@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: webpage_db
+      POSTGRES_USER: Krusovice
+      POSTGRES_PASSWORD: fedefrede
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - webpage_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "Krusovice", "-d", "webpage_db"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+    #command: ["bash", "-c", "chmod -R 777 /var/lib/postgresql/data && docker-entrypoint.sh postgres"]
+
+volumes:
+  postgres_data:
+
+networks:
+  webpage_network:
+    name: webpage_network
+    driver: bridge
