@@ -6,9 +6,9 @@ services:
     container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_DB: webpage_db
-      POSTGRES_USER: Krusovice
-      POSTGRES_PASSWORD: fedefrede
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
       - ./init:/docker-entrypoint-initdb.d
@@ -17,12 +17,11 @@ services:
     networks:
       - webpage_network
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "Krusovice", "-d", "webpage_db"]
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 10s
       retries: 5
       start_period: 30s
       timeout: 5s
-    #command: ["bash", "-c", "chmod -R 777 /var/lib/postgresql/data && docker-entrypoint.sh postgres"]
 
 volumes:
   postgres_data:
