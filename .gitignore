@@ -1,2 +1,15 @@
-utils/secrets.py
+# Python
 __pycache__/
+node_modules/
+
+# Airflow
+airflow/logs/
+
+# Postgres
+postgres/postgres_data/
+
+# Utils
+utils/secrets.py
+
+# django
+django/media/
