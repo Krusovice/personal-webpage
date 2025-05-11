@@ -1,7 +1,7 @@
 services:
   django:
     build:
-      context: ../..
+      context: .
       dockerfile: django/docker/Dockerfile
     container_name: django
     command: >
@@ -11,8 +11,8 @@ services:
                    chmod -R 755 /django/staticfiles &&  
                    daphne -b 0.0.0.0 -p 8000 personalWebpage.asgi:application"
     volumes:
-      - ../../django:/django
-      - ../../utils:/utils
+      - ./django:/django
+      - ./utils:/utils
     ports:
       - "8000:8000"
     depends_on:
