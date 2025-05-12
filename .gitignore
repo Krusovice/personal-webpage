@@ -9,7 +9,7 @@ airflow/logs/
 postgres/postgres_data/
 
 # Utils
-utils/secrets.py
+utils/webpage_secrets.py
 
 # django
 django/media/

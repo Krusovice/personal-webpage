@@ -23,30 +23,34 @@ services:
     environment:
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - REDIS_HOST=redis
+      - PYTHONPATH=/utils
     networks:
-      - shared_network
+      - webpage_network
+      - kafka_network
 
   nginx:
     image: nginx:latest
     container_name: nginx
     volumes:
-      #- ./django/docker/nginx_development.conf:/etc/nginx/nginx.conf # Comment for production
-      - ./django/docker/nginx_production.conf:/etc/nginx/nginx.conf # Uncomment for production
       - ./django/staticfiles:/django/staticfiles
       - ./django/media:/django/media
-      - /etc/letsencrypt/:/etc/letsencrypt # Uncomment for production
+      - ./django/docker/nginx_development.conf:/etc/nginx/nginx.conf # Comment for production
+      #- ./django/docker/nginx_production.conf:/etc/nginx/nginx.conf # Uncomment for production
+      #- /etc/letsencrypt/:/etc/letsencrypt # Uncomment for production
+      
     ports:
       - "80:80"
       - "443:443"  # Expose port 443 for HTTPS
     depends_on:
       - django
     networks:
-      - shared_network
+      - webpage_network
 
 networks:
   kafka_network:
     driver: bridge
-  shared_network:
+  webpage_network:
+    name: webpage_network
     driver: bridge
 
 volumes:
