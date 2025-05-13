@@ -5,11 +5,19 @@ services:
       dockerfile: django/docker/Dockerfile
     container_name: django
     command: >
-          bash -c "python manage.py migrate &&
+          bash -c "export DJANGO_ENV=production_no &&
+                   python manage.py migrate &&
                    python manage.py collectstatic --noinput &&
                    chown -R www-data:www-data /django/staticfiles &&
-                   chmod -R 755 /django/staticfiles &&  
-                   daphne -b 0.0.0.0 -p 8000 personalWebpage.asgi:application"
+                   chmod -R 755 /django/staticfiles &&
+                   {
+                    if [ \"$DJANGO_ENV\" = \"production\" ]; then
+                      daphne -b 0.0.0.0 -p 8000 personalWebpage.asgi:application;
+                    else
+                      pip uninstall -y daphne &&
+                      python manage.py runserver 0.0.0.0:8000
+                    fi
+                   }"
     volumes:
       - ./django:/django
       - ./utils:/utils
@@ -21,6 +29,7 @@ services:
       redis:
         condition: service_started
     environment:
+      #- DJANGO_ENV=production
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - REDIS_HOST=redis
       - PYTHONPATH=/utils

@@ -21,18 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = DJANGO_SECRET_KEY
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = False if os.getenv("DJANGO_ENV") == "production" else True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'www.jkirstein.dk', 'jkirstein.dk', '192.168.1.116', 'localhost','django']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,10 +43,13 @@ INSTALLED_APPS = [
     'about',
     'foundationResponse',
     'rest_framework',
-    'airflow',
+    'stockprices',
     'corsheaders',
     'system_metrics',
 ]
+
+if os.getenv("DJANGO_ENV") == "production":
+    INSTALLED_APPS.insert(0, 'daphne')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AirflowConfig(AppConfig):
+class StockpricesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'airflow'
+    name = 'stockprices'
