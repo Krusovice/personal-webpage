@@ -31,7 +31,7 @@ urlpatterns = [
     path('foundationResponse/', include('foundationResponse.urls')),
     path('literature/', include('literature.urls')),
     path('logged_in/', views.logged_in, name='logged_in'),
-    path('airflow/', include('airflow.urls')),
+    path('stockmarket/', include('stockmarket.urls')),
     
 ]
 

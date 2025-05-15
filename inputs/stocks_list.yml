@@ -1,0 +1,10 @@
+metadata:
+  "^OMXC25":
+    name: "C25"
+    currency: "DKK"
+  "MSFT":
+    name: "Microsoft"
+    currency: "USD"
+
+defaults:
+  start_date: "2025-01-01"

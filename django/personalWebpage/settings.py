@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'about',
     'foundationResponse',
     'rest_framework',
-    'stockprices',
+    'stockmarket',
     'corsheaders',
     'system_metrics',
 ]
