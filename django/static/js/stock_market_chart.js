@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // URL of your Django REST API endpoint (change if necessary)
     const apiUrl = window.location.hostname === 'localhost' 
-    ? 'http://localhost:8000/airflow/api/stock_prices/' 
+    ? 'http://localhost:8000/stockmarket/api/stock_prices/' 
     : 'https://jkirstein.dk/airflow/api/stock_prices/';
     
     // Fetch the data from the API
@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             // Process the data into a format that D3 can use
-            const formattedData = data.map(d => ({
+            const formattedData = data
+                .filter(d => d.ticker == "^OMXC25")
+                .map(d => ({
                 date: d.date, // Ensure the date format is compatible
                 value: parseFloat(d.closing_price) // Convert the close price to a number
             }))
