@@ -6,6 +6,7 @@ services:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/airflow_db
       - AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=False
+      - AIRFLOW_CONN_WEBPAGE_POSTGRES_DB=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/webpage_db
     command: [ "bash", "-c", "pip install -r /requirements.txt && exec airflow webserver" ]
     env_file:
     - .env
@@ -38,6 +39,7 @@ services:
     environment:
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/airflow_db
+      - AIRFLOW_CONN_WEBPAGE_POSTGRES_DB=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/webpage_db
     command: [ "bash", "-c", "pip install -r /requirements.txt && exec airflow scheduler" ]
     env_file:
     - .env
@@ -61,6 +63,7 @@ services:
     image: apache/airflow:2.10.5
     environment:
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/airflow_db
+      - AIRFLOW_CONN_WEBPAGE_POSTGRES_DB=postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/webpage_db
     command: ["bash"]
     env_file:
     - .env
@@ -91,10 +94,7 @@ services:
           --lastname Flow \
           --role Admin \
           --email airflow@example.com \
-          --password airflow || echo "User already exists" && \
-        airflow connections get webpage_postgres_db > /dev/null 2>&1 || \
-        airflow connections add webpage_postgres_db \
-          --conn-uri postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/webpage_db
+          --password airflow || echo "User already exists"
     env_file:
     - .env
     environment:

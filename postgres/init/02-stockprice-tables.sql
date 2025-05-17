@@ -1,15 +1,14 @@
-CREATE TABLE stocks.stock_prices (
+CREATE TABLE stockmarket.stock_prices (
     id SERIAL PRIMARY KEY,
-    symbol TEXT NOT NULL,
+    ticker TEXT NOT NULL,
     date DATE NOT NULL,
-    close_price NUMERIC NOT NULL,
-    UNIQUE (symbol, date)
+    closing_price NUMERIC NOT NULL,
+    UNIQUE (ticker, date)
 );
 
-CREATE TABLE stocks.stock_metadata (
-    symbol TEXT PRIMARY KEY,
+CREATE TABLE stockmarket.stock_metadata (
+    ticker TEXT PRIMARY KEY,
     name TEXT NOT NULL,
-    sector TEXT,
     currency TEXT NOT NULL,
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );

@@ -4,7 +4,8 @@ import yfinance as yf
 from datetime import datetime
 import pandas as pd
 import yaml
-
+import logging
+log = logging.getLogger(__name__)
 
 """
 This dag fetches stockprices from yfinance and stores them in the postgres database.
@@ -24,8 +25,8 @@ def fetch_stock_data(ticker, start_date):
     # lowering all first letters in columns.
     stock_data.columns = stock_data.columns.str.lower()
 
-    # Reanming the column close to close_price to make it more descriptive
-    stock_data.rename(columns={'close': 'close_price'}, inplace=True)
+    # Reanming the column close to closing_price to make it more descriptive
+    stock_data.rename(columns={'close': 'closing_price'}, inplace=True)
     
     return stock_data
 
@@ -40,9 +41,6 @@ def fetch_stock_data(ticker, start_date):
 def fetch_and_store_stock_data():
     @task(multiple_outputs=True)
     def load_tickers():
-        import logging
-        log = logging.getLogger("airflow.task")
-
         with open('/inputs/stocks_list.yml', 'r') as f:
             stock_fetching_config = yaml.safe_load(f)
 
@@ -64,6 +62,8 @@ def fetch_and_store_stock_data():
             stock_data_list.append(stock_data)
 
         stock_data_df = pd.concat(stock_data_list, ignore_index=True)
+
+        log.info(f'stock_data_df:\n {stock_data_df}')
         return stock_data_df.to_dict(orient="records")
 
 
@@ -74,15 +74,15 @@ def fetch_and_store_stock_data():
         cursor = conn.cursor()
 
         insert_query = """
-        insert into stocks.stock_prices (date, symbol, close_price)
+        insert into stockmarket.stock_prices (date, ticker, closing_price)
         VALUES (%s, %s, %s)
-        ON CONFLICT (date,symbol) DO UPDATE
-        SET close_price = EXCLUDED.close_price
+        ON CONFLICT (date,ticker) DO UPDATE
+        SET closing_price = EXCLUDED.closing_price
         """
 
         stock_data_df = pd.DataFrame(stock_data_dict)
         for row in stock_data_df.itertuples(index=False):  # or index=True if you need the index
-            cursor.execute(insert_query, (row.date, row.ticker, row.close_price))
+            cursor.execute(insert_query, (row.date, row.ticker, row.closing_price))
         
         conn.commit()
         cursor.close()

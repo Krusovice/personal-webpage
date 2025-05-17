@@ -99,6 +99,9 @@ DATABASES = {
         'PASSWORD': POSTGRES_CONFIG["password"],
         'HOST': POSTGRES_CONFIG["host"],
         'PORT': POSTGRES_CONFIG["port"],
+        'OPTIONS': {
+            'options': '-c search_path=stockmarket,public'
+        }
     }
 }
 
