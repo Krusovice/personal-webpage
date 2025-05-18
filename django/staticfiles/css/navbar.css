@@ -1,0 +1,9 @@
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+}
+
+.navbar {
+    background-color: #062b55;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
