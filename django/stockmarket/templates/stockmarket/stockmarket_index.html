@@ -2,10 +2,14 @@
 {% load static %}
 
 {% block content %}
-<h2>Stock Charts</h2>
-The following page contains stockprices that I follow.
+<div class="container box-container">
+  <h1>Stock Charts</h1>
+  <p>The following page contains stock prices that I follow.</p>
+</div>
 
-<div id="chart-container"></div>
+<div class="container box-container">
+	<div id="chart-container"></div>
+</div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="{% static 'stockmarket/js/stockprices_chart.js' %}"></script>

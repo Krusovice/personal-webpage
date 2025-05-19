@@ -1,0 +1,20 @@
+.box-container {
+    background-color: #eaeaea;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 900px;
+    box-shadow: 0 6px 10px rgba(0, 0, 30, 0.5);
+    border-radius: 5px;
+}
+
+.background {
+    background-color: #eaeaea;  /* gives contrast */
+    margin: 0;
+    font-family: sans-serif;
+}
+
+html, body {
+    background-color: #eaeaea;  /* gives contrast */
+    margin: 0;
+    font-family: sans-serif;
+}
