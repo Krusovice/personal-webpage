@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function plotGraph(data) {
-    const width = 250;
-    const height = 250;
+    const width = 800;
+    const height = 500;
     const margin = { top: 30, right: 10, bottom: 30, left: 40 };
 
     const svg = d3.select("#chart-container")

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Stock Charts</h2>
+The following page contains stockprices that I follow.
+
+<div id="chart-container"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="{% static 'stockmarket/js/stockprices_chart.js' %}"></script>
+{% endblock %}
