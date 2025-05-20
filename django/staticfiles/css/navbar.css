@@ -1,9 +1,23 @@
 .navbar .dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 .navbar {
-    background-color: #062b55;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #031c3c; /* Alternatively, a lighter version 062b55 */
+    box-shadow: 0 6px 12px rgba(0, 0, 30, 0.8);
+}
+
+.navbar-nav .nav-link {
+    background: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    margin: 0 8px;
+    transition: color 0.4s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #0a3663;
+  border-bottom-color: rgba(255, 255, 255, 0.5);
 }
