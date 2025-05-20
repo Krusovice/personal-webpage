@@ -13,8 +13,8 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g wscat
 
-COPY django/docker/requirements.txt /django/docker/requirements.txt
-RUN pip install --no-cache-dir -r /django/docker/requirements.txt
+COPY django/hosting/requirements.txt /django/hosting/requirements.txt
+RUN pip install --no-cache-dir -r /django/hosting/requirements.txt
 
 EXPOSE 8000
 
