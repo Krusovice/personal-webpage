@@ -13,10 +13,13 @@
 <body>
     {% include 'navbar.html' %}
 
-    <div class="container background mt-4">
-        {% block content %}
+    
+    <div class="page-wrapper">
+        <div class="container mt-4">
+            {% block content %}
 
-        {% endblock %}
+            {% endblock %}
+        </div>
     </div>
 
     <!-- Link to external JavaScript -->
