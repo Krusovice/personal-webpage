@@ -4,11 +4,17 @@
 {% block content %}
 <div class="container box-container">
   <h1>Stock Charts</h1>
-  <p>The following page contains stock prices that I follow.</p>
+  <p>The following page contains selected stock price charts. <br>
+  The charts can be toggled on and off. <br>
+  The Y-axis shows relative stock price values since beginning of the current year.
+
+
+  </p>
 </div>
 
 <div class="container box-container">
 	<div id="chart-container"></div>
+  <div id="toggle-buttons-container" class="toggle-buttons-container"></div>
 </div>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>

@@ -51,9 +51,10 @@ function cleanString(string) {
 }
 
 function plotGraph(tickerGroups) {
-    const width = 800;
+    const container = document.getElementById("chart-container");
+    const width = container.clientWidth;
     const height = 500;
-    const margin = { top: 60, right: 10, bottom: 30, left: 40 };
+    const margin = { top: 60, right: 10, bottom: 60, left: 40 };
 
     const svg = d3.select("#chart-container").append("svg")
         .attr("width", width)
@@ -74,8 +75,8 @@ function plotGraph(tickerGroups) {
         .range([height - margin.bottom, margin.top]);
 
     // Axes
-    const xTicks = 4;
-    const yTicks = 5;
+    const xTicks = 10;
+    const yTicks = 8;
 
     const xAxis = d3.axisBottom(x).ticks(xTicks).tickFormat(d3.timeFormat("%m-%d"));
     const yAxis = d3.axisLeft(y).ticks(yTicks);
@@ -103,7 +104,7 @@ function plotGraph(tickerGroups) {
         .lower();  // moves it to back of SVG stack
 
     const yGrid = d3.axisLeft(y)
-    .ticks(5)                      // Match your yAxis
+    .ticks(yTicks)                      // Match your yAxis
     .tickSize(-width + margin.left + margin.right)
     .tickFormat("");
 
@@ -121,6 +122,20 @@ function plotGraph(tickerGroups) {
     svg.selectAll(".grid path")
         .attr("stroke-width", 0);
 
+    // Labels
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)
+        .attr("y", height)
+        .text("Date");
+
+    svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", 0)
+        .attr("y", height/2)
+        .attr("transform", "rotate(-90)")
+        .text("Relative Change Since Jan 1st");
+
     // title
     svg.append("text")
         .attr("x", width / 2)
@@ -137,8 +152,9 @@ function plotGraph(tickerGroups) {
 
     const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const controls = d3.select("#chart-container").append("div");
+    const controls = d3.select("#toggle-buttons-container").append("div");
 
+    // Graph toggles
     tickerGroups.forEach((dataPoints, ticker) => {
         controls.append("button")
             .text(ticker)
@@ -150,16 +166,18 @@ function plotGraph(tickerGroups) {
             });
     });
 
+    // Graphs
     tickerGroups.forEach((data, ticker) => {
     svg.append("path")
         .datum(data)
         .attr("class", `line line-${ticker}`)
         .attr("fill", "none")
         .attr("stroke", color(ticker))
-        .attr("stroke-width", 1)
+        .attr("stroke-width", 2)
         .attr("d", line);
     });
 
+    // Hovering effect
     tickerGroups.forEach((data, ticker) => {
     svg.selectAll(`.dot-${ticker}`)
         .data(data)
@@ -168,13 +186,13 @@ function plotGraph(tickerGroups) {
         .attr("class", `dot dot-${ticker}`)
         .attr("cx", d => x(new Date(d.date)))
         .attr("cy", d => y(d.value))
-        .attr("r", 2)
+        .attr("r", 3)
         .attr("fill", "transparent")
         .attr("stroke", "transparent")
         .on("mouseover", function (event, d) {
             d3.select(this).attr("stroke", "black").attr("stroke-width", 3);
             tooltip.style("visibility", "visible")
-                .text(`${d.ticker}, ${d.date}: ${d.value}`);
+                .text(`${d.ticker}, ${d.date}: ${d.value.toFixed(3)}`);
         })
         .on("mousemove", function (event) {
             tooltip
