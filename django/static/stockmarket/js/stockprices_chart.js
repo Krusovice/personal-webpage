@@ -54,7 +54,7 @@ function plotGraph(tickerGroups) {
     const container = document.getElementById("chart-container");
     const width = container.clientWidth;
     const height = 500;
-    const margin = { top: 60, right: 10, bottom: 60, left: 40 };
+    const margin = { top: 60, right: 10, bottom: 60, left: 70 };
 
     const svg = d3.select("#chart-container").append("svg")
         .attr("width", width)
@@ -131,10 +131,8 @@ function plotGraph(tickerGroups) {
 
     svg.append("text")
         .attr("text-anchor", "middle")
-        .attr("x", 0)
-        .attr("y", height/2)
-        .attr("transform", "rotate(-90)")
-        .text("Relative Change Since Jan 1st");
+        .attr("transform", `translate(${-margin.left + 100}, ${height / 2}) rotate(-90)`)
+        .text("Relative since Jan 1st");
 
     // title
     svg.append("text")
