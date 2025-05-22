@@ -19,18 +19,43 @@ pd.set_option('display.max_colwidth', None)  # No limit on column width
 
 filePath = r"C:\Users\jmkir\Ramboll\JMKIR - Documents\personalWebpage\foundationResponse\ML\dataFile_test - copy.json"
 df = pd.read_json(filePath)
-df = df[df['Uy'] != 'Calculation failed']
+
+def filter_failed_calculations(df):
+    df = df[df['Uy'] != 'Calculation failed']
+    return df
+
+def inverse_soil_E(df):
+    """
+    Inversing the Emodulus for all layers in the dataframe.
+
+    That is due to the expectation that a layers strain is
+    linearly correlated to the inversed E-modulus, not the E-modulus.
+
+    returns df
+    """
+    df['soils'] = df['soils'].apply(lambda x: [1/i for i in x])
+    return df
 
 # Substituting no soil values with a hard soil placeholder value
-maxSoilLayers = max([len(i) for i in df['soils']])
+def add_boundary_conditions(df):
+    """
+    Extending the number of rows for each result column, so it matches the deepest soil model.
 
-# Taking the inverse of the soil layers, as it is expected that a linear relationship between settlements and the inverse Emodulus, rather than the Emodulus.
-df['soils'] = df['soils'].apply(lambda x: [1/i for i in x])
+    That is introduced by evaluating the max number of rows in all input data.
+    Each input data with less rows (due to model boundary conditions)
+    are substituted with soil layers that are very hard,
+    which lead to approx. zero strain in those soil layers.
+
+    returns df
+    """
+    maxSoilLayers = max([len(i) for i in df['soils']])
+
+
 
 # Filling all soil layers under BC's with zero.
 def fillSoilArray(array,maxLength):
     fillLength = maxLength - len(array)
-    array.extend([0] * fillLength) 
+    array.extend([0] * fillLength)
     return array
 
 df['soilsNew'] = df.apply(lambda row: fillSoilArray(row['soils'], maxLength=maxSoilLayers), axis=1)
