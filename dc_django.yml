@@ -16,7 +16,6 @@ services:
       redis:
         condition: service_started
     environment:
-      #- DJANGO_ENV=production
       - DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       - REDIS_HOST=redis
       - PYTHONPATH=/utils
@@ -30,9 +29,6 @@ services:
     volumes:
       - ./django/staticfiles:/django/staticfiles
       - ./django/media:/django/media
-      - ./django/hosting/nginx_development.conf:/etc/nginx/nginx.conf # Comment for production
-      #- ./django/hosting/nginx_production.conf:/etc/nginx/nginx.conf # Uncomment for production
-      #- /etc/letsencrypt/:/etc/letsencrypt # Uncomment for production
       
     ports:
       - "80:80"

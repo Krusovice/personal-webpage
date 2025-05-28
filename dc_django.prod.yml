@@ -1,0 +1,9 @@
+services:
+  django:
+    environment:
+      - DJANGO_ENV=production
+
+  nginx:
+    volumes:
+      - ./django/hosting/nginx_production.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt/:/etc/letsencrypt
