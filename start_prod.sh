@@ -9,9 +9,6 @@ echo "🔧 Fixing folder permissions..."
 sudo chown -R "$USER:$USER" ./postgres/postgres_data
 chmod +x ./postgres/postgres_data
 
-sudo chown -R "$USER:$USER" ./redis/redis_data
-chmod +x ./redis/redis_data
-
 chmod +x django/hosting/django_bash_command.sh
 
 echo "✅ Permissions fixed."
