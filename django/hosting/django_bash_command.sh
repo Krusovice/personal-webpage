@@ -1,7 +1,5 @@
 #!/bin/bash
 
-export DJANGO_ENV=production_no
-
 python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic --noinput

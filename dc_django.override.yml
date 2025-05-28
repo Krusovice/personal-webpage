@@ -1,4 +1,9 @@
 services:
+  django:
+    environment:
+      - DJANGO_ENV=development
+
+services:
   nginx:
     volumes:
       - ./django/hosting/nginx_development.conf:/etc/nginx/nginx.conf # Comment for production
