@@ -6,11 +6,11 @@ NETWORK_NAME="webpage_network"
 echo "🔧 Fixing folder permissions..."
 
 # Ensure correct ownership and access
-sudo chown -R "$USER:$USER" ./postgres/postgres_data || true
-chmod -R 755 ./postgres/postgres_data || true
+sudo chown -R "$USER:$USER" ./postgres/postgres_data
+chmod +x ./postgres/postgres_data
 
-sudo chown -R "$USER:$USER" ./redis/redis_data || true
-chmod -R 755 ./redis/redis_data || true
+sudo chown -R "$USER:$USER" ./redis/redis_data
+chmod +x ./redis/redis_data
 
 chmod +x django/hosting/django_bash_command.sh
 
