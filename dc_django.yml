@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: django/hosting/Dockerfile
     container_name: django
+    user: "${UID}:${GID}"
     volumes:
       - ./django:/django
       - ./utils:/utils
