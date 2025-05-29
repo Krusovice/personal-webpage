@@ -3,8 +3,8 @@ set -e
 
 NETWORK_NAME="webpage_network"
 
-export UID=$(id -u)
-export GID=$(id -g)
+export HOST_UID=$(id -u)
+export HOST_GID=$(id -g)
 
 echo "🔍 Checking for Docker network: $NETWORK_NAME..."
 if ! docker network ls --format '{{.Name}}' | grep -q "^${NETWORK_NAME}$"; then
