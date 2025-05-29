@@ -16,7 +16,6 @@ RUN npm install -g wscat
 COPY django/hosting/requirements.txt /django/hosting/requirements.txt
 COPY django/hosting/django_bash_command.sh /django/hosting/django_bash_command.sh
 RUN pip install --no-cache-dir -r /django/hosting/requirements.txt
-RUN chmod +x /django/hosting/django_bash_command.sh
 
 EXPOSE 8000
 
