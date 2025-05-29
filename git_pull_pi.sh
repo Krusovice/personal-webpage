@@ -23,7 +23,7 @@ echo "Setting folder permissions..."
 
 # Setting ownership to my pi user so i can modify files.
 sudo chown -R $USER:$USER .
-sudh chmod 755 .
+sudo chmod 755 .
 
 # Permission for postgres
 sudo chmod 700 ./postgres/postgres_data
