@@ -35,9 +35,9 @@ find django/staticfiles -type d -exec chmod 755 {} \; # rwx for each directory
 find django/staticfiles -type f -exec chmod 644 {} \; # rw- for eachfile
 
 # Permissions for Airflow (run as UID 50000, GID 0)
-sudo chown -R 50000:0 ./dags ./logs ./plugins # Setting owner
-sudo find ./dags ./logs ./plugins -type d -exec chmod 755 {} \; # rwx for each directory
-sudo find ./dags ./logs ./plugins -type f -exec chmod 644 {} \; # rw for eachfile
+sudo chown -R 50000:0 airflow/dags airflow/logs airflow/plugins # Setting owner
+sudo find airflow/dags airflow/logs airflow/plugins -type d -exec chmod 755 {} \; # rwx for each directory
+sudo find airflow/dags airflow/logs airflow/plugins -type f -exec chmod 644 {} \; # rw for eachfile
 
 echo "✅ Permissions fixed."
 
