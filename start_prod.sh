@@ -23,8 +23,10 @@ echo "🔧 Fixing folder permissions..."
 #  1 = --x  (execute only)
 #  0 = ---  (no permissions)
 
-# Permission for postgrse
-sudo chown -R "$USER:$USER" ./postgres/postgres_data
+# Setting ownership to my pi user so i can modify files.
+sudo chown -R $USER:$USER .
+
+# Permission for postgres
 sudo chmod 700 ./postgres/postgres_data
 
 # Permission for django
