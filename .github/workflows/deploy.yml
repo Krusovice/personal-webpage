@@ -13,12 +13,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Cleanup before deployment
+        run: |
+          git reset --hard HEAD
+          git clean -fd
+
       - name: Run deployment script
         run: |
-          echo "✅ Successfully connected to Raspberry Pi!"
-          cd ${{ secrets.PI_TARGET_PATH }}
           git pull origin main
-          echo "✅ Successfully pulled main!"
           chmod +x start_prod.sh
           ./start_prod.sh
-          echo "✅ Successfully initiated start_prod.sh!"
