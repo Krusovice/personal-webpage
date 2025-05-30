@@ -8,9 +8,6 @@ services:
     volumes:
       - ./django:/django
       - ./utils:/utils
-      - ../secrets-and-database/media:/media
-      - ../secrets-and-database/secrets/webpage_secrets.py:/utils/webpage_secrets.py
-      
       
     command: /django/hosting/django_bash_command.sh
     ports:

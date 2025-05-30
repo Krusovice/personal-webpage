@@ -2,8 +2,14 @@ services:
   django:
     environment:
       - DJANGO_ENV=development
+    volumes:
+      - ./django:/django
+      - ./utils:/utils
+      - ../secrets-and-database/media:/media
+      - ../secrets-and-database/secrets/webpage_secrets.py:/utils/webpage_secrets.py
 
-services:
   nginx:
     volumes:
-      - ./django/hosting/nginx_development.conf:/etc/nginx/nginx.conf # Comment for production
+      - ./django/staticfiles:/django/staticfiles
+      - ../secrets-and-database/media:/django/media
+      - ./django/hosting/nginx_development.conf:/etc/nginx/nginx.conf
