@@ -4,7 +4,8 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
 # Directories
-DATA_DIR = ROOT_DIR / "postgres/postgres_data"
+DATA_DIR = ROOT_DIR / "postgres_data"
 KAFKA_DIR = ROOT_DIR / "kafka"
 AIRFLOW_DIR = ROOT_DIR / "airflow"
 DJANGO_DIR = ROOT_DIR / "django"
+UTILS = ROOT_DIR / "utils"

@@ -10,7 +10,7 @@ services:
     env_file:
     - .env
     volumes:
-      - ./postgres/postgres_data:/var/lib/postgresql/data
+      - ../secrets-and-database/postgres_data:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
