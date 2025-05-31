@@ -1,6 +1,5 @@
 services:
   django:
-    user: "${HOST_UID}:0"
     environment:
       - DJANGO_ENV=production
     volumes:
@@ -10,13 +9,10 @@ services:
       - ../../../../secrets-and-database/media:/media
 
   nginx:
-    user: "${HOST_UID}:0"
     volumes:
-      - ./django/staticfiles:/django/staticfiles
       - ../../../../secrets-and-database/media:/django/media
+      - ./django/staticfiles:/django/staticfiles
       - ./django/hosting/nginx_production.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/:/etc/letsencrypt
       - ./nginx/cache:/var/cache/nginx
       - ./nginx/run:/var/run
-    environment:
-      - HOST_UID=${HOST_UID}

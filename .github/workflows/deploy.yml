@@ -18,27 +18,17 @@ jobs:
           git reset --hard HEAD
           git clean -fd
 
-      - name: Prepare Nginx
+      - name: Prepare Nginx and django permissions
         run: |
-          sudo rm -rf ./nginx/cache
-          
-          mkdir -p ./nginx/cache/client_temp
-          sudo chown -R $HOST_UID:0 ./nginx/cache
-          sudo chmod -R 755 ./nginx/cache
-
-          mkdir -p ./nginx/run
-          sudo chown -R 1000:0 ./nginx/run
-          sudo chmod -R 755 ./nginx/run
+          chmod -R 755 ../../../../secrets-and-database/media
+          chmod -R 755 ./django/staticfiles
+          chmod +x django/hosting/django_bash_command.sh
 
 
       - name: Preparing Airflow
         run: |
           echo "" >> .env
           echo "AIRFLOW_UID=$(id -u)" >> .env
-
-      - name: Preparing Django
-        run: |
-          chmod +x django/hosting/django_bash_command.sh
 
       - name: Run deployment script
         run: |
