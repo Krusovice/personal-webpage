@@ -17,3 +17,5 @@ services:
       - ./django/hosting/nginx_production.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/:/etc/letsencrypt
       - ./nginx/cache:/var/cache/nginx
+    environment:
+      - HOST_UID=${HOST_UID}
