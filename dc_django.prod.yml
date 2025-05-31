@@ -16,3 +16,4 @@ services:
       - ../../../../secrets-and-database/media:/django/media
       - ./django/hosting/nginx_production.conf:/etc/nginx/nginx.conf
       - /etc/letsencrypt/:/etc/letsencrypt
+      - ./nginx/cache:/var/cache/nginx
