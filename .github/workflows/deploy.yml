@@ -25,9 +25,7 @@ jobs:
           chmod +x start_prod.sh
           chmod +x django/hosting/django_bash_command.sh
 
-          sudo chown -R 50000:0 ./airflow/logs
-          chmod -R 755 ./airflow/logs
-
+          echo "AIRFLOW_UID=$(id -u)" >> .env
 
       - name: Run deployment script
         run: |
