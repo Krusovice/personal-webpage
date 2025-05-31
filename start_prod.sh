@@ -13,6 +13,6 @@ fi
 
 echo "Starting production environment..."
 
-docker-compose -f dc_postgres.yml -f dc_redis.yml -f dc_django.yml -f dc_django.prod.yml -f dc_airflow.yml up --build -d
+docker-compose -f dc_postgres.yml -f dc_redis.yml -f dc_django.yml -f dc_django.prod.yml -f dc_airflow.yml up --build --force-recreate -d
 
 
