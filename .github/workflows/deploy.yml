@@ -21,9 +21,15 @@ jobs:
       - name: Prepare Nginx
         run: |
           sudo rm -rf ./nginx/cache
+          
           mkdir -p ./nginx/cache/client_temp
           sudo chown -R $HOST_UID:0 ./nginx/cache
           sudo chmod -R 755 ./nginx/cache
+
+          mkdir -p ./nginx/run
+          sudo chown -R 1000:0 ./nginx/run
+          sudo chmod -R 755 ./nginx/run
+
 
       - name: Preparing Airflow
         run: |
