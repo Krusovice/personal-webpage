@@ -23,6 +23,7 @@ jobs:
           chmod +x start_prod.sh
           chmod +x django/hosting/django_bash_command.sh
 
+          echo "" >> .env
           echo "AIRFLOW_UID=$(id -u)" >> .env
 
       - name: Run deployment script
