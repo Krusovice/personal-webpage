@@ -29,3 +29,7 @@ jobs:
         run: |
 
           ./start_prod.sh
+
+      - name: Permissions after deployment
+        run: |
+          sudo chown -R $USER:$USER /home/user/actions-runner/_work
