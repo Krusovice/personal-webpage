@@ -29,6 +29,7 @@ jobs:
 
       - name: Preparing Airflow
         run: |
+          mkdir ./airflow/dags ./airflow/logs ./airflow/plugins
           echo "" >> .env
           echo "AIRFLOW_UID=$(id -u)" >> .env
 
