@@ -29,7 +29,6 @@ jobs:
 
       - name: Preparing Airflow
         run: |
-          mkdir ./airflow/dags ./airflow/logs ./airflow/plugins
           echo "" >> .env
           echo "AIRFLOW_UID=$(id -u)" >> .env
 
@@ -40,5 +39,6 @@ jobs:
 
       - name: Permissions after deployment
         run: |
-          sudo chown -R $USER:$USER /home/user/actions-runner/_work
+          sudo chown -R user:user /home/user/actions-runner/_work
+          
 
