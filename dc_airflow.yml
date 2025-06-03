@@ -14,7 +14,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/dags:/opt/airflow/dags:ro
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./airflow/requirements.txt:/requirements.txt
@@ -46,7 +46,7 @@ services:
     env_file:
     - .env
     volumes:
-      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/dags:/opt/airflow/dags:ro
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./airflow/requirements.txt:/requirements.txt
@@ -71,7 +71,7 @@ services:
     env_file:
     - .env
     volumes:
-      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/dags:/opt/airflow/dags:ro
       - ./airflow/logs:/opt/airflow/logs
       - ./airflow/plugins:/opt/airflow/plugins
       - ./airflow/requirements.txt:/requirements.txt
