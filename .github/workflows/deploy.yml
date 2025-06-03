@@ -23,7 +23,6 @@ jobs:
           mkdir -p ./nginx/cache/client_temp
           mkdir -p ./nginx/run
           chmod -R 755 ../../../../secrets-and-database/media
-          chmod -R 755 ./django/staticfiles
           chmod +x django/hosting/django_bash_command.sh
 
 
