@@ -24,7 +24,7 @@ services:
       - webpage_network
       - kafka_network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/healthz/"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/healthcheck/"]
       interval: 30s
       timeout: 10s
       retries: 5

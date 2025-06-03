@@ -21,6 +21,13 @@ from literature import views as literature_views
 from django.conf import settings
 from django.conf.urls.static import static
 
+# For healthcheck
+from django.http import HttpResponse
+from django.urls import path
+
+def healthcheck(request):
+    return HttpResponse("OK")
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +39,7 @@ urlpatterns = [
     path('literature/', include('literature.urls')),
     path('logged_in/', views.logged_in, name='logged_in'),
     path('stockmarket/', include('stockmarket.urls')),
+    path("healthcheck/", healthcheck)
     
 ]
 
