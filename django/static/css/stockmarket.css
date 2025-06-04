@@ -1,5 +1,15 @@
-.toggle-buttons-container {
-    margin-top: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
+/* Container that wraps the entire chart and buttons */
+#chart-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    left-padding: 50px;
+}
+
+/* Floating button panel inside chart */
+#toggle-buttons-container {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 10px;
 }

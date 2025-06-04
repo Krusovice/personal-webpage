@@ -1,3 +1,5 @@
+import { renderToggleButtons } from './stockprices_toggle_buttons.js';
+
 document.addEventListener("DOMContentLoaded", function () {
     // URL of your Django REST API endpoint (change if necessary)
     const apiUrl = window.location.hostname === 'localhost' 
@@ -21,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tickerGroups.forEach((values, ticker) => {
                 values.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-                firstValue = values[0].value;
+                const firstValue = values[0].value;
 
                 values.forEach(d => {
                     d.value = d.value / firstValue;
@@ -54,7 +56,7 @@ function plotGraph(tickerGroups) {
     const container = document.getElementById("chart-container");
     const width = container.clientWidth;
     const height = 500;
-    const margin = { top: 60, right: 10, bottom: 60, left: 70 };
+    const margin = { top: 60, right: 10, bottom: 60, left: 170 };
 
     const svg = d3.select("#chart-container").append("svg")
         .attr("width", width)
@@ -150,19 +152,8 @@ function plotGraph(tickerGroups) {
 
     const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    const controls = d3.select("#toggle-buttons-container").append("div");
 
-    // Graph toggles
-    tickerGroups.forEach((dataPoints, ticker) => {
-        controls.append("button")
-            .text(ticker)
-            .style("margin-right", "10px")
-            .on("click", function () {
-                const path = d3.select(`.line-${ticker}`);
-                const isHidden = path.style("display") === "none";
-                path.style("display", isHidden ? null : "none");
-            });
-    });
+    renderToggleButtons(tickerGroups);
 
     // Graphs
     tickerGroups.forEach((data, ticker) => {
