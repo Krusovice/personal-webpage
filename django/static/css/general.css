@@ -3,8 +3,9 @@
     padding: 20px;
     margin: 20px auto;
     max-width: 900px;
-    box-shadow: 0 6px 10px rgba(0, 0, 30, 0.5);
+    box-shadow: 0 6px 10px rgba(0, 0, 30, 0.15);
     border-radius: 10px;
+    border: 1px solid #ccc;
 }
 
 .page-wrapper {
