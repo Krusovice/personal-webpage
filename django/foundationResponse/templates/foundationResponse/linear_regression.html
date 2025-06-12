@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Linear Regression Input{% endblock %}
+
+{% block content %}
+  <h1 class="container box-container mb-4">Compute Sum of Inputs</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="mb-3">
+      {{ form.width.label_tag }}
+      {{ form.width }}
+      {{ form.width.errors }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.load.label_tag }}
+      {{ form.load }}
+      {{ form.load.errors }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.eccentricity.label_tag }}
+      {{ form.eccentricity }}
+      {{ form.eccentricity.errors }}
+    </div>
+
+    <div class="mb-3">
+      {{ form.soil_modulus.label_tag }}
+      {{ form.soil_modulus }}
+      {{ form.soil_modulus.errors }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Calculate</button>
+  </form>
+
+  {% if result is not None %}
+    <div class="alert alert-success mt-4">
+      <strong>Sum of inputs:</strong> {{ result }}
+    </div>
+  {% endif %}
+{% endblock %}
