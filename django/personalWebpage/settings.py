@@ -30,6 +30,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'www.jkirstein.dk', 'jkirstein.dk', '192.168.1.116
 # Application definition
 
 INSTALLED_APPS = [
+    'widget_tweaks',
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'stockmarket',
     'corsheaders',
-    'system_metrics',
+    'system_metrics'
 ]
 
 if os.getenv("DJANGO_ENV") == "production":
