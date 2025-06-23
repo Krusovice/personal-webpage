@@ -6,78 +6,15 @@
 
 {% block content %}
     <div class="container box-container">
-        <h1>Compute Sum of Inputs</h1>
-
-        <form method="post" novalidate>
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-
-
-            {% for field in form %}
-                <div class="row">
-                    <div class="col-2">
-                        {{ field.label_tag }}
-                    </div>
-
-                    <div class="col-2">
-                        {{ field|add_class:"form-control" }}
-                    </div>
-                </div>
-            {% endfor %}
-
-            <label class="form-label">Soil Inputs</label>
-            <table class="table table-bordered" style="width: 500px">
-                <colgroup>
-                    <col style="width: 200px;">
-                    <col style="width: 250px;">
-                    <col style="width: 200px;">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>Level</th>
-                        <th>E-modulus</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="dynamic-table">
-                    <tr class="input-row">
-                        <td>
-                            <input
-                                type="text"
-                                name="level_input"
-                                class="form-control"
-                                placeholder="Level"
-                            >
-                        </td>
-                        <td>
-                            <input
-                                type="text"
-                                name="E-modulus_input"
-                                class="form-control"
-                                placeholder="E-modulus"
-                            >
-                        </td>
-                        <td class="text-center">
-                            <button
-                                type="button"
-                                class="btn btn-success btn-sm insert-row"
-                            >insert</button>
-                            <button
-                                type="button"
-                                class="btn btn-danger btn-sm delete-row"
-                            >delete</button>
-
-                        </td>
-
-
-                    </tr>
-                </tbody>
-            </table>
-
-            <button type="submit" class="btn btn-primary">Calculate</button>
-            </div>
-        </form>
+        <h5>Foundation Response Predictor - Linear Regression Model</h5>
     </div>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        {% include 'foundationResponse/_linear_regression_form.html' %}
+    </form>
 
     {% if result is not None %}
         <div class="container box-container alert alert-success mt-4">

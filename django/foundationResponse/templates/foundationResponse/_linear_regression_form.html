@@ -1,0 +1,117 @@
+{% load widget_tweaks %}
+{{ form.non_field_errors }}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4 container box-container">
+            <div class="row">
+                <div class="col-6">
+                    Foundation Width
+                </div>
+
+                <div class="col-6">
+                    {{ form.width|add_class:"form-control"  }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    Vertical load
+                </div>
+
+                <div class="col-6">
+                    <input type="text" name="dummy_input" class="form-control" placeholder="Dummy Field">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    Eccentricity
+                </div>
+
+                <div class="col-6">
+                    {{ form.eccentricity|add_class:"form-control"  }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8 container box-container">
+            <table class="table table-bordered">
+                <colgroup>
+                    <col style="width: 150px;">
+                    <col style="width: 150px;">
+                    <col style="width: 150px;">
+                    <col style="width: 150px;">
+                    <col style="width: 200px;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Layer Level</th>
+                        <th>E-modulus</th>
+                        <th>phi</th>
+                        <th>cohesion</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="dynamic-table">
+                    <tr class="input-row">
+                        <td>
+                            <input
+                                type="text"
+                                name="level_input"
+                                class="form-control"
+                                placeholder="Level"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="E-modulus_input"
+                                class="form-control"
+                                placeholder="E-modulus"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="phi_input"
+                                class="form-control"
+                                placeholder="phi"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="cohesion_input"
+                                class="form-control"
+                                placeholder="cohesion"
+                            >
+                        </td>
+                        <td class="text-center">
+                            <button
+                                type="button"
+                                class="btn btn-success btn-sm insert-row"
+                            >insert</button>
+                            <button
+                                type="button"
+                                class="btn btn-danger btn-sm delete-row"
+                            >delete</button>
+
+                        </td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary" style="width: 100%">Calculate</button>
+            </div>
+        </div>
+    </div>
+</div>
