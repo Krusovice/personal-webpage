@@ -5,7 +5,6 @@
 }
 
 .navbar {
-    background-color: #031c3c; /* Alternatively, a lighter version 062b55 */
     box-shadow: 0 6px 12px rgba(0, 0, 30, 0.8);
 }
 
@@ -26,3 +25,4 @@ nav .max-width {
     padding-left: 20px;
     padding-right: 20px;
 }
+

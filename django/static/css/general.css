@@ -29,3 +29,24 @@
     width: 100%;
     margin: 0 auto;
 }
+
+.color-theme-navbar {
+    background-color: #031c3c;
+}
+
+.btn {
+    font-family: sans-serif;
+    font-weight: 900;
+}
+
+.btn-primary {
+    background-color: #031c3c;
+    border-color: #eaeaea;
+
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    color: #0a3663;
+    background-color: #031c3c;
+}
