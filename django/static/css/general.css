@@ -29,23 +29,3 @@
     width: 100%;
     margin: 0 auto;
 }
-
-.footer-separator {
-  height: 1px;
-  margin: 0;          /* adjust spacing */
-}
-
-.footer-text {
-    font-weight: 500;
-    transition: color 0.4s ease;
-}
-
-footer a {
-    text-decoration: none;
-    transition: color 0.4s ease, text-decoration 0.4s ease;
-}
-
-footer a:hover {
-    text-decoration: underline;
-    color: rgba(0, 0, 30, 0.8);
-}
