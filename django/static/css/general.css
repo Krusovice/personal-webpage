@@ -2,7 +2,6 @@
     background-color: white;
     padding: 20px;
     margin: 20px auto;
-    max-width: 900px;
     box-shadow: 0 6px 10px rgba(0, 0, 30, 0.15);
     border-radius: 10px;
     border: 1px solid #ccc;
@@ -21,4 +20,10 @@
     background-color: red;
     margin: 0;
     font-family: sans-serif;
+}
+
+.max-width {
+    max-width: 1150px;
+    width: 100%;
+    margin: 0 auto;
 }
