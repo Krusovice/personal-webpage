@@ -11,8 +11,6 @@
 
     <form method="post" novalidate>
         {% csrf_token %}
-        {{ form.non_field_errors }}
-
         {% include 'foundationResponse/_linear_regression_form.html' %}
     </form>
 

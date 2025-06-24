@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import FoundationResponseForm, FoundationResponseSoilForm
+from django.http import JsonResponse
+
 
 def home(request):
     return render(request, 'foundationResponse/index.html')
@@ -24,6 +26,11 @@ def linear_regression(request):
             result = width + eccentricity
             # Run calculations
             # Stay at the same page, but update a result contanier.
+            return render(request, "foundationResponse/linear_regression.html", {
+                "form": form,
+                #"soil_form": soil_form,
+                "result": result
+            })
     else:
         form = FoundationResponseForm()
         soil_form = FoundationResponseSoilForm(prefix="soils")
