@@ -12,19 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (inputs.some(i => i.value.trim() == '')) return;
 
         const clone = lastRow.cloneNode(true);
-        clone.querySelectorAll('input').forEach(i => i.value = '');
+
+        clone.querySelectorAll('input').forEach(i => {
+            i.value = '';
+            const name = i.name;
+            const newName = name.replace(/\d+/, rowsCount); // e.g., "soils-1-level"
+            i.name = newName;
+        });
+
         tbody.appendChild(clone);
-    });
+
+        // Update TOTAL_FORMS so Django expects the new row
+        const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
+        totalFormsInput.value = rowsCount + 1;
+    }); 
 
   // 2) Delete row
     tbody.addEventListener('click', e => {
         if (e.target && e.target.classList.contains('delete-row')) {
             const row = e.target.closest('tr');
+            row.remove();
 
-          // Prevent deleting the last remaining row (optional)
-            if (tbody.querySelectorAll('tr').length > 1) {
-                row.remove();
-            }
+            // Update TOTAL_FORMS so Django expects the new row
+            const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
+            const rows = tbody.querySelectorAll('.input-row');
+            totalFormsInput.value = rows.length; 
         }
     });
 
@@ -36,6 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const newRow = row.cloneNode(true);
             newRow.querySelectorAll('input').forEach(i => i.value = '');
             tbody.insertBefore(newRow, row);
+
+            // Update TOTAL_FORMS so Django expects the new row
+            const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
+            const rows = tbody.querySelectorAll('.input-row');
+            totalFormsInput.value = rows.length;
         }
     });
 

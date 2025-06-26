@@ -18,12 +18,35 @@ class FoundationResponseForm(forms.Form):
     )
 
 class FoundationResponseSoilForm(forms.Form):
-    e_modulus = forms.FloatField(
-        label="Soil E-modulus",
+    level = forms.FloatField(
+        label="Level",
         widget=forms.NumberInput(attrs={
             "class": "form-control cell",
-            "placeholder": "Enter soil E-modulus"
+            "placeholder": "Enter level"
+        })
+    )
+    e_modulus = forms.FloatField(
+        label="E-modulus",
+        widget=forms.NumberInput(attrs={
+            "class": "form-control cell",
+            "placeholder": "Enter E-modulus"
+        })
+    )
+    phi = forms.FloatField(
+        label="Phi",
+        required=False,
+        widget=forms.NumberInput(attrs={
+            "class": "form-control cell",
+            "placeholder": "Enter phi"
+        })
+    )
+    cohesion = forms.FloatField(
+        label="Cohesion",
+        required=False,
+        widget=forms.NumberInput(attrs={
+            "class": "form-control cell",
+            "placeholder": "Enter cohesion"
         })
     )
 
-SoilFormSet = formset_factory(FoundationResponseSoilForm, extra=1, can_delete=True)
+SoilFormSet = formset_factory(FoundationResponseSoilForm, extra=1)

@@ -37,6 +37,7 @@
 
         <div class="col-8 container box-container">
             <table class="table table-bordered">
+                {{ soil_formset.management_form }}
                 <colgroup>
                     <col style="width: 150px;">
                     <col style="width: 150px;">
@@ -54,53 +55,26 @@
                     </tr>
                 </thead>
                 <tbody id="dynamic-table">
+                    {% for soil_form in soil_formset %}
                     <tr class="input-row">
-                        <td>
-                            <input
-                                type="any"
-                                name="level_input"
-                                class="form-control"
-                                placeholder="Level"
-                            >
-                        </td>
-                        <td>
-                            <input
-                                type="any"
-                                name="E-modulus_input"
-                                class="form-control"
-                                placeholder="E-modulus"
-                            >
-                        </td>
-                        <td>
-                            <input
-                                type="any"
-                                name="phi_input"
-                                class="form-control"
-                                placeholder="dummy"
-                            >
-                        </td>
-                        <td>
-                            <input
-                                type="any"
-                                name="cohesion_input"
-                                class="form-control"
-                                placeholder="dummy"
-                            >
-                        </td>
-                        <td class="text-center">
-                            <button
-                                type="button"
-                                class="btn btn-success btn-sm insert-row"
-                            >insert</button>
-                            <button
-                                type="button"
-                                class="btn btn-danger btn-sm delete-row"
-                            >delete</button>
+                        <td>{{ soil_form.level|add_class:"form-control" }}</td>
+                        <td>{{ soil_form.e_modulus|add_class:"form-control" }}</td>
+                        <td>{{ soil_form.phi|add_class:"form-control" }}</td>
+                        <td>{{ soil_form.cohesion|add_class:"form-control" }}</td>
+                    <td class="text-center">
+
+                    <button
+                        type="button"
+                        class="btn btn-success btn-sm insert-row"
+                    >insert</button>
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm delete-row"
+                    >delete</button>
 
                         </td>
-
-
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 
