@@ -1,52 +1,24 @@
 from django import forms
 from django.forms import formset_factory
 
+def float_input(label, placeholder, css_class="form-control", required=True):
+    return forms.FloatField(
+        label=label,
+        required=required,
+        widget=forms.NumberInput(attrs={
+            "class": css_class,
+            "placeholder": placeholder
+        })
+    )
+    
 class FoundationResponseForm(forms.Form):
-    width = forms.FloatField(
-        label="Width",
-        widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "placeholder": "Enter width"
-        })
-    )
-    eccentricity = forms.FloatField(
-        label="Eccentricity",
-        widget=forms.TextInput(attrs={
-            "class": "form-control",
-            "placeholder": "Enter eccentricity"
-        })
-    )
+    width = float_input("Width", "Enter width")
+    eccentricity = float_input("Eccentricity", "Enter eccentricity")
 
 class FoundationResponseSoilForm(forms.Form):
-    level = forms.FloatField(
-        label="Level",
-        widget=forms.NumberInput(attrs={
-            "class": "form-control cell",
-            "placeholder": "Enter level"
-        })
-    )
-    e_modulus = forms.FloatField(
-        label="E-modulus",
-        widget=forms.NumberInput(attrs={
-            "class": "form-control cell",
-            "placeholder": "Enter E-modulus"
-        })
-    )
-    phi = forms.FloatField(
-        label="Phi",
-        required=False,
-        widget=forms.NumberInput(attrs={
-            "class": "form-control cell",
-            "placeholder": "Enter phi"
-        })
-    )
-    cohesion = forms.FloatField(
-        label="Cohesion",
-        required=False,
-        widget=forms.NumberInput(attrs={
-            "class": "form-control cell",
-            "placeholder": "Enter cohesion"
-        })
-    )
+    level = float_input("Level", "Enter level", css_class="form-control cell")
+    e_modulus = float_input("E-modulus", "Enter E-modulus", css_class="form-control cell")
+    phi = float_input("Phi", "Enter phi", css_class="form-control cell", required=False)
+    cohesion = float_input("Cohesion", "Enter cohesion", css_class="form-control cell", required=False)
 
 SoilFormSet = formset_factory(FoundationResponseSoilForm, extra=1)
