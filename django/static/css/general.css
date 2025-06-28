@@ -16,7 +16,7 @@
 }
 
 .background-color {
-  background-color: #eaeaea; /* or whatever .page-wrapper uses */
+  background-color: #EFE4D2; /* or whatever .page-wrapper uses */
 }
 
 .body {
@@ -30,6 +30,3 @@
     margin: 0 auto;
 }
 
-.color-theme-navbar {
-    background-color: #031c3c;
-}
