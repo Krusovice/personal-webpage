@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'frontpage',
     'literature',
     'personalWebpage',
-    'about',
     'foundationResponse',
     'rest_framework',
     'stockmarket',
