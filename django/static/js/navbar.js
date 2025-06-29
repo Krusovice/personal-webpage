@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const sidebar = document.getElementById("navbar-side");
   sidebar.style.transition = "none";
+  document.documentElement.classList.remove("sidebar-open");
 
   // Restore sidebar state
   if (localStorage.getItem("sidebarOpen") === "true") {
-    sidebar.classList.add("open");
+    document.documentElement.classList.add("sidebar-open");
   }
 
   requestAnimationFrame(() => {
@@ -13,16 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // activate sidebar
   sidebar.addEventListener("mouseover", () => {
-    sidebar.classList.add("open");
+    document.documentElement.classList.add("sidebar-open");
     localStorage.setItem("sidebarOpen", "true");
   });
 
   // deavtivating sidebar
-  sidebar.addEventListener("mouseout", (e) => {
-    if (!sidebar.contains(e.relatedTarget)) {
-      sidebar.classList.remove("open");
-      localStorage.setItem("sidebarOpen", "false");
-    }
+  sidebar.addEventListener("mouseout", () => {
+    document.documentElement.classList.remove("sidebar-open");
+    localStorage.setItem("sidebarOpen", "false");
   });
 
 });
