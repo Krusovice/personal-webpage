@@ -28,6 +28,10 @@
 	width: 300px;
 }
 
+.sidebar-open #navbar-side {
+  width: 300px;
+}
+
 .navbar-link {
 	display: block;
 	font-family: sans-serif;
