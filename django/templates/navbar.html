@@ -1,8 +1,10 @@
 {% load static %}
-<div class=navbar-top>
+<script src="{% static 'js/navbar.js' %}"></script>
+
+<div id="navbar-top">
 </div>
 
-<div class=navbar-side>
+<div id="navbar-side">
 	<ul style="list-style: none;">
 		<li>
 			<a class="navbar-link" href="/">News</a>
@@ -14,7 +16,7 @@
 
 		<li>
 			<a class="navbar-link" href="/foundationResponse/">Foundation Response Predictor</a>
-		    <ul class="navbar-dropdown-menu">
+		    <ul class="navbar-dropdown-menu" style="list-style: none;">
 		        <li><a class="navbar-link" href="/foundationResponse/">Models</a></li>
 		        <li><a class="navbar-link" href="/foundationResponse/">Documentation</a></li>
 		    </ul>
@@ -25,3 +27,4 @@
 		</li>
 	</ul>
 </div>
+
