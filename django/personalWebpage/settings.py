@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'stockmarket',
     'corsheaders',
-    'system_metrics'
+    'system_metrics',
+    'core',
 ]
 
 if os.getenv("DJANGO_ENV") == "production":
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.sidebar_state',
             ],
         },
     },
@@ -89,7 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'personalWebpage.wsgi.application'  # For traditional HTTP requests
 ASGI_APPLICATION = 'personalWebpage.asgi.application'  # For WebSockets and async features
-
 
 DATABASES = {
     'default': {
@@ -105,7 +106,6 @@ DATABASES = {
     }
 }
 
-
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -114,8 +114,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
