@@ -8,20 +8,25 @@
 }
 
 .page-wrapper {
+    flex: 1;
     width: 100vw;
-    height: 100vh;
     z-index: -1;
-    margin-top: 0;
-    padding-top: 20px; /* controlled spacing under navbar */
+    padding-top: 70px; /* Moving under navbar plus some extra */
+    padding-bottom: 20px;
 }
 
 .background-color {
-  background-color: #EFE4D2; /* or whatever .page-wrapper uses */
+  background-color: #EFE4D2;
 }
 
-.body {
+html, body {
     margin: 0;
-    font-family: sans-serif;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
 }
 
 .max-width {
@@ -30,3 +35,6 @@
     margin: 0 auto;
 }
 
+.footer {
+    height: 90px;
+}
