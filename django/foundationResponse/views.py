@@ -28,3 +28,6 @@ def linear_regression(request):
         "soil_formset": soil_formset,
         "result": prediction
     })
+
+def documentation(request):
+    return render(request, 'foundationResponse/documentation.html')
