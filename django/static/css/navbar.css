@@ -41,7 +41,7 @@
   	overflow: hidden;
 }
 
-#navbar-side:hover .navbar-link {
+.sidebar-open .navbar-link {
 	opacity: 1;
 	pointer-events: auto;
 	
@@ -49,4 +49,19 @@
 
 .navbar-link:hover {
 	color: black;
+}
+
+#navbar-side-icon {
+	position: fixed;
+	z-index: 3;
+	top: 20px;
+	width: 30px;
+	left: 0px;
+	transition: left 0.3s ease, transform 0.3s ease;
+	transform: rotate(0deg);
+}
+
+.sidebar-open #navbar-side-icon {
+	left: 270px;
+	transform: rotate(70deg);
 }
