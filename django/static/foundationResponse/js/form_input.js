@@ -1,3 +1,18 @@
+// Function to update the indices of the formset rows after deleting or inserting a row.
+// To make sure that the rows are fed to the foundation-response-predictor API in the right order.
+function updateFormsetIndexes(tbody) {
+    const rows = Array.from(tbody.querySelectorAll('.input-row'));
+
+    rows.forEach((row, index) => {
+        const inputs = row.querySelectorAll('input');
+
+        inputs.forEach(input => {
+            input.name = input.name.replace(/\d+/, index);
+            input.id = input.id.replace(/\d+/, index);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const tbody = document.getElementById('dynamic-table');
 
@@ -6,10 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const rows = tbody.querySelectorAll('.input-row');
         const rowsCount = rows.length;
         const lastRow = rows[rowsCount - 1];
-        if (!lastRow.contains(e.target)) return; // If its not the last row that is the trigger.
 
+        // Returning nothing if the last row doesn't contain the trigger.
+        if (!lastRow.contains(e.target)) return;
+
+        // Returning nothing if any of the last rows inputs are empty.
         const inputs = Array.from(lastRow.querySelectorAll('input'));
-        if (inputs.some(i => i.value.trim() == '')) return;
+        if (inputs.some(i => i.value.trim() == '' && i.disabled == false )) return;
 
         const clone = lastRow.cloneNode(true);
 
@@ -36,7 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update TOTAL_FORMS so Django expects the new row
             const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
             const rows = tbody.querySelectorAll('.input-row');
-            totalFormsInput.value = rows.length; 
+            totalFormsInput.value = rows.length;
+
+            updateFormsetIndexes(tbody);
         }
     });
 
@@ -53,9 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
             const rows = tbody.querySelectorAll('.input-row');
             totalFormsInput.value = rows.length;
+
+            updateFormsetIndexes(tbody);
         }
     });
-
-    // Fading delete button if only one child
-    tbody.addEventListener()
 });

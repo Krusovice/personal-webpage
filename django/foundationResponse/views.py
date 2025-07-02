@@ -17,7 +17,7 @@ def linear_regression(request):
             width = form.cleaned_data['width']
             eccentricity = form.cleaned_data['eccentricity']
             soils = [f.cleaned_data for f in soil_formset.forms]
-
+ 
             prediction = linear_predictor_api_call(width, eccentricity, soils)
     else:
         form = FoundationResponseForm()
