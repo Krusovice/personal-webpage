@@ -4,7 +4,6 @@ from .serializers import StockPriceSerializer
 from django.shortcuts import render
 
 
-
 class StockPriceViewSet(viewsets.ModelViewSet):
     queryset = StockPrice.objects.all()
     serializer_class = StockPriceSerializer

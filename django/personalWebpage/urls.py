@@ -38,8 +38,8 @@ urlpatterns = [
     path('literature/', include('literature.urls')),
     path('logged_in/', views.logged_in, name='logged_in'),
     path('stockmarket/', include('stockmarket.urls')),
-    path("healthcheck/", healthcheck)
-    
+    path("healthcheck/", healthcheck),
+    path('rust_fe/', include('rust_fe.urls')),
 ]
 
 if settings.DEBUG:

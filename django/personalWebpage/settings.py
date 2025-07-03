@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'system_metrics',
     'core',
+    'rust_fe'
 ]
 
 if os.getenv("DJANGO_ENV") == "production":
