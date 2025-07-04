@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("navbar-side");
-  const sidebarIcon = document.getElementById("navbar-side-icon");
+  const sidebar = document.getElementById("sidebar");
+  const sidebarIcon = document.getElementById("sidebar-icon");
   sidebar.style.transition = "none";
 
-  const navbarLinks = document.querySelectorAll(".navbar-link");
+  const navbarLinks = document.querySelectorAll(".sidebar-link");
 
   navbarLinks.forEach(link => {
     link.style.transition = "none";

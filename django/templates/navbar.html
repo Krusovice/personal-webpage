@@ -1,41 +1,45 @@
 {% load static %}
-<div id="navbar-top">
+<div id="topbar">
 </div>
 
-<div id="navbar-side-icon">
+<div id="sidebar-icon">
 	<img src="{% static 'core/img/menu_icon.png' %}" alt="sidebar-icon" style="width: 100%;">
 </div>
 
-<div id="navbar-side">
+<div id=sidebar-icon>
+	<p>Sidebar</p>
+</div>
+
+<div id="sidebar">
 	<ul style="list-style: none;">
 		<li>
-			<a class="navbar-link" href="/">News</a>
+			<a class="sidebar-link" href="/">News</a>
 		</li>
 
 		<li>
-			<a class="navbar-link" href="/literature">Literature Database</a>
+			<a class="sidebar-link" href="/literature">Literature Database</a>
 		</li>
 
 		<li>
-			<a class="navbar-link" href="/foundationResponse/models/">Foundation Response Predictor</a>
-		    <ul class="navbar-dropdown-menu" style="list-style: none;">
-		        <li><a class="navbar-link" href="/foundationResponse/models/">Models</a></li>
-		        <li><a class="navbar-link" href="/foundationResponse/documentation/">Documentation</a></li>
+			<a class="sidebar-link" href="/foundationResponse/models/">Foundation Response Predictor</a>
+		    <ul style="list-style: none;">
+		        <li><a class="sidebar-link" href="/foundationResponse/models/">Models</a></li>
+		        <li><a class="sidebar-link" href="/foundationResponse/documentation/">Documentation</a></li>
 		    </ul>
 		</li>
 		    
 		<li>
-			<a class="navbar-link" href="/rust_fe/">Rust FE</a>
-			<ul class="navbar-dropdown-menu" style="list-style: none;">
-		        <li><a class="navbar-link" href="#">Calculator</a></li>
-		        <li><a class="navbar-link" href="#">Documentation</a></li>
+			<a class="sidebar-link" href="/rust_fe/">Rust FE</a>
+			<ul style="list-style: none;">
+		        <li><a class="sidebar-link" href="#">Calculator</a></li>
+		        <li><a class="sidebar-link" href="#">Documentation</a></li>
 		    </ul>
 		</li>
 
 		<li>
-			<a class="navbar-link" href="/stockmarket/">Selected Stocks Performance</a>
+			<a class="sidebar-link" href="/stockmarket/">Selected Stocks Performance</a>
 		</li>
 	</ul>
 </div>
 
-<script src="{% static 'js/navbar.js' %}"></script>
+<script src="{% static 'js/sidebar.js' %}"></script>
