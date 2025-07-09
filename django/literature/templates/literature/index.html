@@ -3,18 +3,16 @@
 
 {% block content %}
 
-<div class="container box-container">
-    <h5>The Literature App</h5>
-    
+<div class="container box">
+    <h1>The Literature App</h1>
     <p>This app contains literature from my personal literature database. <br>
-    The literature can be shown in the webbrowser or downloaded. <br>
-    </p>
+    The literature can be shown in the webbrowser or downloaded.</p>
 </div>
 
 
 <!-- Search Form -->
-<div class="container box-container">
-    <h5>Search Literature Items</h5>
+<div class="container box">
+    <h2>Search Literature Items</h2>
     <p>Searches through title, author and tags.</p>
     <form method="GET" action="">
         <input type="text" name="query" placeholder="Search" value="{{ request.GET.query }}">
@@ -23,8 +21,8 @@
 </div>
 
 <!-- Table of Literature -->
-<div class="container box-container">
-    <table class="table table-light">
+<div class="container box">
+    <table>
         <thead>
             <tr>
                 <th style="width: 5%;">#</th>
@@ -36,10 +34,10 @@
         <tbody>
             {% if objects %}
                 {% for i in objects %}
-                    <tr>
+                    <tr class="literature-table-td">
                         <th>{{ forloop.counter }}</th>
                         <td>{{ i.author }}</td>
-                        <td><a href="{{ i.get_absolute_url }}">{{ i.title }}</a></td>
+                        <td><a class="text-link" href="{{ i.get_absolute_url }}">{{ i.title }} </a></td>
                         <td>{{ i.description }}</td>
                     </tr>
                 {% endfor %}

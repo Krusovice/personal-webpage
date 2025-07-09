@@ -28,7 +28,6 @@ from django.urls import path
 def healthcheck(request):
     return HttpResponse("OK")
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login_user/', auth_views.LoginView.as_view(), name='login_user'),
@@ -40,6 +39,7 @@ urlpatterns = [
     path('stockmarket/', include('stockmarket.urls')),
     path("healthcheck/", healthcheck),
     path('rust_fe/', include('rust_fe.urls')),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
 
 if settings.DEBUG:

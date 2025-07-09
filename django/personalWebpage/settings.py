@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'system_metrics',
     'core',
-    'rust_fe'
+    'rust_fe',
+    'django_browser_reload'
 ]
 
 if os.getenv("DJANGO_ENV") == "production":

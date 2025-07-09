@@ -1,7 +1,7 @@
 // Function to update the indices of the formset rows after deleting or inserting a row.
 // To make sure that the rows are fed to the foundation-response-predictor API in the right order.
 function updateFormsetIndexes(tbody) {
-    const rows = Array.from(tbody.querySelectorAll('.input-row'));
+    const rows = Array.from(tbody.querySelectorAll('.soil-table-input-row'));
 
     rows.forEach((row, index) => {
         const inputs = row.querySelectorAll('input');
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 1) Add new row when last one is filled
     tbody.addEventListener('input', e => {
-        const rows = tbody.querySelectorAll('.input-row');
+        const rows = tbody.querySelectorAll('.soil-table-input-row');
         const rowsCount = rows.length;
         const lastRow = rows[rowsCount - 1];
 
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update TOTAL_FORMS so Django expects the new row
             const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
-            const rows = tbody.querySelectorAll('.input-row');
+            const rows = tbody.querySelectorAll('.soil-table-input-row');
             totalFormsInput.value = rows.length;
 
             updateFormsetIndexes(tbody);
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Update TOTAL_FORMS so Django expects the new row
             const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
-            const rows = tbody.querySelectorAll('.input-row');
+            const rows = tbody.querySelectorAll('.soil-table-input-row');
             totalFormsInput.value = rows.length;
 
             updateFormsetIndexes(tbody);

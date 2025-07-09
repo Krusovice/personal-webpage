@@ -1,19 +1,37 @@
-.footer-separator {
-  height: 1px;
-  margin: 0;          /* adjust spacing */
+.footer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-items: center;
+    gap: 8px;
+
+    font-weight: 500;
+    transition: color 0.4s ease;
+    background-color: #EFE4D2;
+    border-top: 1px solid rgba(128, 128, 128, 0.6);
+    padding: 10px 20px;
 }
 
 .footer-text {
-    font-weight: 500;
-    transition: color 0.4s ease;
+    font-family: sans-serif;
+    margin: 0;
+    text-align: center;
 }
 
-footer a {
+.footer-links {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 16px;
+}
+
+.footer-link {
+    color: #254D70;
     text-decoration: none;
     transition: color 0.4s ease, text-decoration 0.4s ease;
 }
 
-footer a:hover {
+.footer-link:hover {
     text-decoration: underline;
     color: rgba(0, 0, 30, 0.8);
 }

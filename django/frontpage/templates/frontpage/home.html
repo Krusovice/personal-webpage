@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 {% for news in news_items %}
-    <div class="container box-container">
+    <div class="container box">
         <h2>{{ news.title }}</h2>
 
         <p>{{ news.content|linebreaks }}</p>

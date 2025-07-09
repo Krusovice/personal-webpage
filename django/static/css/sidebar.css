@@ -1,13 +1,6 @@
-#topbar {
-	background: #131D4F;
-	height: 50px;
-	position: fixed;
-	width: 100%;
-	border-bottom: 2px solid black;
-	z-index: 1;
-}
-
 #sidebar {
+	display:grid;
+	grid-template-row: 1fr;
 	position: fixed;
 	background: #131D4F;
 	width: 30px;

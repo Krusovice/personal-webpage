@@ -5,17 +5,22 @@
 {% block title %}Linear Regression Input{% endblock %}
 
 {% block content %}
-    <div class="container box-container">
+    <div class="container box">
         <h1>Foundation Response Predictor - Linear Regression Model</h1>
     </div>
 
-    <form method="post" novalidate>
-        {% csrf_token %}
-        {% include 'foundationResponse/_linear_regression_form.html' %}
-    </form>
+    <div class="frp-input-grid">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'foundationResponse/_linear_regression_form.html' %}
+        </form>
+        <div class="frp-input-grid-right box">List of Stored Calculations</div>
+    </div>
+
+    
 
     {% if result is not None %}
-        <div class="container box-container alert alert-success mt-4">
+        <div class="container box alert alert-success mt-4">
             <strong>Sum of inputs:</strong> {{ result }}
         </div>
     {% endif %}

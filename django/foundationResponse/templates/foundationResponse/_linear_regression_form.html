@@ -1,91 +1,65 @@
 {% load widget_tweaks %}
 {{ form.non_field_errors }}
 
-<div class="container">
-    <div class="row">
-        <div class="col-4 container box-container">
-            <div class="row mt-2">
-                <div class="col-6">
-                    Foundation Width
-                </div>
-
-                <div class="col-6">
-                    {{ form.width|add_class:"form-control"  }}
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-6">
-                    Vertical load
-                </div>
-
-                <div class="col-6">
-                    {{ form.load|add_class:"form-control"  }}
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="col-6">
-                    Eccentricity
-                </div>
-
-                <div class="col-6">
-                    {{ form.eccentricity|add_class:"form-control"  }}
-                </div>
-            </div>
+<div class="frp-input-grid-top-left box" style="display: flex">
+    <div class="col-6">
+            <div class="row label form-row">Input</div>
+            <div class="row form-row">Foundation Width</div>
+            <div class="row form-row">Vertical Load</div>
+            <div class="row form-row">Eccentricity per foundation width</div>
         </div>
-
-        <div class="col-8 container box-container">
-            <table class="table table-bordered">
-                {{ soil_formset.management_form }}
-                <colgroup>
-                    <col style="width: 150px;">
-                    <col style="width: 150px;">
-                    <col style="width: 150px;">
-                    <col style="width: 150px;">
-                    <col style="width: 200px;">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th>Layer Level</th>
-                        <th>E-modulus</th>
-                        <th>phi</th>
-                        <th>cohesion</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="dynamic-table">
-                    {% for soil_form in soil_formset %}
-                    <tr class="input-row">
-                        <td>{{ soil_form.level|add_class:"form-control" }}</td>
-                        <td>{{ soil_form.e_modulus|add_class:"form-control" }}</td>
-                        <td>{{ soil_form.phi|add_class:"form-control" }}</td>
-                        <td>{{ soil_form.cohesion|add_class:"form-control" }}</td>
-                    <td class="text-center">
-
-                    <button
-                        type="button"
-                        class="btn btn-success btn-sm insert-row"
-                    >insert</button>
-                    <button
-                        type="button"
-                        class="btn btn-danger btn-sm delete-row"
-                    >delete</button>
-
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-
+        <div class="col-3">
+            <div class="row label form-row">Value</div>
+            <div class="row form-row">{{ form.width|add_class:"form-control"  }}</div>
+            <div class="row form-row">{{ form.load|add_class:"form-control"  }}</div>
+            <div class="row form-row">{{ form.eccentricity|add_class:"form-control"  }}</div>
         </div>
+        <div class="col-3">
+            <div class="row label form-row">Unit</div>
+            <div class="row form-row">m</div>
+            <div class="row form-row">kPa</div>
+            <div class="row form-row">-</div>
     </div>
+</div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
-                <button type="submit" class="btn btn-primary" style="width: 100%">Calculate</button>
-            </div>
-        </div>
-    </div>
+<div class="frp-input-grid-bot-left box" style="display: flex">
+    <table style="display: block;">
+        {{ soil_formset.management_form }}
+        <colgroup>
+            <col style="width: 150px;">
+            <col style="width: 150px;">
+            <col style="width: 150px;">
+            <col style="width: 150px;">
+            <col style="width: 200px;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>Layer Level</th>
+                <th>E-modulus</th>
+                <th>phi</th>
+                <th>cohesion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="dynamic-table">
+            {% for soil_form in soil_formset %}
+            <tr class="soil-table-input-row">
+                <td>{{ soil_form.level|add_class:"form-control" }}</td>
+                <td>{{ soil_form.e_modulus|add_class:"form-control" }}</td>
+                <td>{{ soil_form.phi|add_class:"form-control" }}</td>
+                <td>{{ soil_form.cohesion|add_class:"form-control" }}</td>
+                <td>
+                    <button type="button" class="btn insert-row">insert</button>
+                    <button type="button" class="btn delete-row">delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+<div box>
+    <button type="submit" class="btn">Calculate</button>
 </div>
