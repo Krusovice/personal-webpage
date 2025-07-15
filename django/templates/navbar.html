@@ -2,11 +2,12 @@
 <div id="topbar">
 </div>
 
-<div id="sidebar-icon">
-	<img src="{% static 'core/img/menu_icon.png' %}" alt="sidebar-icon" style="width: 100%;">
-</div>
+<div class="sidebar">
 
-<div id="sidebar">
+	<div class="sidebar__icon">
+		<img src="{% static 'core/img/menu_icon.png' %}" alt="sidebar-icon" style="width: 100%;">
+	</div>
+
 	<ul style="list-style: none;">
 		<li>
 			<a class="sidebar-link" href="/">News</a>
@@ -14,6 +15,10 @@
 
 		<li>
 			<a class="sidebar-link" href="/literature">Literature Database</a>
+		    <ul style="list-style: none;">
+		        <li><a class="sidebar-link" href="/literature">Database Items</a></li>
+		        <li><a class="sidebar-link" href="/literature/upload">Upload Item</a></li>
+		    </ul>
 		</li>
 
 		<li>

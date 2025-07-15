@@ -1,22 +1,14 @@
-#sidebar {
-	display:grid;
-	grid-template-row: 1fr;
-	position: fixed;
+.sidebar {
+	grid-area: sidebar;
 	background: #131D4F;
-	width: 30px;
+	width: 35px;
 	border-right: 2px solid black;
-	top: 48px;
-	height: 100vh;
 	transition: width 0.3s ease;
 	z-index: 2;
 }
 
-#sidebar.open {
+.sidebar-open .sidebar {
 	width: 300px;
-}
-
-.sidebar-open #sidebar {
-  width: 300px;
 }
 
 .sidebar-link {
@@ -44,17 +36,13 @@
 	color: black;
 }
 
-#sidebar-icon {
-	position: fixed;
-	z-index: 3;
-	top: 20px;
+.sidebar__icon {
 	width: 30px;
 	left: 0px;
 	transition: left 0.3s ease, transform 0.3s ease;
 	transform: rotate(0deg);
 }
 
-.sidebar-open #sidebar-icon {
-	left: 270px;
+.sidebar-open .sidebar__icon {
 	transform: rotate(270deg);
 }

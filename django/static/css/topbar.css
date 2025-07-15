@@ -1,0 +1,6 @@
+#topbar {
+	grid-area: topbar;
+	background: #131D4F;
+	border-bottom: 2px solid black;
+	z-index: 1;
+}

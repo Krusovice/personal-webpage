@@ -1,48 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sidebar = document.getElementById("sidebar");
-  const sidebarIcon = document.getElementById("sidebar-icon");
-  sidebar.style.transition = "none";
-
+  const sidebar = document.querySelector(".sidebar");
+  const sidebarIcon = document.querySelector(".sidebar__icon");
   const navbarLinks = document.querySelectorAll(".sidebar-link");
 
-  navbarLinks.forEach(link => {
-    link.style.transition = "none";
-  });
-
-  requestAnimationFrame(() => {
-    sidebar.style.transition = "width 0.3s ease";
-    
-    navbarLinks.forEach(link => {
-      link.style.transition = "opacity 0.2s ease";
-    });
-  });
-
-  // activate sidebar by hover
-  sidebar.addEventListener("mouseover", () => {
+  const renderActivatedSidebar = () => {
     document.documentElement.classList.add("sidebar-open");
-    document.cookie = "sidebarOpen=true; path=/; Secure";
-  });
 
-  // deavtivating sidebar by hover
-  sidebar.addEventListener("mouseout", () => {
-    if (document.cookie.includes("sidebarOpenFixed=false")) {
-      document.documentElement.classList.remove("sidebar-open");
-      document.cookie = "sidebarOpen=false; path=/; Secure";
-    }
-  });
+    sidebar.style.transition = "none";
+    navbarLinks.forEach(link => {
+      link.style.transition = "none";
+    });
 
-  // activate sideby by icon
-  sidebarIcon.addEventListener("click", () => {
-    if (document.documentElement.classList.contains("sidebar-open")) {
-      document.documentElement.classList.remove("sidebar-open");
-      document.cookie = "sidebarOpen=false; path=/; Secure";
-      document.cookie = "sidebarOpenFixed=false; path=/; Secure";
-    } else {
+    requestAnimationFrame(() => {
+      sidebar.style.transition = "width 0.3s ease";
+      
+      navbarLinks.forEach(link => {
+        link.style.transition = "opacity 0.2s ease";
+      });
+    });
+  };
+
+  const setSidebarCookie = (bool) => {
+    document.cookie = `sidebarClicked=${bool}; path=/;${location.protocol === "https:" ? " Secure;" : ""}`;
+  }
+
+  const addSidebarClick = () => {
+    document.documentElement.classList.add("sidebar-open");
+    setSidebarCookie(true)
+  };
+
+  const removeSidebarClick = () => {
+    document.documentElement.classList.remove("sidebar-open");
+    setSidebarCookie(false)
+  };
+
+  const addSidebarHover = () => {
+    if (document.cookie.includes("sidebarClicked=false")) {
       document.documentElement.classList.add("sidebar-open");
-      document.cookie = "sidebarOpen=true; path=/; Secure";
-      document.cookie = "sidebarOpenFixed=true; path=/; Secure";
+    }
+  };
+
+  const removeSidebarHover = () => {
+    if (document.cookie.includes("sidebarClicked=false")) {
+      document.documentElement.classList.remove("sidebar-open");
+    }
+  };
+
+
+  // Applying logic
+  if (document.cookie.includes("sidebarClicked=true")) {
+    renderActivatedSidebar()
+  }
+  
+  sidebar.addEventListener("mouseover", addSidebarHover);
+  sidebar.addEventListener("mouseout", removeSidebarHover);
+  sidebarIcon.addEventListener("click", () => {
+    if (document.cookie.includes("sidebarClicked=false")) {
+      addSidebarClick();
+    } else {
+      removeSidebarClick();
     }
   });
-
-
 });

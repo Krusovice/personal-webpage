@@ -1,4 +1,7 @@
 @import url("general.css");
 @import url("footer.css");
 @import url("buttons.css");
-@import url("navbar.css");
+@import url("topbar.css");
+@import url("sidebar.css");
+@import url("fonts.css");
+@import url("grid.css");
