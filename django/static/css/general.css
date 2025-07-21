@@ -30,12 +30,6 @@ table {
   border-collapse: collapse;
 }
 
-.literature-table-td {
-  border-top: 1px solid gray;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
 .form-control {
   width: 100%;
   box-sizing: border-box;

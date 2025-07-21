@@ -1,0 +1,12 @@
+.literature-detail-table {
+  border-collapse: separate;
+  border-spacing: 0 2px;
+  width: 100%;
+  text-align: left;
+}
+
+.literature-detail-table th,
+.literature-detail-table td {
+  padding: 3px 3px;
+  vertical-align: top;
+}
