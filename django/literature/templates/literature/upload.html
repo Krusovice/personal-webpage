@@ -4,11 +4,35 @@
 
 <div class="box">
     <h1>Literature Upload Form</h1>
+    <br>
 
-    <form method="POST" enctype="multipart/form-data" name="ItemUploadForm">
+    <form class="literature-upload-form-grid" method="POST" enctype="multipart/form-data" name="ItemUploadForm">
     {% csrf_token %}
-    {{ form_upload.as_p }}
-    <input type="submit" value="Save" class="btn" />
+
+    <div class="literature-upload-form-group">
+        {{ form_upload.title.label_tag }}
+        {{ form_upload.title }}
+    </div>
+
+    <div class="literature-upload-form-group">
+        {{ form_upload.author.label_tag }}
+        {{ form_upload.author }}
+    </div>
+
+    <div class="literature-upload-form-group">
+        {{ form_upload.description.label_tag }}
+        {{ form_upload.description }}
+    </div>
+
+    <div class="literature-upload-form-group">
+        {{ form_upload.content.label_tag }}
+        {{ form_upload.content }}
+    </div>
+
+    <div class="literature-upload-form-group">
+        <input type="submit" value="Save" class="btn" />
+    </div>
+    
 </form>
 </div>
 {% endblock content %}
