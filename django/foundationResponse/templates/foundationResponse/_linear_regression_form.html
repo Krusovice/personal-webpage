@@ -1,65 +1,54 @@
 {% load widget_tweaks %}
 {{ form.non_field_errors }}
 
-<div class="frp-input-grid-top-left box" style="display: flex">
-    <div class="col-6">
-            <div class="row label form-row">Input</div>
-            <div class="row form-row">Foundation Width</div>
-            <div class="row form-row">Vertical Load</div>
-            <div class="row form-row">Eccentricity per foundation width</div>
-        </div>
-        <div class="col-3">
-            <div class="row label form-row">Value</div>
-            <div class="row form-row">{{ form.width|add_class:"form-control"  }}</div>
-            <div class="row form-row">{{ form.load|add_class:"form-control"  }}</div>
-            <div class="row form-row">{{ form.eccentricity|add_class:"form-control"  }}</div>
-        </div>
-        <div class="col-3">
-            <div class="row label form-row">Unit</div>
-            <div class="row form-row">m</div>
-            <div class="row form-row">kPa</div>
-            <div class="row form-row">-</div>
+<div class="frp-linreg-input-grid">
+    <div class="width_text">Width</div>
+    <div class="width_input">{{ form.width|add_class:"form-control" }}</div>
+    <div class="width_unit">m</div>
+    <div class="load_text">Load</div>
+    <div class="load_input">{{ form.load|add_class:"form-control" }}</div>
+    <div class="load_unit">kPa</div>
+    <div class="eccentricity_text">Eccentricity</div>
+    <div class="eccentricity_input">{{ form.eccentricity|add_class:"form-control" }}</div>
+    <div class="eccentricity_unit">m</div>
+
+    <div class="soil_input">
+        <table>
+            {{ soil_formset.management_form }}
+            <colgroup>
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 200px;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Layer Level</th>
+                    <th>E-modulus</th>
+                    <th>phi</th>
+                    <th>cohesion</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="dynamic-table">
+                {% for soil_form in soil_formset %}
+                <tr class="soil-table-input-row">
+                    <td>{{ soil_form.level|add_class:"form-control" }}</td>
+                    <td>{{ soil_form.e_modulus|add_class:"form-control" }}</td>
+                    <td>{{ soil_form.phi|add_class:"form-control" }}</td>
+                    <td>{{ soil_form.cohesion|add_class:"form-control" }}</td>
+                    <td>
+                        <button type="button" class="btn insert-row">insert</button>
+                        <button type="button" class="btn delete-row">delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-</div>
 
-<div class="frp-input-grid-bot-left box" style="display: flex">
-    <table style="display: block;">
-        {{ soil_formset.management_form }}
-        <colgroup>
-            <col style="width: 150px;">
-            <col style="width: 150px;">
-            <col style="width: 150px;">
-            <col style="width: 150px;">
-            <col style="width: 200px;">
-        </colgroup>
-        <thead>
-            <tr>
-                <th>Layer Level</th>
-                <th>E-modulus</th>
-                <th>phi</th>
-                <th>cohesion</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="dynamic-table">
-            {% for soil_form in soil_formset %}
-            <tr class="soil-table-input-row">
-                <td>{{ soil_form.level|add_class:"form-control" }}</td>
-                <td>{{ soil_form.e_modulus|add_class:"form-control" }}</td>
-                <td>{{ soil_form.phi|add_class:"form-control" }}</td>
-                <td>{{ soil_form.cohesion|add_class:"form-control" }}</td>
-                <td>
-                    <button type="button" class="btn insert-row">insert</button>
-                    <button type="button" class="btn delete-row">delete</button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-
-
-
-<div box>
-    <button type="submit" class="btn">Calculate</button>
+    <div class="calculate_button">
+        <button type="submit" class="btn">Calculate</button>
+    </div>
 </div>

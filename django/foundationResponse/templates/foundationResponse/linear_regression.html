@@ -9,21 +9,25 @@
         <h1>Foundation Response Predictor - Linear Regression Model</h1>
     </div>
 
-    <div class="frp-input-grid">
-        <form method="post" novalidate>
-            {% csrf_token %}
-            {% include 'foundationResponse/_linear_regression_form.html' %}
-        </form>
-        <div class="frp-input-grid-right box">List of Stored Calculations</div>
-    </div>
-
-    
-
-    {% if result is not None %}
-        <div class="container box alert alert-success mt-4">
-            <strong>Sum of inputs:</strong> {{ result }}
+    <div class="frp-linreg-grid">
+        
+        <div class="frp-linreg-input box">
+            <form method="post" novalidate>
+                {% csrf_token %}
+                
+                {% include 'foundationResponse/_linear_regression_form.html' %}
+            </form>
         </div>
-    {% endif %}
+
+        <div class="box frp-linreg-result box">
+            {% if result is not None %}
+                <strong>Result:</strong> {{ result }}
+            {% endif %}
+        </div>
+
+
+        <div class="frp-linreg-previous_calculations box">List of Stored Calculations</div>
+    </div>
 
 <script type="module" src="{% static 'foundationResponse/js/form_input.js' %}"></script>
 {% endblock %}

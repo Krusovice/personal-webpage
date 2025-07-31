@@ -1,0 +1,22 @@
+form label {
+  align-self: center;
+  font-weight: 600;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+form input[type="submit"] {
+  padding: 8px 16px;
+  border: 1px solid #888;
+  border-radius: 6px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  width: auto;
+  font-weight: bold;
+}

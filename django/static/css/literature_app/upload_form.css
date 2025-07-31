@@ -9,15 +9,3 @@
   display: contents; /* let label and input use the grid columns */
 }
 
-.literature-upload-form-group label {
-  align-self: center;
-  font-weight: 600;
-}
-
-.literature-upload-form-group input,
-.literature-upload-form-group textarea {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
