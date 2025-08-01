@@ -15,10 +15,13 @@ def linear_regression(request):
 
         if form.is_valid() and soil_formset.is_valid():
             width = form.cleaned_data['width']
+            load = form.cleaned_data['load']
             eccentricity = form.cleaned_data['eccentricity']
             soils = [f.cleaned_data for f in soil_formset.forms]
- 
+
+            # Prediction based on training data using only 100 kPa load
             prediction = linear_predictor_api_call(width, eccentricity, soils)
+            preidction*= load/100 # Considering a linear relationship between load and settlements
     else:
         form = FoundationResponseForm()
         soil_formset = SoilFormSet(prefix="soils")

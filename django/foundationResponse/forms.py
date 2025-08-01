@@ -17,7 +17,7 @@ def float_input(label, placeholder, css_class="form-control", required=True, dis
     
 class FoundationResponseForm(forms.Form):
     width = float_input(label="Width", placeholder="1-4")
-    load = float_input(label="Load", placeholder="100", required=False, disabled=True)
+    load = float_input(label="Load", placeholder="100", required=False)
     eccentricity = float_input(label="Eccentricity", placeholder="0.0-0.3")
 
 class FoundationResponseSoilForm(forms.Form):
