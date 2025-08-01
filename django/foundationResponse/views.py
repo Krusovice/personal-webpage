@@ -22,6 +22,8 @@ def linear_regression(request):
             # Prediction based on training data using only 100 kPa load
             prediction = linear_predictor_api_call(width, eccentricity, soils)
             prediction *= load/100 # Considering a linear relationship between load and settlements
+            prediction *= 1000 # Displacement value in mm.
+            prediction = format(prediction,'0.1f') # Displacement value with 1 decimal.
     else:
         form = FoundationResponseForm()
         soil_formset = SoilFormSet(prefix="soils")
