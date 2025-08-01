@@ -1,20 +1,15 @@
 .frp-linreg-grid {
   display: grid;
   grid-template-columns: 800px 1fr;
-  grid-template-rows: 500px 1fr;
+  grid-template-rows: 1fr;
   gap: 16px 12px;
   margin: auto;
   grid-template-areas:
-    "input previous_calculations"
-    "result previous_calculations";
+    "input previous_calculations";
 }
 
 .frp-linreg-input {
   grid-area: input;
-}
-
-.frp-linreg-result {
-  grid-area: result;
 }
 
 .frp-linreg-previous_calculations {
@@ -25,16 +20,25 @@
   display: grid;
   gap: 10px 10px;
   grid-template-columns: 100px 100px 100px 1fr;
-  grid-template-rows: 30px 30px 30px 1fr 30px;
+  grid-template-rows: 30px 30px 30px 20px 1fr 5px 30px;
   grid-template-areas:
-    "width_text width_input width_unit empty"
-    "load_text load_input load_unit empty"
-    "eccentricity_text eccentricity_input eccentricity_unit empty"
+    "width_text width_input width_unit ."
+    "load_text load_input load_unit ."
+    "eccentricity_text eccentricity_input eccentricity_unit ."
+    ". . . ."
     "soil_input soil_input soil_input soil_input"
-    "calculate_button calculate_button calculate_button calculate_button";
+    ". . . ."
+    "calculate_button . . ."
+    "result result result result";
+
 }
 
-.width_text       { grid-area: width_text; }
+/* Centering all items in grid */
+.frp-linreg-input-grid > div {
+  align-self: center;
+}
+
+.width_text       { grid-area: width_text;}
 .width_input      { grid-area: width_input; }
 .width_unit       { grid-area: width_unit; }
 
@@ -49,6 +53,8 @@
 .soil_input       { grid-area: soil_input; }
 
 .calculate_button { grid-area: calculate_button; }
+
+.result { grid-area: result; }
 
 .soil_input table {
     width: 100%;

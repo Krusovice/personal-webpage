@@ -14,19 +14,23 @@
         <div class="frp-linreg-input box">
             <form method="post" novalidate>
                 {% csrf_token %}
-                
+
                 {% include 'foundationResponse/_linear_regression_form.html' %}
             </form>
+
+            <div class="result">
+                <strong>Estimated Vertical Displacement: </strong>
+                {% if result is not None %}
+                     {{ result }}
+                {% endif %}
+            </div>
+            
         </div>
 
-        <div class="box frp-linreg-result box">
-            {% if result is not None %}
-                <strong>Result:</strong> {{ result }}
-            {% endif %}
+        <div class="frp-linreg-previous_calculations box">
+            <h3>Previous Calculations</h3>
+            <p>For users only</p>
         </div>
-
-
-        <div class="frp-linreg-previous_calculations box">List of Stored Calculations</div>
     </div>
 
 <script type="module" src="{% static 'foundationResponse/js/form_input.js' %}"></script>
