@@ -13,6 +13,17 @@ function updateFormsetIndexes(tbody) {
     });
 }
 
+function updateDeleteButton(tbody) {
+    const rows = tbody.querySelectorAll('.soil-table-input-row');
+
+    // Disabling if the row is the last row
+    if (rows.length === 1) {
+        tbody.querySelector('.delete-row').disabled = true;
+    } else {
+        tbody.querySelectorAll('.delete-row').forEach(btn => btn.disabled = false);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const tbody = document.getElementById('dynamic-table');
 
@@ -43,6 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update TOTAL_FORMS so Django expects the new row
         const totalFormsInput = document.querySelector('input[name="soils-TOTAL_FORMS"]');
         totalFormsInput.value = rowsCount + 1;
+
+        updateDeleteButton(tbody);
     }); 
 
   // 2) Delete row
@@ -57,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             totalFormsInput.value = rows.length;
 
             updateFormsetIndexes(tbody);
+            updateDeleteButton(tbody);
         }
     });
 
@@ -75,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
             totalFormsInput.value = rows.length;
 
             updateFormsetIndexes(tbody);
+            updateDeleteButton(tbody);
         }
     });
+
+
 });
