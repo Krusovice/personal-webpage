@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const clone = lastRow.cloneNode(true);
 
+        // Adding the name of the new row, so django gets the content right in the form.
         clone.querySelectorAll('input').forEach(i => {
             i.value = '';
             const name = i.name;
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2) Delete row
     tbody.addEventListener('click', e => {
-        if (e.target && e.target.classList.contains('delete-row')) {
+        if (e.target.classList.contains('delete-row')) {
             const row = e.target.closest('tr');
             row.remove();
 
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 3) Add row
     tbody.addEventListener('click', e => {
-        if (e.target && e.target.classList.contains('insert-row')) {
+        if (e.target.classList.contains('insert-row')) {
             const row = e.target.closest('tr');
 
             const newRow = row.cloneNode(true);
