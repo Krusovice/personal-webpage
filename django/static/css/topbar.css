@@ -1,6 +1,6 @@
 .topbar {
 	display: grid;
-  grid-template-columns: 300px 200px 1fr;
+  grid-template-columns: 320px 200px 1fr;
 	grid-template-areas: 
 		"sidebar_icon calculator .";
 	grid-area: topbar;
@@ -22,4 +22,18 @@
 
 .sidebar-open .sidebar__icon {
 	width: 200px;
+}
+
+.calculator {
+	align-self: center;
+}
+
+.calculator input {
+  grid-area: calculator;
+  align-self: center;
+  padding: 5px 10px;
+  font-size: 14px;
+  width: 150px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
