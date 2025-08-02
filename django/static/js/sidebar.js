@@ -48,7 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // Applying logic
-  if (document.cookie.includes("sidebarClicked=true")) {
+  if (!document.cookie.includes("sidebarClicked")) {
+    setSidebarCookie(true);
+    renderActivatedSidebar();
+  } else if (document.cookie.includes("sidebarClicked=true")) {
     renderActivatedSidebar()
   }
   
