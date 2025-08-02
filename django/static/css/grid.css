@@ -6,7 +6,7 @@
     "footer footer";
   grid-template-columns: auto 1fr;
   grid-template-rows: 50px 1fr 90px;
-  height: 100vh;
+  min-height: 110vh;
 }
 
 .layout__page-wrapper {
