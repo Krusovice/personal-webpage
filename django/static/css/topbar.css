@@ -1,6 +1,25 @@
-#topbar {
+.topbar {
+	display: grid;
+  grid-template-columns: 300px 200px 1fr;
+	grid-template-areas: 
+		"sidebar_icon calculator .";
 	grid-area: topbar;
 	background: #131D4F;
 	border-bottom: 2px solid black;
 	z-index: 1;
+}
+
+.sidebar__icon {
+	grid-area: sidebar_icon;
+	transition: width 0.3s ease;
+	align-self: center;
+	width: 17px;
+	overflow: hidden;
+	margin-left: 9px;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.sidebar-open .sidebar__icon {
+	width: 200px;
 }

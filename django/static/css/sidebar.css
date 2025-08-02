@@ -36,13 +36,6 @@
 	color: black;
 }
 
-.sidebar__icon {
-	width: 30px;
-	left: 0px;
-	transition: left 0.3s ease, transform 0.3s ease;
-	transform: rotate(0deg);
-}
-
-.sidebar-open .sidebar__icon {
-	transform: rotate(270deg);
+.sidebar.transitioning {
+	pointer-events: none;
 }

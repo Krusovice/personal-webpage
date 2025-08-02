@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const sidebarIcon = document.querySelector(".sidebar__icon");
   const navbarLinks = document.querySelectorAll(".sidebar-link");
 
+  const sidebarTransitioning = () => {
+    sidebar.classList.add('transitioning')
+
+    setTimeout(() => {
+      sidebar.classList.remove('transitioning');
+    }, 300)
+  }
+
   const renderActivatedSidebar = () => {
     document.documentElement.classList.add("sidebar-open");
 
@@ -27,11 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const addSidebarClick = () => {
     document.documentElement.classList.add("sidebar-open");
     setSidebarCookie(true)
+    sidebarTransitioning()
   };
 
   const removeSidebarClick = () => {
     document.documentElement.classList.remove("sidebar-open");
     setSidebarCookie(false)
+    sidebarTransitioning()
   };
 
   const addSidebarHover = () => {
