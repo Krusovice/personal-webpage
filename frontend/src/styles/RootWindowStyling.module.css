@@ -1,0 +1,10 @@
+.rootWindow {
+  display: grid;
+  grid-template-areas:
+    "topbar topbar"
+    "sidebar main"
+    "sidebar footer";
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 50px 1fr 90px;
+  min-height: 110vh;
+}
