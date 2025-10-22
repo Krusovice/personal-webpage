@@ -5,4 +5,11 @@
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
   padding: 12px;
+  padding-right: 50px;
+  border-left: 1px solid var(--color-border);
+  background:
+    /* 20px-wide gradient strip on the left, fills full height */
+    linear-gradient(to left, var(--color-edge), var(--color-background))
+      right / 50px 100% no-repeat,
+    var(--color-background); /* main background */
 }
