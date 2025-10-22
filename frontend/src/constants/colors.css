@@ -11,6 +11,8 @@
   --color-background: var(--rust-beige);
   --color-text: var(--rust-black);
   --color-topbar: var(--rust-orange-dark);
+  --color-topbar-link: var(--rust-black);
+  --color-topbar-link-hover: var(--rust-orange-dark);
   --color-sidebar: var(--rust-orange-bright);
   --color-border: var(--rust-black);
   --color-edge: var(--sublime-white);
