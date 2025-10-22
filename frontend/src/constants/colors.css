@@ -1,0 +1,37 @@
+:root {
+  /* Rust palette */
+  --rust-black: #000000;
+  --rust-orange-bright: #DEA584;
+  --rust-orange-dark: #8A4632;
+  --rust-beige: #F4EDE4;
+
+  --sublime-white: #F8F8F2;
+
+  /* You can also set semantic names */
+  --color-background: var(--rust-beige);
+  --color-text: var(--rust-black);
+  --color-topbar: var(--rust-orange-dark);
+  --color-sidebar: var(--rust-orange-bright);
+  --color-border: var(--rust-black);
+  --color-edge: var(--sublime-white);
+
+  /*
+  Not used colors
+  */
+  
+  /* Sublime palette */
+  --sublime-purple: #AE81FF;
+
+  --sublime-dark: #272822;
+  --sublime-orange: #FD971F;
+  /* tab colors */
+  --color-tab-active: #272822;
+  --color-tab-inactive: #4A4A3D;
+  --color-tab-active-text: #F8F8F2;
+  --color-tab-inactive-text: #A6A690;
+
+  /* General colors */
+  --color-border: #1E1F1C;
+}
+
+

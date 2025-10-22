@@ -1,11 +1,19 @@
 // App.tsx
-import Frontpage from "./pages/Frontpage";
+import Mainpage from "./pages/Mainpage";
+import Topbar from "./components/Topbar"
+import Sidebar from "./components/Sidebar"
+import Edges from "./components/Edges"
 import stylesRootWindow from "./styles/RootWindowStyling.module.css";
+
+import "./constants/colors.css";
 
 export default function App() {
   return (
     <div className={ stylesRootWindow.rootWindow } >
-      <Frontpage />
+      <Topbar />
+      <Sidebar />
+      <Mainpage />
+      <Edges />
     </div>
     
   );

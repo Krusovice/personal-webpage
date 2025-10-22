@@ -1,0 +1,9 @@
+.left_edge {
+  grid-area: left_edge;
+  background-color: var(--color-edge);
+}
+
+.right_edge {
+  grid-area: right_edge;
+  background-color: var(--color-edge);
+}
