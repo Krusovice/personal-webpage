@@ -1,4 +1,4 @@
-.mainpage {
+.mainArea {
   grid-area: main;
   display: flex;
   padding: 12px;
@@ -10,4 +10,5 @@
     linear-gradient(to right, var(--color-edge), var(--color-background))
       left / 50px 100% no-repeat,
     var(--color-background); /* main background */
+  height: 100%;
 }

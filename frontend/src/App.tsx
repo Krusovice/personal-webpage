@@ -1,20 +1,28 @@
-// App.tsx
-import Mainpage from "./pages/Mainpage";
-import Topbar from "./components/Topbar"
-import Sidebar from "./components/Sidebar"
-import Edges from "./components/Edges"
-import stylesRootWindow from "./styles/RootWindowStyling.module.css";
+import { Routes, Route } from "react-router-dom";
 
+// Pages
+import Homepage from "./pages/Homepage";
+import Stockspage from "./pages/Stockspage";
+import Literaturepage from "./pages/Literaturepage";
+import Foundationpage from "./pages/Foundationpage";
+import Profilepage from "./pages/Profilepage";
+
+// Constants
 import "./constants/colors.css";
+
+// Other
+import RootLayout from "./RootLayout";
 
 export default function App() {
   return (
-    <div className={ stylesRootWindow.rootWindow } >
-      <Topbar />
-      <Sidebar />
-      <Mainpage />
-      <Edges />
-    </div>
-    
+    <Routes>
+      <Route element={<RootLayout />}>
+        <Route index element={<Homepage />} />
+        <Route path="literature" element={<Literaturepage />} />
+        <Route path="stocks" element={<Stockspage />} />
+        <Route path="foundation" element={<Foundationpage />} />
+        <Route path="profile" element={<Profilepage />} />
+      </Route>
+    </Routes>
   );
 }
