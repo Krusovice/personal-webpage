@@ -20,15 +20,15 @@ export default function Topbar() {
         </li>
 
         <li>
-          <a className= {stylesTopbar.link} href="/">Selected Stocks</a>
+          <a className= {stylesTopbar.link} href="/stocks">Selected Stocks</a>
         </li>
 
         <li>
-          <a className= {stylesTopbar.link} href="/">Foundation Response</a>
+          <a className= {stylesTopbar.link} href="/foundation">Foundation Response</a>
         </li>
 
         <li className={stylesTopbar.right}>
-          <a className= {stylesTopbar.link} href="/">Profile</a>
+          <a className= {stylesTopbar.link} href="/profile">Profile</a>
         </li>
 
       </ul>
