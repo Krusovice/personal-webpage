@@ -7,3 +7,6 @@ airflow/logs/
 
 # Django
 django/staticfiles/
+
+# Rust
+backend/target/

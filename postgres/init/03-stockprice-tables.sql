@@ -1,4 +1,4 @@
-CREATE TABLE stockmarket.stock_prices (
+CREATE TABLE stocks.stock_prices (
     id SERIAL PRIMARY KEY,
     ticker TEXT NOT NULL,
     date DATE NOT NULL,
@@ -6,7 +6,7 @@ CREATE TABLE stockmarket.stock_prices (
     UNIQUE (ticker, date)
 );
 
-CREATE TABLE stockmarket.stock_metadata (
+CREATE TABLE stocks.stock_metadata (
     ticker TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     currency TEXT NOT NULL,
