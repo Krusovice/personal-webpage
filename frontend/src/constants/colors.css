@@ -6,6 +6,7 @@
   --rust-beige: #F4EDE4;
 
   --sublime-white: #F8F8F2;
+  --sublime-tab-inactive-text: #A6A690;
 
   /* You can also set semantic names */
   --color-background: var(--rust-beige);
@@ -16,6 +17,7 @@
   --color-sidebar: var(--rust-orange-bright);
   --color-border: var(--rust-black);
   --color-edge: var(--sublime-white);
+  --color-page-background: var(--sublime-tab-inactive-text);
 
   /*
   Not used colors
@@ -30,7 +32,6 @@
   --color-tab-active: #272822;
   --color-tab-inactive: #4A4A3D;
   --color-tab-active-text: #F8F8F2;
-  --color-tab-inactive-text: #A6A690;
 
   /* General colors */
   --color-border: #1E1F1C;

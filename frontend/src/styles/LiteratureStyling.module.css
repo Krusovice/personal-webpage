@@ -1,0 +1,25 @@
+.literaturePage {
+  display: grid;
+  grid-template-areas:
+    "searchBar"
+    "resultsArea";
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr;
+  min-height: 1100vh;
+}
+
+.searchBar {
+  grid-area: searchBar;
+  height: 20px;
+}
+
+.searchBar input {
+  height: 100%;
+}
+
+.resultsArea {
+  grid-area: resultsArea;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-page-background);
+}
