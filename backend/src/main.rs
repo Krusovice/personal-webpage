@@ -1,30 +1,17 @@
 use anyhow::Result;
-use serde::{Deserialize, Serialize};
 
 use tokio::net::TcpListener;
-use axum::{Router, http, extract::State, Json};
+use axum::{Router};
 use axum::routing::{get};
 use sqlx::{PgPool};
 use tower_http::cors::{Any, CorsLayer};
 
 
 use backend::handlers::tests::print_hello;
-use backend::handlers::literature_db::get_all_literature_items;
+use backend::handlers::literature_app::get_all_literature_items;
+use backend::states::AppState;
 
-#[derive(Clone)]
-pub struct AppState {
-    pool: PgPool,
-}
 
-#[derive(Serialize, Deserialize, sqlx::FromRow)]
-pub struct LiteratureItem {
-    id: i64,
-    title: String,
-    author: String,
-    keywords: String,
-    timestamp_upload: chrono::DateTime<chrono::Utc>,
-    timestamp_modified: chrono::DateTime<chrono::Utc>,
-}
 
 
 #[tokio::main]

@@ -2,7 +2,7 @@ use axum::{http};
 
 // Handlers
 pub async fn print_hello() -> (http::StatusCode, String) {
-    let s = "Hello!".to_string();
+    let s = "Hello!\n".to_string();
 
     (http::StatusCode::OK, s)
 }

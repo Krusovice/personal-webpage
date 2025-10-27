@@ -5,13 +5,14 @@ use axum::Json;
 use reqwest::StatusCode;
 
 
-use crate::{AppState, LiteratureItem};
+use crate::models::literature_app::LiteratureItem;
+use crate::states::AppState;
 
 fn internal<E: std::fmt::Display>(e: E) -> (StatusCode, String) {
     (StatusCode::INTERNAL_SERVER_ERROR, e.to_string())
 }
 
-async fn get_all_literature_items(
+pub async fn get_all_literature_items(
     State(state): State<AppState>)
     -> Result<Json<Vec<LiteratureItem>>, (http::StatusCode, String)> {
     let items = sqlx::query_as::<_, LiteratureItem>(

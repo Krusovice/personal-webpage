@@ -13,6 +13,6 @@ tokio = { version = "1.48.0", features = ["full"] }
 tower-http = { version = "0.6.6", features = ["cors"] }
 
 # DB
-sqlx = { version = "0.7", features = ["runtime-tokio", "postgres", "macros", "uuid", "chrono"] }
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "postgres", "macros", "uuid", "chrono"] }
 dotenvy = "0.15" # if you want to load .env locally
 chrono = { version = "0.4", features = ["serde"] }

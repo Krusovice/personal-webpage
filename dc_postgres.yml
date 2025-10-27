@@ -13,9 +13,9 @@ services:
       - ../personal-webpage-secrets-and-db/postgres_data:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d
     ports:
-      - "5432:5432"
+      - ${POSTGRES_PORT}
     networks:
-      - webpage_network
+      - ${WEBPAGE_NETWORK}
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 10s
@@ -25,5 +25,5 @@ services:
 
 networks:
   webpage_network:
-    name: webpage_network
+    name: ${WEBPAGE_NETWORK}
     driver: bridge
