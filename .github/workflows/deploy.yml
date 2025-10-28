@@ -1,43 +1,33 @@
-name: Deploy to Raspberry Pi
+name: Deploy Frontend (Docker) to Raspberry Pi
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cleanup before deployment
+      # Optional: ensure docker/compose are installed on the runner
+      # - name: Install Docker Compose plugin (if needed)
+      #   run: |
+      #     if ! docker compose version >/dev/null 2>&1; then
+      #       sudo apt-get update
+      #       sudo apt-get install -y docker-compose-plugin
+      #     fi
+
+      - name: Build and launch frontend
         run: |
-          git reset --hard HEAD
-          git clean -fd
+          docker compose down || true
+          docker compose build --pull
+          docker compose up -d
 
-      - name: Prepare Nginx and django permissions
+      - name: Show status
         run: |
-          mkdir -p ./nginx/cache/client_temp
-          mkdir -p ./nginx/run
-          chmod -R 755 ../../../../secrets-and-database/media
-          chmod +x django/hosting/django_bash_command.sh
-
-
-      - name: Preparing Airflow
-        run: |
-          echo "" >> .env
-          echo "AIRFLOW_UID=$(id -u)" >> .env
-
-      - name: Run deployment script
-        run: |
-          chmod +x start_prod.sh
-          ./start_prod.sh
-
-      - name: Permissions after deployment
-        run: |
-          sudo chown -R user:user /home/user/actions-runner/_work
-          
-
+          docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
+          echo "Open: http://$(hostname -I | awk '{print $1}')/"
