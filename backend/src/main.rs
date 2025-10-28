@@ -6,7 +6,6 @@ use axum::routing::{get};
 use sqlx::{PgPool};
 use tower_http::cors::{Any, CorsLayer};
 
-
 use backend::handlers::tests::print_hello;
 use backend::handlers::literature_app::get_all_literature_items;
 use backend::states::AppState;
@@ -34,7 +33,7 @@ async fn main() -> Result<()> {
         .with_state(AppState { pool })
         .layer(cors);
 
-    let listener = TcpListener::bind("127.0.0.1:8000").await.unwrap();
+    let listener = TcpListener::bind("127.0.0.1:5000").await.unwrap();
     println!("Personal-webpage backend server running");
     axum::serve(listener, app).await.unwrap();
 
