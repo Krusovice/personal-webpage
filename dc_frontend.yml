@@ -1,12 +1,33 @@
 version: "3.9"
+networks:
+  web: {}
 
 services:
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    image: my-frontend:latest
     container_name: react-frontend
+    expose:
+      - "80"              # expose only to the docker network
+    networks: [web]
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2
+    container_name: caddy
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data              # stores certs
+      - caddy_config:/config
+    depends_on:
+      - frontend
+    networks: [web]
     restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

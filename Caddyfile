@@ -1,0 +1,4 @@
+jkirstein.dk, www.jkirstein.dk {
+  reverse_proxy react-frontend:80
+  encode gzip
+}
