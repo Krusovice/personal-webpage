@@ -1,3 +1,4 @@
+/*
 import { useEffect, useMemo, useState } from "react";
 
 import styling from "./../styles/LiteratureStyling.module.css"
@@ -28,7 +29,7 @@ export default function LiteratureSearch() {
     </div>
   )
 }
-
+*/
 /*
 export default function UsersSearch() {
   const [q, setQ] = useState("");

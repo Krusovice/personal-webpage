@@ -8,7 +8,6 @@ import Edges from "./components/Edges"
 
 // Styling
 import stylesRootWindow from "./styles/RootWindowStyling.module.css";
-import stylesMainArea from "./styles/MainAreaStyling.module.css";
 
 export default function RootLayout() {
   return (
