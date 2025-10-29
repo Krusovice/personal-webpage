@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styling from "./../styles/LiteratureStyling.module.css"
 
@@ -22,7 +22,7 @@ export default function LiteratureResults() {
   const [results, setResults] = useState<any[]>([]);
 
   function searchLiteratureItems(searchKeywords: SearchKeywords) {
-    fetch("http://127.0.0.1:5000/get_all_literature_items", {
+    fetch("http://127.0.0.1:5000/search_literature_items", {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -35,6 +35,10 @@ export default function LiteratureResults() {
       .catch(err => console.error("Fetch error:", err));
   }
 
+  // Run once when the component mounts
+  useEffect(() => {
+    searchLiteratureItems(""); // or a default query
+  }, []);
 
   return (
     <>
