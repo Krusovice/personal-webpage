@@ -1,12 +1,13 @@
 use serde::{Deserialize, Serialize};
-use sqlx;
+use sqlx::types::chrono::{DateTime, Utc};
+
 
 #[derive(Serialize, Deserialize, sqlx::FromRow)]
 pub struct LiteratureItem {
-    id: i32,
-    title: String,
-    author: String,
-    keywords: String,
-    timestamp_upload: chrono::DateTime<chrono::Utc>,
-    timestamp_modified: chrono::DateTime<chrono::Utc>,
+    pub id: i32,
+    pub title: String,
+    pub author: String,
+    pub keywords: String,
+    pub timestamp_upload: Option<DateTime<Utc>>,
+    pub timestamp_modified: Option<DateTime<Utc>>,
 }

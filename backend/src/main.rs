@@ -2,12 +2,12 @@ use anyhow::Result;
 
 use tokio::net::TcpListener;
 use axum::{Router};
-use axum::routing::{get};
+use axum::routing::{get, post};
 use sqlx::{PgPool};
 use tower_http::cors::{Any, CorsLayer};
 
 use backend::handlers::tests::print_hello;
-use backend::handlers::literature_app::get_all_literature_items;
+use backend::handlers::literature_app::get_literature_items;
 use backend::states::AppState;
 
 
@@ -29,7 +29,7 @@ async fn main() -> Result<()> {
 
     let app = Router::new()
         .route("/print_hello", get(print_hello))
-        .route("/get_all_literature_items", get(get_all_literature_items))
+        .route("/search_literature_items", post(get_literature_items))
         .with_state(AppState { pool })
         .layer(cors);
 
