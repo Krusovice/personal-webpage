@@ -19,20 +19,18 @@ type LiteratureItem = {
 type SearchKeywords = string;
 
 export default function LiteratureResults() {
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<LiteratureItem[]>([]);
 
-  function searchLiteratureItems(searchKeywords: SearchKeywords) {
-    fetch("http://127.0.0.1:5000/search_literature_items", {
+  async function searchLiteratureItems(searchKeywords: SearchKeywords) {
+    const resp = await fetch("http://127.0.0.1:5000/search_literature_items", {
       method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
       body: JSON.stringify({ searchKeywords }),
-    })
-      .then(r => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
-      .then(setResults)
-      .catch(err => console.error("Fetch error:", err));
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+
+    const data = (await resp.json()) as LiteratureItem[]; // <-- typed parse
+    setResults(data);
   }
 
   // Run once when the component mounts
@@ -51,7 +49,21 @@ export default function LiteratureResults() {
           />
         </div>
 
-        {<pre>{JSON.stringify(results, null, 2)}</pre>}
+          <table>
+            <thead>
+              <tr><th>Title</th><th>Author</th><th>Keywords</th><th>Views</th></tr>
+            </thead>
+            <tbody>
+              {results.map(({ id, title, author, keywords }) => (
+                <tr key={id}>
+                  <td>{title}</td>
+                  <td>{author}</td>
+                  <td>{keywords}</td>
+                  <td>int</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
       </div>
     </>
   )
