@@ -16,14 +16,19 @@ type LiteratureItem = {
   keywords: string;
 };
 
+type SearchKeywords = string;
 
 export default function LiteratureResults() {
   const [results, setResults] = useState<any[]>([]);
 
-  function searchAllLiteratureItems() {
+  function searchLiteratureItems(searchKeywords: SearchKeywords) {
     fetch("http://127.0.0.1:5000/get_all_literature_items", {
-      method: "GET",
-      headers: { Accept: "application/json" }, // no Content-Type for GET
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ searchKeywords }),
     })
       .then(r => (r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`))))
       .then(setResults)
@@ -38,7 +43,7 @@ export default function LiteratureResults() {
           <input 
             type="text" 
             placeholder="Search Literature"
-            onChange={() => searchAllLiteratureItems() }
+            onChange={(e) => searchLiteratureItems(e.target.value) }
           />
         </div>
 
