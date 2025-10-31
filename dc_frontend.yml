@@ -2,12 +2,13 @@ version: "3.9"
 networks:
   web: {}
 
+name: webpage
 services:
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: react-frontend
+    container_name: frontend
     expose:
       - "80"              # expose only to the docker network
     networks: [web]

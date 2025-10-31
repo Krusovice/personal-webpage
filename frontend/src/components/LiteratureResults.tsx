@@ -2,12 +2,6 @@ import { useState, useEffect } from "react";
 
 import styling from "./../styles/LiteratureStyling.module.css"
 
-/*
-1. Define search results list as state
-2. Create function that fetches from the literature database, based on search.
-3. Create input area. Run fetch function on change.
-4. Create result area.
-*/
 
 type LiteratureItem = {
   id: number;

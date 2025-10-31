@@ -24,16 +24,15 @@ pub async fn get_literature_items(
     
     let pattern = format!("%{}%", request.search_keywords);
 
-    let items = sqlx::query_as!(
-        LiteratureItem,
+    let items = sqlx::query_as::<_, LiteratureItem>(
         r#"
         SELECT id, title, author, keywords, timestamp_upload, timestamp_modified
         FROM literature.items
         WHERE title ILIKE $1 OR author ILIKE $1 OR keywords ILIKE $1
         ORDER BY id DESC
-        "#,
-        pattern
+        "#
     )
+    .bind(pattern)
     .fetch_all(&state.pool)
     .await
     .map_err(internal)?;
