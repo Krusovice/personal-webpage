@@ -14,7 +14,7 @@ services:
       - "5000:5000"        # external access: http://<pi-ip>:8000
     environment:
       DATABASE_URL: ${DATABASE_URL}
-      RUST_LOG=info
+      RUST_LOG: info
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:5000/healthz"]
       interval: 10s
