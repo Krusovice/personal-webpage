@@ -36,7 +36,7 @@ async fn main() -> Result<()> {
         .with_state(AppState { pool })
         .layer(cors);
 
-    let listener = TcpListener::bind("127.0.0.1:5000").await.unwrap();
+    let listener = TcpListener::bind("0.0.0.0:5000").await.unwrap();
     println!("Personal-webpage backend server running");
     axum::serve(listener, app).await.unwrap();
 
