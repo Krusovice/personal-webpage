@@ -15,10 +15,11 @@ use backend::states::AppState;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    dotenvy::dotenv().ok();
+    // dotenvy::dotenv().ok();
+    // let db_url = std::env::var("DATABASE_URL")?;
 
     // pool ?
-    let db_url = std::env::var("DATABASE_URL")?;
+    let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
     let pool = PgPool::connect(&db_url).await?;
 
     // cors layer
