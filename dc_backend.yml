@@ -14,6 +14,7 @@ services:
       - "5000:5000"        # external access: http://<pi-ip>:8000
     environment:
       DATABASE_URL: ${DATABASE_URL}
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:${POSTGRES_PORT:-5432}/${POSTGRES_DB}
       RUST_LOG: info
     healthcheck:
       test: ["CMD", "curl", "-fsS", "http://localhost:5000/healthz"]
