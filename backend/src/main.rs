@@ -6,7 +6,8 @@ use axum::routing::{get, post};
 use sqlx::{PgPool};
 use tower_http::cors::{Any, CorsLayer};
 
-use backend::handlers::tests::print_hello;
+
+use backend::handlers::tests::{print_hello, healthz};
 use backend::handlers::literature_app::get_literature_items;
 use backend::states::AppState;
 
@@ -30,6 +31,7 @@ async fn main() -> Result<()> {
 
     let app = Router::new()
         .route("/print_hello", get(print_hello))
+        .route("/healthz", get(healthz))
         .route("/search_literature_items", post(get_literature_items))
         .with_state(AppState { pool })
         .layer(cors);

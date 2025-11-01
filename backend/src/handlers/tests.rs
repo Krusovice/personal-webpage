@@ -6,3 +6,5 @@ pub async fn print_hello() -> (http::StatusCode, String) {
 
     (http::StatusCode::OK, s)
 }
+
+pub async fn healthz() -> &'static str { "ok" }
