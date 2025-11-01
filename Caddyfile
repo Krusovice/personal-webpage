@@ -1,4 +1,19 @@
 jkirstein.dk, www.jkirstein.dk {
-  reverse_proxy react-frontend:80
-  encode gzip
+  encode zstd gzip
+
+  # API → Rust backend
+  handle_path /api/* {
+    reverse_proxy http://backend:5000
+  }
+
+  # Everything else → React frontend container (Nginx or similar)
+  handle {
+    reverse_proxy http://frontend:80
+  }
+
+  log {
+    output stdout
+    format console
+    level INFO
+  }
 }

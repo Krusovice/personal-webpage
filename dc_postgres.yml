@@ -26,4 +26,4 @@ services:
 networks:
   webpage_network:
     name: ${WEBPAGE_NETWORK}
-    driver: bridge
+    external: true
