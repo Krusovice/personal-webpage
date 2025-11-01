@@ -21,6 +21,7 @@ jobs:
           docker compose -f dc_frontend.yml up -d
 
       - name: Build and launch backend
+        run: |
           PROJECT=website
           docker compose -f dc_backend.yml down || true
           docker compose -f dc_backend.yml build --pull
