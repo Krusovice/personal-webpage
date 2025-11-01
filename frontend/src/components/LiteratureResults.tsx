@@ -16,7 +16,9 @@ export default function LiteratureResults() {
   const [results, setResults] = useState<LiteratureItem[]>([]);
 
   async function searchLiteratureItems(searchKeywords: SearchKeywords) {
-    const resp = await fetch("http://127.0.0.1:5000/search_literature_items", {
+    const API_BASE = `${window.location.protocol}//${window.location.hostname}:5000`;
+    
+    const resp = await fetch(`${API_BASE}/search_literature_items`, {
       method: "POST",
       headers: { "Accept": "application/json", "Content-Type": "application/json" },
       body: JSON.stringify({ searchKeywords }),
