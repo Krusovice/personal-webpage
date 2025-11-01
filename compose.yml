@@ -1,0 +1,69 @@
+name: webpage
+
+networks:
+  webpage_network: {}   # user-defined bridge; created automatically
+
+volumes:
+  caddy_data:
+  caddy_config:
+  pg_data:
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks: [webpage_network]
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}"
+      RUST_LOG: "info"
+      PORT: "5000"
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://localhost:5000/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    networks: [webpage_network]
+
+  frontend:
+    build:
+      context: ./frontend
+    expose:
+      - "80"
+    networks: [webpage_network]
+
+  caddy:
+    image: caddy:2
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      # Or mount your built frontend here:
+      # - ./frontend/dist:/usr/share/caddy:ro
+    depends_on:
+      - frontend
+      - backend
+    networks: [webpage_network]

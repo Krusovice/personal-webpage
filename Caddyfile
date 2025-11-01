@@ -1,14 +1,16 @@
 jkirstein.dk, www.jkirstein.dk {
   encode zstd gzip
 
-  # API → Rust backend
   handle_path /api/* {
     reverse_proxy http://backend:5000
   }
 
-  # Everything else → React frontend container (Nginx or similar)
   handle {
     reverse_proxy http://frontend:80
+    # or, if mounting dist into Caddy:
+    # root * /usr/share/caddy
+    # try_files {path} /index.html
+    # file_server
   }
 
   log {

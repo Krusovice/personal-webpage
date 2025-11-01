@@ -1,4 +1,4 @@
-name: Deploy Frontend (Docker) to Raspberry Pi
+name: Deploy Website (Docker) to Raspberry Pi
 
 on:
   push:
@@ -13,22 +13,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and launch frontend
+      - name: Build & launch stack
         run: |
-          PROJECT=website
-          docker compose -f dc_frontend.yml down || true
-          docker compose -f dc_frontend.yml build --pull
-          docker compose -f dc_frontend.yml up -d
-
-      - name: Build and launch backend
-        run: |
-          PROJECT=website
-          docker compose -f dc_backend.yml down || true
-          docker compose -f dc_backend.yml build --pull
-          docker compose -f dc_backend.yml up -d
+          docker compose down --remove-orphans || true
+          docker compose build --pull
+          docker compose up -d --build --wait
 
       - name: Show status
         run: |
           docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}"
-          echo "Frontend: http://$(hostname -I | awk '{print $1}')/"
-          echo "Backend:  http://$(hostname -I | awk '{print $1}'):5000/"
+          IP=$(hostname -I | awk '{print $1}')
+          echo "Frontend: http://$IP/"
+          echo "Backend:  http://$IP:5000/"
