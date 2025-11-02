@@ -1,5 +1,0 @@
-services:
-  postgres:
-    volumes:
-      - ../../../../secrets-and-database/postgres_data:/var/lib/postgresql/data
-      - ./postgres/init:/docker-entrypoint-initdb.d
