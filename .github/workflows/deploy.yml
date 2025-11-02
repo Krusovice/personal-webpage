@@ -15,9 +15,8 @@ jobs:
 
       - name: Build & launch stack
         run: |
-          docker compose down --remove-orphans || true
-          docker compose build --pull
-          docker compose up -d --build --wait
+          docker compose --env-file .env.prod down --remove-orphans || true
+          docker compose --env-file .env.prod up -d --build --wait
 
       - name: Show status
         run: |
