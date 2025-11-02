@@ -19,7 +19,7 @@ services:
     volumes:
       #- ../personal-webpage-secrets-and-db/postgres_data:/var/lib/postgresql/data
       #- ./postgres/init:/docker-entrypoint-initdb.d
-      - ../../../../secrets-and-database/postgres_data:/var/lib/postgresql/data
+      - /home/user/secrets-and-database/postgres_data:/var/lib/postgresql/data
       - ./postgres/init:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
