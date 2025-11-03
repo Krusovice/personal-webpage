@@ -1,4 +1,5 @@
 use anyhow::Result;
+use std::net::SocketAddr;
 
 use tokio::net::TcpListener;
 use axum::{Router};
@@ -16,19 +17,26 @@ use backend::states::AppState;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // dotenvy::dotenv().ok();
-    // let db_url = std::env::var("DATABASE_URL")?;
+
+    // Constants from environment.
+    let _ = dotenvy::from_filename("../.env");
+
+    let db_url = std::env::var("DB_URL").expect("DB_URL not set");
+
+    let backend_ip = std::env::var("BACKEND_IP").expect("BACKEND_IP not set");
+    let backend_port = std::env::var("BACKEND_PORT").expect("BACKEND_PORT not set");
 
     // pool ?
-    let db_url = std::env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    println!("{}", db_url);
     let pool = PgPool::connect(&db_url).await?;
 
-    // cors layer
+    // Cors layer
     let cors = CorsLayer::new()
         .allow_origin(Any)   // narrow later to your frontend origin
         .allow_methods(Any)
         .allow_headers(Any);
 
+    // Setting routes
     let app = Router::new()
         .route("/print_hello", get(print_hello))
         .route("/healthz", get(healthz))
@@ -36,7 +44,12 @@ async fn main() -> Result<()> {
         .with_state(AppState { pool })
         .layer(cors);
 
-    let listener = TcpListener::bind("0.0.0.0:5000").await.unwrap();
+    // Set listener
+    let addr: SocketAddr = format!("{backend_ip}:{backend_port}")
+        .parse()
+        .expect("Invalid BACKEND_IP/BACKEND_PORT");
+
+    let listener = TcpListener::bind(addr).await.unwrap();
     println!("Personal-webpage backend server running");
     axum::serve(listener, app).await.unwrap();
 
