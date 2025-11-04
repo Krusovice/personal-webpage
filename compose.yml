@@ -34,8 +34,9 @@ services:
     build:
       context: ./backend
     environment:
+      DATABASE_URL: ${DB_URL}
+      PORT: ${BACKEND_PORT}
       RUST_LOG: "info"
-      PORT: "5000"
     ports:
       - "5000:5000"
     depends_on:
@@ -66,8 +67,6 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
       - caddy_config:/config
-      # Or mount your built frontend here:
-      # - ./frontend/dist:/usr/share/caddy:ro
     depends_on:
       - frontend
       - backend
