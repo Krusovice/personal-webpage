@@ -34,6 +34,7 @@ services:
     build:
       context: ./backend
     environment:
+      BACKEND_IP: ${BACKEND_IP}
       DB_URL: ${DB_URL}
       PORT: ${BACKEND_PORT}
       RUST_LOG: "info"
