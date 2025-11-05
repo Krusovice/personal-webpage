@@ -10,4 +10,5 @@ pub struct LiteratureItem {
     pub keywords: String,
     pub timestamp_upload: Option<DateTime<Utc>>,
     pub timestamp_modified: Option<DateTime<Utc>>,
+    pub views: i64,
 }

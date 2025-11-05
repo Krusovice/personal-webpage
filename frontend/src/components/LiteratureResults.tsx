@@ -8,6 +8,7 @@ type LiteratureItem = {
   title: string;
   author: string;
   keywords: string;
+  views: number;
 };
 
 type SearchKeywords = string;
@@ -48,12 +49,12 @@ export default function LiteratureResults() {
               <tr><th>Title</th><th>Author</th><th>Keywords</th><th>Views</th></tr>
             </thead>
             <tbody>
-              {results.map(({ id, title, author, keywords }) => (
+              {results.map(({ id, title, author, keywords, views }) => (
                 <tr key={id}>
                   <td>{title}</td>
                   <td>{author}</td>
                   <td>{keywords}</td>
-                  <td>int</td>
+                  <td>{views}</td>
                 </tr>
               ))}
             </tbody>

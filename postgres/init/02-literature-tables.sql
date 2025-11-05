@@ -5,6 +5,6 @@ CREATE TABLE literature.items (
     keywords TEXT NOT NULL,
     timestamp_upload TIMESTAMPTZ DEFAULT NOW(),
     timestamp_modified TIMESTAMPTZ DEFAULT NOW(),
-    views integer NOT NULL DEFAULT 0,
+    views BIGINT NOT NULL DEFAULT 0,
     UNIQUE (title, author)
 );
