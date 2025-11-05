@@ -1,24 +1,26 @@
-use axum::{extract::{State},routing::{post, get},Json, Router};
-use axum_extra::extract::cookie::{Cookie, CookieJar, Key, SameSite};
+use axum::{extract::{State},routing::{post, get}, Json, Router};
+use axum::http::StatusCode;
 use axum_extra::extract::cookie::{Cookie, CookieJar, Key, SameSite};
 use serde::{Deserialize, Serialize};
 use sqlx::{PgPool};
 use std::net::SocketAddr;
+
+use backend::helpers::encryption::{hash_password};
 
 
 
 async fn register(
     State(state): State<AppState>,
     Json(body): Json<RegisterBody>
-) -> Result<Json<ApiMsg>, (axum::http::StatusCode, String)> {
+) -> Result<Json<ApiMsg>, (StatusCode, String)> {
     // hash pw
     let pw_hash = hash_password(&body.password).await
-        .map_err(|e| (axum::http::StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+        .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
 
     // indsæt bruger
     let res = sqlx::query!(
-        "INSERT INTO users (email, password_hash) VALUES ($1, $2)",
-        body.email, pw_hash
+        "INSERT INTO users (email, username, password_hash, first_name, last_name, company) VALUES ($1, $2, $3, $4, $5, $6)",
+        body.email, body.username, pw_hash, body.first_name, body.last_name, body.company
     )
     .execute(&state.pool).await;
 

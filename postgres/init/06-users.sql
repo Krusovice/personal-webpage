@@ -5,8 +5,8 @@ CREATE TABLE users (
 
     email CITEXT NOT NULL UNIQUE,
     username CITEXT NOT NULL UNIQUE,
-
     password_hash TEXT NOT NULL,
+
     first_name TEXT NOT NULL CHECK (length(first_name) <= 100),
     last_name  TEXT NOT NULL CHECK (length(last_name)  <= 100),
     company    TEXT NULL CHECK (length(company) <= 200),
