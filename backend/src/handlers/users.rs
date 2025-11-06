@@ -1,19 +1,24 @@
-use axum::{extract::{State},routing::{post, get}, Json, Router};
+use axum::{extract::{State}, Json};
 use axum::http::StatusCode;
-use axum_extra::extract::cookie::{Cookie, CookieJar, Key, SameSite};
-use serde::{Deserialize, Serialize};
-use sqlx::{PgPool};
-use std::net::SocketAddr;
+use axum_extra::extract::cookie::{SignedCookieJar};
 
-use backend::helpers::encryption::{
+use crate::states::AppState;
+
+use crate::helpers::encryption::{
     hash_password, 
     verify_password, 
-    set_session_cookie, 
-    clear_session_cookie, 
+    set_user_id_cookie, 
+    clear_user_id_cookie, 
     get_user_id_from_cookie
 };
 
-async fn register(
+use crate::models::users::{
+    RegisterBody,
+    LoginBody,
+    ApiMsg
+};
+
+pub async fn register(
     State(state): State<AppState>,
     Json(body): Json<RegisterBody>
 ) -> Result<Json<ApiMsg>, (StatusCode, String)> {
@@ -36,14 +41,14 @@ async fn register(
     }
 }
 
-async fn login(
+pub async fn login(
     State(state): State<AppState>,
-    jar: CookieJar,
+    jar: SignedCookieJar,
     Json(body): Json<LoginBody>
-) -> Result<(CookieJar, Json<ApiMsg>), (axum::http::StatusCode, String)> {
+) -> Result<(SignedCookieJar, Json<ApiMsg>), (axum::http::StatusCode, String)> {
 
     let row = sqlx::query!(
-        "SELECT email, password_hash FROM users WHERE email = $1",
+        "SELECT id, password_hash FROM users WHERE email = $1",
         body.email
     )
     .fetch_optional(&state.pool).await
@@ -57,25 +62,23 @@ async fn login(
         return Err((StatusCode::UNAUTHORIZED, "invalid password".into()));
     }
 
-    let jar = set_session_cookie(jar, &state.cookie_key, user.id.unwrap());
+    let jar = set_user_id_cookie(jar, user.id);
 
     Ok((jar, Json(ApiMsg { message: "logged in".into() })))
 }
 
-async fn logout(
-    State(state): State<AppState>,
-    jar: CookieJar
-) -> (CookieJar, Json<ApiMsg>) {
-    let jar = clear_session_cookie(jar, &state.cookie_key);
+pub async fn logout(
+    jar: SignedCookieJar
+) -> (SignedCookieJar, Json<ApiMsg>) {
+    let jar = clear_user_id_cookie(jar);
     (jar, Json(ApiMsg { message: "logged out".into() }))
 }
 
-async fn list_items_protected(
-    State(state): State<AppState>,
-    jar: CookieJar
+pub async fn list_items_protected(
+    jar: SignedCookieJar
 ) -> Result<Json<serde_json::Value>, (axum::http::StatusCode, String)> {
     // kræver login
-    let Some(_uid) = get_user_id_from_cookie(&jar, &state.cookie_key) else {
+    let Some(_uid) = get_user_id_from_cookie(jar) else {
         return Err((StatusCode::UNAUTHORIZED, "login required".into()));
     };
 

@@ -6,24 +6,13 @@ use axum::{Router};
 use axum::routing::{get, post};
 use sqlx::{PgPool};
 use tower_http::cors::{Any, CorsLayer};
-
-use axum_extra::extract::cookie::{Cookie};
+use axum_extra::extract::cookie::{Key};
 
 use backend::handlers::tests::{print_hello, healthz};
 use backend::handlers::literature_app::get_literature_items;
 use backend::states::AppState;
 use backend::helpers::encryption::hash_password;
-
-
-#[derive(Deserialize)]
-struct RegisterBody { email: String, password: String }
-
-#[derive(Deserialize)]
-struct LoginBody { email: String, password: String }
-
-#[derive(Serialize)]
-struct ApiMsg { message: String }
-
+use backend::handlers::users::{register, login, logout, list_items_protected}
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -31,14 +20,14 @@ async fn main() -> Result<()> {
     // Constants from environment.
     let _ = dotenvy::from_filename("../.env");
 
-    let db_url = std::env::var("DB_URL").expect("DB_URL not set");
+    let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL not set");
 
     let backend_ip = std::env::var("BACKEND_IP").expect("BACKEND_IP not set");
     let backend_port = std::env::var("BACKEND_PORT").expect("BACKEND_PORT not set");
 
     // pool ?
-    println!("{}", db_url);
-    let pool = PgPool::connect(&db_url).await?;
+    println!("{}", database_url);
+    let pool = PgPool::connect(&database_url).await?;
 
     // Cookie key
     let cookie_key = Key::generate();
