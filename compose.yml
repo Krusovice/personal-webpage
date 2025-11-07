@@ -35,7 +35,7 @@ services:
     environment:
       BACKEND_IP: ${BACKEND_IP}
       BACKEND_PORT: ${BACKEND_PORT}
-      DATABASE_URL: ${DB_URL}
+      DATABASE_URL: ${DATABASE_URL}
       RUST_LOG: "info"
     ports:
       - "5000:5000"
