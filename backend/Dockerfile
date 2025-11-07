@@ -2,6 +2,8 @@
 FROM rustlang/rust:nightly as builder
 WORKDIR /app
 
+ENV SQLX_OFFLINE=true
+
 # cache deps
 COPY Cargo.toml Cargo.lock ./
 RUN mkdir src && echo "fn main(){}" > src/main.rs && cargo build --release && rm -rf src
