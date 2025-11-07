@@ -68,6 +68,7 @@ pub async fn login(
 }
 
 pub async fn logout(
+    State(_): State<AppState>,
     jar: SignedCookieJar
 ) -> (SignedCookieJar, Json<ApiMsg>) {
     let jar = clear_user_id_cookie(jar);

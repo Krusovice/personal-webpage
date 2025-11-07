@@ -11,8 +11,7 @@ use axum_extra::extract::cookie::{Key};
 use backend::handlers::tests::{print_hello, healthz};
 use backend::handlers::literature_app::get_literature_items;
 use backend::states::AppState;
-use backend::helpers::encryption::hash_password;
-use backend::handlers::users::{register, login, logout, list_items_protected}
+use backend::handlers::users::{register, login, logout, list_items_protected};
 
 #[tokio::main]
 async fn main() -> Result<()> {
