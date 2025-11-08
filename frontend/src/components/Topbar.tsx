@@ -28,7 +28,7 @@ export default function Topbar() {
         </li>
 
         <li className={stylesTopbar.right}>
-          <a className= {stylesTopbar.link} href="/profile">Profile</a>
+          <a className= {stylesTopbar.link} href="/profile">User</a>
         </li>
 
       </ul>

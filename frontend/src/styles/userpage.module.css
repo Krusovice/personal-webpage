@@ -5,3 +5,12 @@
 .login input {
   height: 100%;
 }
+
+.password {
+  height: 20px;
+}
+
+.password input {
+  height: 100%;
+  
+}
