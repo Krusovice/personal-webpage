@@ -8,3 +8,4 @@ CREATE TABLE literature.items (
     views BIGINT NOT NULL DEFAULT 0,
     UNIQUE (title, author)
 );
+
