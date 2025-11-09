@@ -42,12 +42,12 @@ async fn main() -> Result<()> {
 
     // Setting routes
     let app = Router::new()
+        .route("/print_hello", get(print_hello))
+        .route("/healthz", get(healthz))
         .route("/api/auth/register", post(register))
         .route("/api/auth/login",    post(login))
         .route("/api/auth/logout",   post(logout))
-        .route("/print_hello", get(print_hello))
-        .route("/healthz", get(healthz))
-        .route("/search_literature_items", post(get_literature_items))
+        .route("/api/search_literature_items", post(get_literature_items))
         .with_state(state)
         .layer(cors);
 
