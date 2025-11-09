@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logoUrl from "./../assets/react.svg";
 import stylesTopbar from "./../styles/TopbarStyling.module.css"
-
+import UserLogin from "./user/login"
 
 
 export default function Topbar() {
@@ -28,7 +28,7 @@ export default function Topbar() {
         </li>
 
         <li className={stylesTopbar.right}>
-          <a className= {stylesTopbar.link} href="/profile">User</a>
+          <UserLogin/>
         </li>
 
       </ul>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form"
 
-import styling from "./../../styles/userpage.module.css"
+import styling from "./../../styles/user/registration.module.css"
 
 type FormData = {
 	email: string

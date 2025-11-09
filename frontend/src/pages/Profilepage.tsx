@@ -7,10 +7,6 @@ export default function Profilespage() {
   return (
     <div className={ stylesMainArea.mainArea }>
       <div>
-        <UserLogin/>  
-      </div>
-      
-      <div>
         <UserRegistration/>
       </div>
       

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import styling from "./../../styles/userpage.module.css"
+import styling from "./../../styles/user/login.module.css"
 
 const API = import.meta.env.VITE_API_BASE?.replace(/\/$/, "") || "";
 const LOGIN_URL = API + "/api/auth/login"; // change if your route differs
@@ -26,21 +26,23 @@ export default function UserLogin() {
 	return (
 		<div>
 			<form onSubmit={onSubmit}>
-				<div className={ styling.login }>
-					<input 
-						type="text"
-						placeholder="email"
-					/>
-				</div>
+        <div className = { styling.formArea }>
+          <div className={ styling.emailField }>
+            <input type="text" placeholder="email" />
+          </div>
+              
+          <div className={ styling.passwordField }>
+            <input type="password" placeholder="password" />
+          </div>
+              
+          <div className={ styling.loginField }>
+            <button type="submit">Sign in</button>
+          </div>
 
-				<div className={ styling.password }>
-					<input 
-						type="password"
-						placeholder="password"
-				 	/>
-				</div>
-
-				<button type="submit">Sign in</button>
+          <div className={ styling.registerField }>
+            <button type="submit">Sign up</button>
+          </div>
+        </div>
 			</form>
 		</div>
 		
