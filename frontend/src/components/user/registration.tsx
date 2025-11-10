@@ -36,18 +36,32 @@ export default function UserRegistration() {
     window.location.href = "/";
   }
 
-  function Field() {
+  type FieldProps = {
+    id: string;
+    type: React.InputHTMLAttributes<HTMLInputElement>["type"];
+    placeholder: string;
+    autocomplete?: string; // 👈 optional
+    label: string;
+    register: ReturnType<typeof useForm>["register"];
+    errors: Record<string, any>;
+  };
+
+  function Field({ id, type, placeholder, autocomplete, label, register, errors }: FieldProps) {
     return (
-      <div className = { styling.email }>
-        <label htmlFor="">E-mail</label>
+      <div className = { styling[id] }>
+        <label htmlFor={id}>{label}</label>
         <input
-          id="email"
-          type="email"
-          placeholder="email@example.com"
-          autoComplete="email"
-          {...register("email", { required: "Email is required" })}
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          autoComplete={autocomplete}
+          {...register(id, { required: `${label}+ is required` })}
         />
-        {errors.email && <small style={{ color: "crimson" }}>{errors.email.message}</small>}
+        {errors[id] && (
+          <small style={{ color: "crimson" }}>
+            {errors[id].message}
+          </small>
+        )}
       </div>
     );
   }
@@ -58,71 +72,58 @@ export default function UserRegistration() {
   		<form onSubmit={handleSubmit(onSubmit)}>
         <div className={ styling.registration }>
 
-          <div className = { styling.email }>
-            <label htmlFor="">E-mail</label>
-            <input
-              id="email"
-              type="email"
-              placeholder="email@example.com"
-              autoComplete="email"
-              {...register("email", { required: "Email is required" })}
-            />
-            {errors.email && <small style={{ color: "crimson" }}>{errors.email.message}</small>}
-          </div>
-  				
-          <div className = { styling.username }>
-            <label htmlFor="">Username</label>
-            <input
-              type="text"
-              placeholder="username"
-              autoComplete="username"
-              {...register("username", { required: "Username is required" })}
-            />
-            {errors.username && <small style={{ color: "crimson" }}>{errors.username.message}</small>}
-          </div>
+          {Field({id: "email", 
+            type: "email", 
+            placeholder: "email@example.com", 
+            autocomplete: "email", 
+            label: "E-mail", 
+            register: register, 
+            errors: errors
+          })}
 
-          <div className = { styling.password }>
-            <label htmlFor="">Password</label>
-            <input
-              type="password"
-              placeholder="••••••••"
-              {...register("password", { required: "Password is required" })}
-            />
-            {errors.password && <small style={{ color: "crimson" }}>{errors.password.message}</small>}
-          </div>
+          {Field({id: "username", 
+            type: "text", 
+            placeholder: "Username", 
+            autocomplete: "username", 
+            label: "Username", 
+            register: register, 
+            errors: errors
+          })}
 
-          <div className = { styling.first_name }>
-            <label htmlFor="">First Name</label>
-            <input
-              type="text"
-              placeholder="first name"
-              autoComplete="given-name"
-              {...register("first_name", { required: "First name is required" })}
-            />
-            {errors.first_name && <small style={{ color: "crimson" }}>{errors.first_name.message}</small>}
-          </div>
+          {Field({id: "password", 
+            type: "password", 
+            placeholder: "••••••••", 
+            label: "Password", 
+            register: register, 
+            errors: errors
+          })}
 
-          <div className = { styling.last_name }>
-            <label htmlFor="">Last Name</label>
-            <input
-              type="text"
-              placeholder="last name"
-              autoComplete="family-name"
-              {...register("last_name", { required: "Last name is required" })}
-            />
-            {errors.last_name && <small style={{ color: "crimson" }}>{errors.last_name.message}</small>}
-          </div>
+          {Field({id: "first_name", 
+            type: "text", 
+            placeholder: "First Name", 
+            autocomplete: "given-name", 
+            label: "First Name", 
+            register: register, 
+            errors: errors
+          })}
 
-          <div className = { styling.company }>
-            <label htmlFor="">Company</label>
-            <input
-              type="text"
-              placeholder="company"
-              autoComplete="organization"
-              {...register("company", { required: "Company is required" })}
-            />
-            {errors.company && <small style={{ color: "crimson" }}>{errors.company.message}</small>}
-          </div>
+          {Field({id: "last_name", 
+            type: "text", 
+            placeholder: "Last Name", 
+            autocomplete: "family-name", 
+            label: "Last Name", 
+            register: register, 
+            errors: errors
+          })}
+
+          {Field({id: "company", 
+            type: "text", 
+            placeholder: "Company", 
+            autocomplete: "organization", 
+            label: "Company or Institution", 
+            register: register, 
+            errors: errors
+          })}
 
           <div className = { styling.submitButton }>
             <button type="submit" disabled={isSubmitting}>

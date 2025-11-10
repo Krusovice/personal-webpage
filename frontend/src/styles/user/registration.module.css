@@ -4,25 +4,35 @@
     "email email"
     "username password"
     "first_name last_name"
-    "company company";
+    "company company"
+    "submitButton submitButton";
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-auto-rows: auto;
   gap: 20px;
-
-  height: 200px;
   width: 400px;
+  box-sizing: border-box;
 }
 
-.email { grid-area: email };
-.username { grid-area: username };
-.password { grid-area: password };
-.first_name { grid-area: first_name };
-.last_name { grid-area: last_name };
-.company { grid-area: company };
+.email { 
+  grid-area: email;
+  width: 50%;
+}
 
-.registration input {
-  height: 60px;
+.registration > .email        { grid-area: email; }
+.registration > .username     { grid-area: username; }
+.registration > .password     { grid-area: password; }
+.registration > .first_name   { grid-area: first_name; }
+.registration > .last_name    { grid-area: last_name; }
+.registration > .company      { grid-area: company; }
+.registration > .submitButton { grid-area: submitButton; }
+
+.registration input,
+.registration button {
+  width: 100%;
+  height: 30px;
   padding: 0 .75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--rust-black);
   border-radius: 6px;
+  box-sizing: border-box;
+  
 }
