@@ -1,7 +1,7 @@
 .mainArea {
   grid-area: main;
   display: flex;
-  padding: 12px;
+  padding: 10px;
   padding-left: 50px;
   background-color: var(--color-background);
   border-right: 1px solid var(--color-border);

@@ -4,7 +4,7 @@
     "left_edge topbar topbar right_edge"
     "left_edge main sidebar right_edge"
     "left_edge footer footer right_edge";
-  grid-template-columns: 1fr 1000px 300px 1fr;
+  grid-template-columns: 1fr 1000px 340px 1fr;
   grid-template-rows: 80px 1fr 90px;
   min-height: 110vh;
 }

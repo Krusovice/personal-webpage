@@ -4,8 +4,8 @@
   color: var(--color-text);
   background-color: var(--color-background);
   border: 1px solid var(--color-border);
-  padding: 12px;
-  padding-right: 50px;
+  padding: 18px;
+  padding-right: 40px;
   border-left: 1px solid var(--color-border);
   background:
     /* 20px-wide gradient strip on the left, fills full height */
