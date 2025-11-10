@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styling from "./../../styles/user/login.module.css"
 
@@ -9,8 +10,9 @@ export default function UserLogin() {
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
 	const [err, setErr] = useState("");
+  
 
-	async function onSubmit(e: React.FormEvent) {
+	async function submitLogin(e: React.FormEvent) {
 		e.preventDefault();
 		setErr("");
 		const r = await fetch(LOGIN_URL, {
@@ -23,25 +25,37 @@ export default function UserLogin() {
 		window.location.href = "/"; // or navigate("/dashboard")
 	}
 
+  // Changing the form, based on anything in the email input
+  const emailFilled = email.trim().length > 0;
+
 	return (
 		<div>
-			<form onSubmit={onSubmit}>
+			<form onSubmit={submitLogin}>
         <div className = { styling.loginArea }>
+
           <div className={ styling.emailField }>
-            <input type="text" placeholder="email" />
+            <input 
+              type="text"
+              placeholder="email@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
               
           <div className={ styling.passwordField }>
-            <input type="password" placeholder="password" />
-          </div>
-              
-          <div className={ styling.loginField }>
-            <button type="submit">Sign in</button>
+            <input type="password" placeholder="••••••••" />
           </div>
 
-          <div className={ styling.registerField }>
-            <button type="submit">Sign up</button>
+          <div className = { styling.buttonField }>
+            {
+              emailFilled ? (
+                <button type="submit">Sign In</button>
+              ) : (
+                <button type="button" onClick={() => navigate("/register")}>Register</button>
+              )
+            }
           </div>
+
+
         </div>
 			</form>
 		</div>

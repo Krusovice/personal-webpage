@@ -1,49 +1,22 @@
 
 
 .loginArea {
-  height: 50px;
-  width: 250px;
-
   display: grid;
   grid-template-areas:
     "emailField loginField"
     "passwordField registerField";
-  grid-template-columns: 1fr 100px;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 85px;
+  grid-template-rows: auto;
+  width: 260px;
+  column-gap: 5px;
 }
 
-.emailField {
-  height: 80%;
-  width: 93%;
-  align-content: center;
-}
-
-.passwordField {
-  grid-area: passwordField;
-  height: 80%;
-  width: 93%;
-  align-content: center;
-}
-
-.loginField {
+.buttonField {
   grid-area: loginField;
   width: 100%;
   align-content: center;
 }
 
-.registerField {
-  grid-area: registerField;
-  width: 100%;
-  align-content: center;
-}
-
 .loginArea input {
-  height: 90%;
-  width: 100%;
+  height: 25px;
 }
-
-.loginField .registerField button {
-  height: 100%;
-  width: 60px;
-}
-

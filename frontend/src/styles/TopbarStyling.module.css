@@ -7,7 +7,7 @@
   border: 1px solid var(--color-border);
   padding: 12px;
   padding-left: 100px;
-  padding-right: 100px;
+  padding-right: 50px;
   background:
     /* left strip (fades inward) */
     linear-gradient(to right, var(--color-edge), var(--color-background))
