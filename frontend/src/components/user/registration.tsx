@@ -36,7 +36,21 @@ export default function UserRegistration() {
     window.location.href = "/";
   }
 
-  function
+  function Field() {
+    return (
+      <div className = { styling.email }>
+        <label htmlFor="">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="email@example.com"
+          autoComplete="email"
+          {...register("email", { required: "Email is required" })}
+        />
+        {errors.email && <small style={{ color: "crimson" }}>{errors.email.message}</small>}
+      </div>
+    );
+  }
 
 	return (
     <div>
@@ -44,21 +58,20 @@ export default function UserRegistration() {
   		<form onSubmit={handleSubmit(onSubmit)}>
         <div className={ styling.registration }>
 
-          
-
           <div className = { styling.email }>
-            <label htmlFor="">fla</label>
+            <label htmlFor="">E-mail</label>
             <input
-
-            type="email"
-            placeholder="email@example.com"
-            autoComplete="email"
-            {...register("email", { required: "Email is required" })}
+              id="email"
+              type="email"
+              placeholder="email@example.com"
+              autoComplete="email"
+              {...register("email", { required: "Email is required" })}
             />
             {errors.email && <small style={{ color: "crimson" }}>{errors.email.message}</small>}
           </div>
   				
           <div className = { styling.username }>
+            <label htmlFor="">Username</label>
             <input
               type="text"
               placeholder="username"
@@ -69,6 +82,7 @@ export default function UserRegistration() {
           </div>
 
           <div className = { styling.password }>
+            <label htmlFor="">Password</label>
             <input
               type="password"
               placeholder="••••••••"
@@ -78,6 +92,7 @@ export default function UserRegistration() {
           </div>
 
           <div className = { styling.first_name }>
+            <label htmlFor="">First Name</label>
             <input
               type="text"
               placeholder="first name"
@@ -88,6 +103,7 @@ export default function UserRegistration() {
           </div>
 
           <div className = { styling.last_name }>
+            <label htmlFor="">Last Name</label>
             <input
               type="text"
               placeholder="last name"
@@ -98,6 +114,7 @@ export default function UserRegistration() {
           </div>
 
           <div className = { styling.company }>
+            <label htmlFor="">Company</label>
             <input
               type="text"
               placeholder="company"
