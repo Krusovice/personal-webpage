@@ -26,7 +26,7 @@ export default function UserLogin() {
 	return (
 		<div>
 			<form onSubmit={onSubmit}>
-        <div className = { styling.formArea }>
+        <div className = { styling.loginArea }>
           <div className={ styling.emailField }>
             <input type="text" placeholder="email" />
           </div>

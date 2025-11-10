@@ -1,6 +1,6 @@
 
 
-.formArea {
+.loginArea {
   height: 50px;
   width: 250px;
 
@@ -37,7 +37,7 @@
   align-content: center;
 }
 
-input {
+.loginArea input {
   height: 90%;
   width: 100%;
 }

@@ -36,65 +36,84 @@ export default function UserRegistration() {
     window.location.href = "/";
   }
 
+  function
 
 	return (
-		<div className={ styling.registration }>
-			<form onSubmit={handleSubmit(onSubmit)}>
+    <div>
+  		<h1>Sign up</h1>
+  		<form onSubmit={handleSubmit(onSubmit)}>
+        <div className={ styling.registration }>
 
-        <h1>Sign in</h1>
+          
 
-				<input
-          type="email"
-          placeholder="email@example.com"
-          autoComplete="email"
-          {...register("email", { required: "Email is required" })}
-        />
-        {errors.email && <small style={{ color: "crimson" }}>{errors.email.message}</small>}
+          <div className = { styling.email }>
+            <label htmlFor="">fla</label>
+            <input
 
-        <input
-          type="text"
-          placeholder="username"
-          autoComplete="username"
-          {...register("username", { required: "Username is required" })}
-        />
-        {errors.username && <small style={{ color: "crimson" }}>{errors.username.message}</small>}
+            type="email"
+            placeholder="email@example.com"
+            autoComplete="email"
+            {...register("email", { required: "Email is required" })}
+            />
+            {errors.email && <small style={{ color: "crimson" }}>{errors.email.message}</small>}
+          </div>
+  				
+          <div className = { styling.username }>
+            <input
+              type="text"
+              placeholder="username"
+              autoComplete="username"
+              {...register("username", { required: "Username is required" })}
+            />
+            {errors.username && <small style={{ color: "crimson" }}>{errors.username.message}</small>}
+          </div>
 
-        <input
-          type="password"
-          placeholder="••••••••"
-          {...register("password", { required: "Password is required" })}
-        />
-        {errors.password && <small style={{ color: "crimson" }}>{errors.password.message}</small>}
+          <div className = { styling.password }>
+            <input
+              type="password"
+              placeholder="••••••••"
+              {...register("password", { required: "Password is required" })}
+            />
+            {errors.password && <small style={{ color: "crimson" }}>{errors.password.message}</small>}
+          </div>
 
-        <input
-          type="text"
-          placeholder="first name"
-          autoComplete="given-name"
-          {...register("first_name", { required: "First name is required" })}
-        />
-        {errors.first_name && <small style={{ color: "crimson" }}>{errors.first_name.message}</small>}
+          <div className = { styling.first_name }>
+            <input
+              type="text"
+              placeholder="first name"
+              autoComplete="given-name"
+              {...register("first_name", { required: "First name is required" })}
+            />
+            {errors.first_name && <small style={{ color: "crimson" }}>{errors.first_name.message}</small>}
+          </div>
 
-        <input
-          type="text"
-          placeholder="last name"
-          autoComplete="family-name"
-          {...register("last_name", { required: "Last name is required" })}
-        />
-        {errors.last_name && <small style={{ color: "crimson" }}>{errors.last_name.message}</small>}
+          <div className = { styling.last_name }>
+            <input
+              type="text"
+              placeholder="last name"
+              autoComplete="family-name"
+              {...register("last_name", { required: "Last name is required" })}
+            />
+            {errors.last_name && <small style={{ color: "crimson" }}>{errors.last_name.message}</small>}
+          </div>
 
-        <input
-          type="text"
-          placeholder="company"
-          autoComplete="organization"
-          {...register("company", { required: "Company is required" })}
-        />
-        {errors.company && <small style={{ color: "crimson" }}>{errors.company.message}</small>}
+          <div className = { styling.company }>
+            <input
+              type="text"
+              placeholder="company"
+              autoComplete="organization"
+              {...register("company", { required: "Company is required" })}
+            />
+            {errors.company && <small style={{ color: "crimson" }}>{errors.company.message}</small>}
+          </div>
 
-
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Signing up…" : "Sign up"}
-        </button>
-			</form>
-		</div>	
+          <div className = { styling.submitButton }>
+            <button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Signing up…" : "Sign up"}
+            </button>
+          </div>
+  		  </div>	
+  		</form>
+    </div>
 	);
 }

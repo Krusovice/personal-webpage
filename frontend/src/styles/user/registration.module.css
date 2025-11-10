@@ -1,16 +1,28 @@
-.login {
-  height: 20px;
+.registration {
+  display: grid;
+  grid-template-areas: 
+    "email email"
+    "username password"
+    "first_name last_name"
+    "company company";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+
+  height: 500px;
+  width: 400px;
 }
 
-.login input {
-  height: 100%;
-}
+.email { grid-area: email };
+.username { grid-area: username };
+.password { grid-area: password };
+.first_name { grid-area: first_name };
+.last_name { grid-area: last_name };
+.company { grid-area: company };
 
-.password {
-  height: 20px;
-}
-
-.password input {
-  height: 100%;
-  
+.registration input {
+  height: 60px;
+  padding: 0 .75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
 }
