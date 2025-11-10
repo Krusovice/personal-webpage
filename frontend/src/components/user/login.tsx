@@ -10,6 +10,7 @@ export default function UserLogin() {
 	const [email, setEmail] = useState("");
 	const [pw, setPw] = useState("");
 	const [err, setErr] = useState("");
+  const navigate = useNavigate();
   
 
 	async function submitLogin(e: React.FormEvent) {

@@ -6,6 +6,8 @@ import Stockspage from "./pages/Stockspage";
 import Literaturepage from "./pages/Literaturepage";
 import Foundationpage from "./pages/Foundationpage";
 import Profilepage from "./pages/Profilepage";
+import Registerpage from "./pages/Registerpage";
+
 
 // Constants
 import "./constants/colors.css";
@@ -22,6 +24,7 @@ export default function App() {
         <Route path="stocks" element={<Stockspage />} />
         <Route path="foundation" element={<Foundationpage />} />
         <Route path="profile" element={<Profilepage />} />
+        <Route path="register" element={<Registerpage />} />
       </Route>
     </Routes>
   );
