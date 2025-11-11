@@ -58,7 +58,7 @@ export default function UserLogin() {
 		<div>
 			<form onSubmit={submitLogin}>
         <div className = { styling.loginArea }>
-          {err && <div className={styling.error}>{err}</div>}
+          {err && <div className={styling.errorMessage}>{err}</div>}
 
           <div className={ styling.emailField }>
             <input 

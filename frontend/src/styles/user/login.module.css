@@ -2,7 +2,7 @@
   display: grid;
   grid-template-areas:
     "emailField loginField"
-    "passwordField registerField";
+    "passwordField errorMessage";
   grid-template-columns: 1fr 85px;
   grid-template-rows: auto;
   width: 260px;
@@ -17,4 +17,10 @@
 
 .loginArea input {
   height: 25px;
+}
+
+.errorMessage {
+  grid-area: errorMessage;
+  padding-left: 5px;
+  padding-top: 5px;
 }
