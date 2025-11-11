@@ -3,27 +3,42 @@ import { useNavigate } from "react-router-dom";
 
 import styling from "./../../styles/user/login.module.css"
 
-const API = import.meta.env.VITE_API_BASE?.replace(/\/$/, "") || "";
-const LOGIN_URL = API + "/api/auth/login"; // change if your route differs
 
 export default function UserLogin() {
 	const [email, setEmail] = useState("");
-	const [pw, setPw] = useState("");
-	const [err, setErr] = useState("");
+	const [password, setPassword] = useState("");
   const navigate = useNavigate();
   
-
 	async function submitLogin(e: React.FormEvent) {
 		e.preventDefault();
 		setErr("");
-		const r = await fetch(LOGIN_URL, {
-			method: "POST",
-			headers: { "Content-Type": "application/json", Accept: "application/json" },
-			credentials: "include", // allow cookie-based auth
-			body: JSON.stringify({ email, password: pw }),
-		});
-		if (!r.ok) return setErr((await r.json().catch(() => ({})))?.message || "Login failed");
-		window.location.href = "/"; // or navigate("/dashboard")
+
+  try {
+    const r = await fetch("/api/auth/login", {
+      method: "POST",
+      credentials: "include", // send/receive cookies
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        // ...(csrf ? { "x-csrf-token": csrf } : {}), // if your backend uses CSRF
+      },
+      body: JSON.stringify({ email: email.trim(), password }),
+    });
+
+    if (!r.ok) {
+      // try to read { message } from backend, otherwise generic text
+      let msg = "Login failed";
+      try {
+        const data = await r.json();
+        if (typeof data?.message === "string") msg = data.message;
+      } catch {
+        msg = await r.text().catch(() => "Login failed");
+      }
+      setErr(msg);
+      return;
+    }
+
+    navigate("/")
 	}
 
   // Changing the form, based on anything in the email input
@@ -36,14 +51,18 @@ export default function UserLogin() {
 
           <div className={ styling.emailField }>
             <input 
-              type="text"
+              type="email"
               placeholder="email@example.com"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
               
           <div className={ styling.passwordField }>
-            <input type="password" placeholder="••••••••" />
+            <input 
+              type="password" 
+              placeholder="••••••••"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
           <div className = { styling.buttonField }>
@@ -55,11 +74,8 @@ export default function UserLogin() {
               )
             }
           </div>
-
-
         </div>
 			</form>
 		</div>
-		
 	);
 }
