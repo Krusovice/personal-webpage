@@ -15,7 +15,8 @@ use crate::helpers::encryption::{
 use crate::models::users::{
     RegisterBody,
     LoginBody,
-    ApiMsg
+    ApiMsg,
+    UserInfo
 };
 
 pub async fn register(
@@ -89,4 +90,24 @@ pub async fn list_items_protected(
             {"id": 1, "title": "Example", "author": "You", "keywords": "demo"}
         ]
     })))
+}
+
+pub async fn user_information(
+    State(state): State<AppState>,
+    jar: SignedCookieJar,
+) -> Result<Json<UserInfo>, (StatusCode, String)> {
+    let user_id = get_user_id_from_cookie(jar);
+
+    let user = sqlx::query_as!(
+        UserInfo,
+        r#"SELECT id, email, username, first_name, last_name, company
+           FROM users
+           WHERE id = $1"#,
+        user_id
+    )
+    .fetch_optional(&state.pool).await
+    .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?
+    .ok_or((StatusCode::UNAUTHORIZED, "Not authenticated".into()))?;
+
+    Ok(Json(user))
 }

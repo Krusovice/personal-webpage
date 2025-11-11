@@ -11,7 +11,7 @@ use axum_extra::extract::cookie::{Key};
 use backend::handlers::tests::{print_hello, healthz};
 use backend::handlers::literature_app::get_literature_items;
 use backend::states::AppState;
-use backend::handlers::users::{register, login, logout, list_items_protected};
+use backend::handlers::users::{register, login, logout, user_information, list_items_protected};
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -47,6 +47,7 @@ async fn main() -> Result<()> {
         .route("/api/auth/register", post(register))
         .route("/api/auth/login",    post(login))
         .route("/api/auth/logout",   post(logout))
+        .route("/api/auth/me",       get(user_information))
         .route("/api/search_literature_items", post(get_literature_items))
         .with_state(state)
         .layer(cors);
