@@ -1,9 +1,12 @@
 import { useAuth } from "../../auth";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 import styling from "./../../styles/user/profileLogo.module.css"
 
 export default function ProfileLogo() {
+  const navigate = useNavigate();
   const { user, setUser, loading: authLoading } = useAuth();
   const [profileMenuVisible, setProfileMenuVisible] = useState(false);
   const hideTimer = useRef<number | null>(null);
@@ -22,6 +25,18 @@ export default function ProfileLogo() {
     if (hideTimer.current) window.clearTimeout(hideTimer.current);
     hideTimer.current = window.setTimeout(() => setProfileMenuVisible(false), 150);
   };
+
+  async function logout() {
+    const r = await fetch("/api/auth/logout", {
+      method: "POST",
+      credentials: "include",
+      cache: "no-store",
+    });
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    console.log("logout: cleared user");
+    setUser(null);
+    navigate("/");
+  }
 
   return (
     <div
@@ -47,10 +62,20 @@ export default function ProfileLogo() {
       >
         <ul role="menu">
           <li role="none">
-            <a href="/profile" role="menuitem">Profile</a>
+            <a 
+              href="/profile" 
+              role="menuitem"
+              className={styling.profileMenuItem}
+            >Profile</a>
+
           </li>
           <li role="none">
-            <a href="/auth/logout" role="menuitem">Log out</a>
+            <button 
+              type="button"
+              role="menuitem"
+              className={styling.profileMenuItem}
+              onClick={() => void logout()}
+            >Log out</button>
           </li>
         </ul>
       </nav>
