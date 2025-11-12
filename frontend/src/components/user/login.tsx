@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../auth";
+
+import ProfileLogo from "./profileLogo"
 
 import styling from "./../../styles/user/login.module.css"
+
 
 
 export default function UserLogin() {
@@ -10,6 +14,12 @@ export default function UserLogin() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user, setUser, loading: authLoading } = useAuth();
+
+  if (authLoading) return null; // or a skeleton/spinner
+  if (user) {
+    return <ProfileLogo/>
+  }
   
 	async function submitLogin(e: React.FormEvent) {
 		e.preventDefault();
@@ -42,8 +52,11 @@ export default function UserLogin() {
         return;
       }
 
+      // Expect the API to return the logged-in user
+      const data = await r.json(); // e.g., { user: {...} }
+      setUser(data.user ?? data);
       navigate("/");
-    } catch (e) {
+    } catch {
       setErr("Network error. Please try again.");
     } finally {
       setLoading(false);

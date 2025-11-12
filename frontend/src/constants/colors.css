@@ -8,7 +8,6 @@
   --sublime-white: #F8F8F2;
   --sublime-tab-inactive-text: #A6A690;
 
-  /* You can also set semantic names */
   --color-background: var(--rust-beige);
   --color-text: var(--rust-black);
   --color-topbar: var(--rust-orange-dark);
