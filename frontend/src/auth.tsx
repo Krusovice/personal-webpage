@@ -27,6 +27,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         });
         if (r.ok) {
           const data = await r.json(); // { user: {...} } or just user
+          
+          // debugging
+          const rawUser = data.user ?? data;
+          console.log("AuthProvider /me rawUser:", rawUser);
+
           setUser(data.user ?? data);
         } else {
           setUser(null);

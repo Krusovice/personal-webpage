@@ -15,8 +15,6 @@ export default function UserLogin() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user, setUser, loading: authLoading } = useAuth();
-
-  if (authLoading) return null;
   
 	async function submitLogin(e: React.FormEvent) {
 		e.preventDefault();
@@ -49,9 +47,21 @@ export default function UserLogin() {
         return;
       }
 
-      // Expect the API to return the logged-in user
-      const data = await r.json(); // e.g., { user: {...} }
-      setUser(data.user ?? data);
+    const meRes = await fetch("/api/auth/me", {
+      credentials: "include",
+      headers: { Accept: "application/json" },
+    });
+
+    if (meRes.ok) {
+      const meData = await meRes.json(); // { user: {...} } or just user
+      const rawUser = meData.user ?? meData;
+      console.log("me rawUser:", rawUser);
+      setUser(rawUser); // now this has id/email/first_name
+    } else {
+      setUser(null);
+      setErr("Could not load user profile after login.");
+    }
+
       navigate("/");
     } catch {
       setErr("Network error. Please try again.");

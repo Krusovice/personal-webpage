@@ -7,11 +7,9 @@ import styling from "./../../styles/user/profileLogo.module.css"
 
 export default function ProfileLogo() {
   const navigate = useNavigate();
-  const { user, setUser, loading: authLoading } = useAuth();
+  const { user, setUser } = useAuth();
   const [profileMenuVisible, setProfileMenuVisible] = useState(false);
   const hideTimer = useRef<number | null>(null);
-
-  if (authLoading) return null;
 
   const profileInitial = user.first_name[0].toUpperCase();
 
