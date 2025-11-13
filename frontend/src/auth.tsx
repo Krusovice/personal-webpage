@@ -8,7 +8,7 @@ export type User = {
 
 type AuthContextType = {
   user: User | null;
-  setUser: (u: User | null) => void;
+  setUser: (user: User | null) => void;
   loading: boolean;
 };
 

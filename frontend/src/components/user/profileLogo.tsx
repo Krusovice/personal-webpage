@@ -11,10 +11,7 @@ export default function ProfileLogo() {
   const [profileMenuVisible, setProfileMenuVisible] = useState(false);
   const hideTimer = useRef<number | null>(null);
 
-  // 1) While auth is loading, render nothing (or a tiny skeleton)
-  if (authLoading || !user.first_name) {
-    return <div className={styling.loggedInWrapper} aria-hidden="true">…</div>;
-  }
+  if (authLoading) return null;
 
   const profileInitial = user.first_name[0].toUpperCase();
 

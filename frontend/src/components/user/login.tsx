@@ -16,10 +16,7 @@ export default function UserLogin() {
   const navigate = useNavigate();
   const { user, setUser, loading: authLoading } = useAuth();
 
-  if (authLoading) return null; // or a skeleton/spinner
-  if (user) {
-    return <ProfileLogo/>
-  }
+  if (authLoading) return null;
   
 	async function submitLogin(e: React.FormEvent) {
 		e.preventDefault();
