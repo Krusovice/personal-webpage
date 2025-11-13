@@ -76,22 +76,6 @@ pub async fn logout(
     (jar, Json(ApiMsg { message: "logged out".into() }))
 }
 
-pub async fn list_items_protected(
-    jar: SignedCookieJar
-) -> Result<Json<serde_json::Value>, (axum::http::StatusCode, String)> {
-    // kræver login
-    let Some(_uid) = get_user_id_from_cookie(jar) else {
-        return Err((StatusCode::UNAUTHORIZED, "login required".into()));
-    };
-
-    // her ville du slå litteratur op i DB — demo svar:
-    Ok(Json(serde_json::json!({
-        "items": [
-            {"id": 1, "title": "Example", "author": "You", "keywords": "demo"}
-        ]
-    })))
-}
-
 pub async fn user_information(
     State(state): State<AppState>,
     jar: SignedCookieJar,
