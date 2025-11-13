@@ -4,6 +4,7 @@ use sqlx;
 use axum::Json;
 use reqwest::StatusCode;
 use serde::Deserialize;
+use axum_extra::extract::cookie::{SignedCookieJar};
 
 use crate::models::literature_app::LiteratureItem;
 use crate::states::AppState;
@@ -19,9 +20,20 @@ fn internal<E: std::fmt::Display>(e: E) -> (StatusCode, String) {
 
 pub async fn get_literature_items(
     State(state): State<AppState>,
+    jar: SignedCookieJar
     Json(request): Json<SearchRequest>)
     -> Result<Json<Vec<LiteratureItem>>, (http::StatusCode, String)> {
-    
+
+    // checking for user id
+    let Some(user_id_cookie) = jar.get("user_id");
+
+    if user_id_cookie {
+        rights = "user";
+    } else {
+        rights = "public"
+    } // Add rights = admin, to allow for literature uploads
+
+
     let pattern = format!("%{}%", request.search_keywords);
 
     let items = sqlx::query_as::<_, LiteratureItem>(

@@ -3,6 +3,7 @@ CREATE TABLE literature.items (
     title TEXT NOT NULL,
     author TEXT NOT NULL,
     keywords TEXT NOT NULL,
+    public BOOLEAN NOT NULL DEFAULT FALSE,
     timestamp_upload TIMESTAMPTZ DEFAULT NOW(),
     timestamp_modified TIMESTAMPTZ DEFAULT NOW(),
     views BIGINT NOT NULL DEFAULT 0,
