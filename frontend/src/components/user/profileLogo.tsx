@@ -11,7 +11,7 @@ export default function ProfileLogo() {
   const [profileMenuVisible, setProfileMenuVisible] = useState(false);
   const hideTimer = useRef<number | null>(null);
 
-  const profileInitial = user.first_name[0].toUpperCase();
+  const profileInitial = user?.first_name?.[0]?.toUpperCase() ?? "";
 
   const showNow = () => {
     if (hideTimer.current) {

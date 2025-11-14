@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth";
 
-import ProfileLogo from "./profileLogo"
-
 import styling from "./../../styles/user/login.module.css"
 
 
@@ -14,7 +12,7 @@ export default function UserLogin() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const { user, setUser, loading: authLoading } = useAuth();
+  const { setUser } = useAuth();
   
 	async function submitLogin(e: React.FormEvent) {
 		e.preventDefault();

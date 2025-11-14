@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
+import type { UseFormRegister, FieldError } from "react-hook-form";
 
 import styling from "./../../styles/user/registration.module.css"
 
@@ -12,6 +12,16 @@ type FormData = {
 	company: string
   registration_key: string
 }
+
+type FieldProps = {
+  id: keyof FormData;
+  type: React.InputHTMLAttributes<HTMLInputElement>["type"];
+  placeholder: string;
+  autocomplete?: string; // 👈 optional
+  label: string;
+  register: UseFormRegister<any>;
+  errors: Partial<Record<keyof FormData, FieldError>>;
+};
 
 export default function UserRegistration() {
   const {
@@ -37,16 +47,6 @@ export default function UserRegistration() {
     window.location.href = "/";
   }
 
-  type FieldProps = {
-    id: string;
-    type: React.InputHTMLAttributes<HTMLInputElement>["type"];
-    placeholder: string;
-    autocomplete?: string; // 👈 optional
-    label: string;
-    register: ReturnType<typeof useForm>["register"];
-    errors: Record<string, any>;
-  };
-
   function Field({ id, type, placeholder, autocomplete, label, register, errors }: FieldProps) {
     return (
       <div className = { styling[id] }>
@@ -60,7 +60,7 @@ export default function UserRegistration() {
         />
         {errors[id] && (
           <small style={{ color: "crimson" }}>
-            {errors[id].message}
+            {errors[id]?.message}
           </small>
         )}
       </div>
