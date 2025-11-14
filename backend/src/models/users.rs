@@ -7,7 +7,8 @@ pub struct RegisterBody {
     pub password: String,
     pub first_name: String,
     pub last_name: String,
-    pub company: Option<String>
+    pub company: Option<String>,
+    pub registration_key: String
 }
 
 #[derive(Deserialize)]

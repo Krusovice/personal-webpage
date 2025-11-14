@@ -1,6 +1,7 @@
 .registration {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
+    "registration_key registration_key"
     "email email"
     "username password"
     "first_name last_name"
@@ -15,9 +16,15 @@
 
 .email { 
   grid-area: email;
-  width: 50%;
+  width: 48%;
 }
 
+.registration_key { 
+  grid-area: email;
+  width: 48%;
+}
+
+.registration > .registration_key        { grid-area: registration_key; }
 .registration > .email        { grid-area: email; }
 .registration > .username     { grid-area: username; }
 .registration > .password     { grid-area: password; }

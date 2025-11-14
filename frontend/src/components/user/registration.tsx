@@ -10,6 +10,7 @@ type FormData = {
 	first_name: string
 	last_name: string
 	company: string
+  registration_key: string
 }
 
 export default function UserRegistration() {
@@ -28,8 +29,8 @@ export default function UserRegistration() {
     });
 
     if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      alert(body.message || "Registration failed");
+      const text = await res.text().catch(() => "");
+      alert(text || "Registration failed");
       return;
     }
 
@@ -71,6 +72,14 @@ export default function UserRegistration() {
   		<h1>Sign up</h1>
   		<form onSubmit={handleSubmit(onSubmit)}>
         <div className={ styling.registration }>
+
+          {Field({id: "registration_key", 
+            type: "password", 
+            placeholder: "••••••••", 
+            label: "Registration Key", 
+            register: register, 
+            errors: errors
+          })}
 
           {Field({id: "email", 
             type: "email", 

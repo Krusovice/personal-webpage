@@ -24,6 +24,14 @@ pub async fn register(
     Json(body): Json<RegisterBody>
 ) -> Result<Json<ApiMsg>, (StatusCode, String)> {
 
+    // 1) Check registration key
+    let expected_key = std::env::var("REGISTRATION_KEY")
+        .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+
+    if body.registration_key != expected_key {
+        return Err((StatusCode::FORBIDDEN, "invalid registration key".into()));
+    }
+
     let pw_hash = hash_password(&body.password).await
         .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
 
