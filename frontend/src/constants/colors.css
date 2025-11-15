@@ -8,27 +8,31 @@
   --sublime-white: #F8F8F2;
   --sublime-tab-inactive-text: #A6A690;
 
-  --color-background: var(--rust-beige);
+  --sublime-purple: #AE81FF;
+
+  --dark-purple: #0b0714;
+  --dark-purple-rgb: 11, 7, 20; 
+  --dark-purple-elevated: #151027;
+  --dark-purple-elevated-rgb: 23, 16, 40;
+
+  --color-background: var(--sublime-dark);
   --color-text: var(--rust-black);
   --color-topbar: var(--rust-orange-dark);
   --color-topbar-link: var(--rust-black);
   --color-topbar-link-hover: var(--rust-orange-dark);
   --color-sidebar: var(--rust-orange-bright);
   --color-border: var(--rust-black);
-  --color-edge: var(--sublime-white);
-  --color-page-background: var(--sublime-tab-inactive-text);
+  --color-edge: var(--dark-purple);
 
   /*
   Not used colors
   */
   
   /* Sublime palette */
-  --sublime-purple: #AE81FF;
 
   --sublime-dark: #272822;
   --sublime-orange: #FD971F;
   /* tab colors */
-  --color-tab-active: #272822;
   --color-tab-inactive: #4A4A3D;
   --color-tab-active-text: #F8F8F2;
 

@@ -9,6 +9,20 @@
   min-height: 110vh;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background-image: url("https://images.unsplash.com/photo-1756093158082-37e567772896?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* optional parallax-ish */
+  background-repeat: no-repeat;
+}
+
 :global input,
 :global button {
   width: 100%;
