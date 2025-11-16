@@ -1,17 +1,7 @@
 .left_edge {
   grid-area: left_edge;
-  background-image: linear-gradient(
-    to right,
-    rgba(var(--dark-purple-rgb), 0.9),
-    rgba(var(--dark-purple-elevated-rgb), 0.4)
-  );
 }
 
 .right_edge {
   grid-area: right_edge;
-  background-image: linear-gradient(
-    to left,
-    rgba(var(--dark-purple-rgb), 0.9),
-    rgba(var(--dark-purple-elevated-rgb), 0.4)
-  );
 }
