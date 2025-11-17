@@ -1,35 +1,39 @@
 :root {
   /* Rust palette */
-  --rust-black: #000000;
-  --rust-orange-bright: #DEA584;
-  --rust-orange-dark: #8A4632;
+  --black: #000000;
+  --orange-bright: #DEA584;
+  --orange-rust: #8A4632;
+  --orange-dark: #2e0f00;
   --rust-beige: #F4EDE4;
+  --grey-light: #ccccc4;
+  --grey-dark: #171515;
+  --grey-mid: #2e2c2c;
 
-  --sublime-white: #F8F8F2;
-  --sublime-tab-inactive-text: #A6A690;
+  --sublime-tab-inactive-text: #424242;
   --purple: #AE81FF;
-  --dark-grey: #272822;
   --sublime-orange: #FD971F;
   --color-tab-inactive: #4A4A3D;
   --color-tab-active-text: #F8F8F2;
   --color-border: #1E1F1C;
 
+  --color-border: var(--black);
   --dark-purple: #0b0714;
   --dark-purple-elevated: #151027;
-  --color-background: var(--dark-grey);
-  --color-text: var(--rust-black);
-  --color-topbar: var(--rust-orange-dark);
+  --color-background: var(--grey-dark);
+  --color-text: var(--grey-light);
+  --color-topbar: var(--rust-orange);
   --color-topbar-link: var(--rust-black);
-  --color-topbar-link-hover: var(--rust-orange-dark);
-  --color-sidebar: var(--rust-orange-bright);
-  --color-border: var(--rust-black);
+  --color-topbar-link-hover: var(--rust-orange);
+
   --color-edge: var(--dark-purple);
 
+  --link-hover: var(--orange-rust);
   /*
   Not used colors
   */
   
-  /* Sublime palette */
+  /* Sidebar */
+  --color-sidebar-background: var(--grey-mid);
 
 }
 

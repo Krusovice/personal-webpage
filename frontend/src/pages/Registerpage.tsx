@@ -1,10 +1,10 @@
 import UserRegistration from "./../components/user/registration"
 
-import stylesMainArea from "./../styles/MainAreaStyling.module.css"
+import styles from "./../styles/Content.module.css"
 
 export default function Registerpage() {
   return (
-    <div className={ stylesMainArea.mainArea }>
+    <div className={ styles.content }>
       <div>
         <UserRegistration/>
       </div>

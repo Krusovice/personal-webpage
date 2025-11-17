@@ -1,23 +1,17 @@
 // RootLayout.tsx
-import { Outlet } from "react-router-dom";
+
 
 // Components
-import Topbar from "./components/Topbar"
-import Sidebar from "./components/Sidebar"
 import Edges from "./components/Edges"
+import MainWindow from "./components/MainWindow"
 
 // Styling
-import stylesRootWindow from "./styles/RootWindowStyling.module.css";
+import styles from "./styles/RootWindowStyling.module.css";
 
 export default function RootLayout() {
   return (
-      <div className={ stylesRootWindow.rootWindow } >
-        <Topbar />
-        <Sidebar />
-        <main>
-          {/* Routed pages render here */}
-          <Outlet />
-        </main>
+      <div className={ styles.rootWindow } >
+        <MainWindow />
         <Edges />
       </div>
   );

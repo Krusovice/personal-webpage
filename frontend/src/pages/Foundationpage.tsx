@@ -1,9 +1,9 @@
 
-import stylesMainArea from "./../styles/MainAreaStyling.module.css"
+import styles from "./../styles/Content.module.css"
 
 export default function Foundationpage() {
   return (
-    <div className={ stylesMainArea.mainArea }>
+    <div className={ styles.content }>
       <h1>I'm the foundation page</h1>  
     </div>
     

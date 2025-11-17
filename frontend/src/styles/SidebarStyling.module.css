@@ -2,14 +2,9 @@
   grid-area: sidebar;
   display: flex;
   color: var(--color-text);
-  background-color: var(--color-background);
-  border: 1px solid var(--color-border);
+  background-color: var(--color-sidebar-background);
   padding: 18px;
   padding-right: 40px;
-  border-left: 1px solid var(--color-border);
-  background:
-    /* 20px-wide gradient strip on the left, fills full height */
-    linear-gradient(to left, var(--color-edge), var(--color-background))
-      right / 50px 100% no-repeat,
-    var(--color-background); /* main background */
+  border: 2px solid var(--color-border);
+  border-radius: 20px;
 }

@@ -1,0 +1,13 @@
+.mainWindow {
+  grid-area: mainWindow;
+  display: grid;
+  grid-template-areas:
+    "topbar topbar"
+    "content sidebar";
+  grid-template-columns: 1fr 340px;
+  grid-template-rows: 80px 1fr;
+  padding: 10px;
+  background-color: var(--color-background);
+  border-left: 2px solid var(--color-border);
+  height: 100%;
+}

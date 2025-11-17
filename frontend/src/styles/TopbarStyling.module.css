@@ -3,20 +3,9 @@
   display: flex;
   align-items: center;
   color: var(--color-text);
-  background-color: var(--color-background);
-  border: 1px solid var(--color-border);
+  background-color: var(--grey-mid);
   padding: 12px;
-  padding-left: 100px;
-  padding-right: 50px;
-  background:
-    /* left strip (fades inward) */
-    linear-gradient(to right, var(--color-edge), var(--color-background))
-      left / 50px 100% no-repeat,
-    /* right strip (fades inward) */
-    linear-gradient(to left,  var(--color-edge), var(--color-background))
-      right / 50px 100% no-repeat,
-    /* base fill */
-    var(--color-background);
+  border-radius: 15px;
 }
 
 .topbar ul {
@@ -47,5 +36,5 @@
 }
 
 .link:hover {
-  color: var(--color-topbar-link-hover);
+  color: var(--link-hover);
 }
