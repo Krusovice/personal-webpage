@@ -37,6 +37,7 @@ services:
       BACKEND_PORT: ${BACKEND_PORT}
       DATABASE_URL: ${DATABASE_URL}
       RUST_LOG: "info"
+      REGISTRATION_KEY: ${REGISTRATION_KEY}
     ports:
       - "5000:5000"
     depends_on:

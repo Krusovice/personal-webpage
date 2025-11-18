@@ -26,7 +26,16 @@ pub async fn register(
 
     // 1) Check registration key
     let expected_key = std::env::var("REGISTRATION_KEY")
-        .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?;
+        .map_err(|e| {
+            // Log the technical detail on the server
+            eprintln!("REGISTRATION_KEY env var error: {e}");
+
+            // Message for the client
+            (
+                StatusCode::INTERNAL_SERVER_ERROR, 
+                "Server issue: registration key is not set. Please contact the administrator.".to_string()
+            )
+        })?;
 
     if body.registration_key != expected_key {
         return Err((StatusCode::FORBIDDEN, "invalid registration key".into()));

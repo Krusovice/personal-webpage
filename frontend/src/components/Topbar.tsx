@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoUrl from "./../assets/react.svg";
+import logoUrl from "./../assets/slardar.png";
 import stylesTopbar from "./../styles/TopbarStyling.module.css"
 import UserArea from "./user/userArea"
 

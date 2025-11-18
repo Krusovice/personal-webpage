@@ -1,77 +1,45 @@
-/*
-import { useEffect, useMemo, useState } from "react";
+import { useState, useEffect } from "react";
 
 import styling from "./../styles/LiteratureStyling.module.css"
 
-export default function LiteratureSearch() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
 
-  console.log(query);
+type LiteratureItem = {
+  id: number;
+  title: string;
+  author: string;
+  keywords: string;
+  views: number;
+};
 
-  fetch("http://localhost:8000/api/literature/search", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: query,
-  })
-    .then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
-    .then(setResults)
-    .catch(e => { if (e.name !== "AbortError") setError(String(e)); })
-    .finally(() => setLoading(false));
+type SearchKeywords = string;
 
-  return (
-    <div className={ styling.searchBar }>
-      <input 
-        type="text"
-        placeholder="Search Liteature"
-        value={query}
-        onChange={e => setQuery(e.target.value)}/>
-    </div>
-  )
-}
-*/
-/*
-export default function UsersSearch() {
-  const [q, setQ] = useState("");
-  const [results, setResults] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export default function LiteratureResults() {
+  const [literatureList, setLiteratureList] = useState<LiteratureItem[]>([]);
 
-  // simple debounce
-  const debouncedQ = useMemo(() => q, [q]);
-  useEffect(() => {
-    if (!debouncedQ) { setResults([]); return; }
-
-    const ctrl = new AbortController();
-    setLoading(true); setError(null);
-
-    fetch("http://localhost:3001/api/users/search", {
+  async function searchLiteratureItems(searchKeywords: SearchKeywords) {
+    const resp = await fetch("/api/search_literature_items", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ term: debouncedQ, limit: 10 }),
-      signal: ctrl.signal,
-    })
-      .then(r => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
-      .then(setResults)
-      .catch(e => { if (e.name !== "AbortError") setError(String(e)); })
-      .finally(() => setLoading(false));
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({ searchKeywords }),
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
 
-    return () => ctrl.abort();
-  }, [debouncedQ]);
+    const data = (await resp.json()) as LiteratureItem[]; // <-- typed parse
+    setLiteratureList(data);
+  }
+
+  // Run once when the component mounts
+  useEffect(() => {
+    searchLiteratureItems(""); // or a default query
+  }, []);
 
   return (
     <div>
-      <input
-        value={q}
-        onChange={e => setQ(e.target.value)}
-        placeholder="Search users…"
+      <input 
+        type="text" 
+        placeholder="Search Literature"
+        onChange={(e) => searchLiteratureItems(e.target.value) }
       />
-      {loading && <p>Loading…</p>}
-      {error && <p style={{color:"red"}}>{error}</p>}
-      <ul>
-        {results.map(u => <li key={u.id}>{u.name} — {u.email}</li>)}
-      </ul>
     </div>
-  );
+  )
 }
-*/

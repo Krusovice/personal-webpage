@@ -22,6 +22,10 @@ body {
   height: 100vh;
 }
 
+td, th {
+  color: var(--color-text);
+}
+
 :global input,
 :global button {
   width: 100%;

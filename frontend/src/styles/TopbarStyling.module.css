@@ -38,3 +38,11 @@
 .link:hover {
   color: var(--link-hover);
 }
+
+.logo {
+  height: 80px;
+}
+
+.logo:hover {
+  height: 300px;
+}
