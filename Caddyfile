@@ -1,7 +1,7 @@
 jkirstein.dk, www.jkirstein.dk {
   encode zstd gzip
 
-  handle_path /api/* {
+  handle /api/* {
     reverse_proxy backend:5000
   }
 
