@@ -1,17 +1,13 @@
+/*
 import { useState, useEffect } from "react";
 
 import styling from "./../styles/LiteratureStyling.module.css"
 
+import type { LiteratureItem, SearchKeywords } from "./types.ts"
 
-type LiteratureItem = {
-  id: number;
-  title: string;
-  author: string;
-  keywords: string;
-  views: number;
-};
+import { LiteratureSearch } from "./LiteratureSearch";
+import { LiteratureList } from "./LiteratureList";
 
-type SearchKeywords = string;
 
 export default function LiteratureResults() {
   const [results, setResults] = useState<LiteratureItem[]>([]);
@@ -30,7 +26,7 @@ export default function LiteratureResults() {
 
   // Run once when the component mounts
   useEffect(() => {
-    searchLiteratureItems(""); // or a default query
+    searchLiteratureItems(""); // default query
   }, []);
 
   return (
@@ -63,3 +59,4 @@ export default function LiteratureResults() {
     </>
   )
 }
+*/
