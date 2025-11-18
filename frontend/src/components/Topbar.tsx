@@ -9,7 +9,7 @@ export default function Topbar() {
     <div className={ stylesTopbar.topbar }>
 
       <ul className={ stylesTopbar.list }>
-        <li>
+        <li className={ stylesTopbar.logoContainer }>
           <Link to="/" aria-label="Home">
             <img src={logoUrl} alt="" className={stylesTopbar.logo} />
           </Link>

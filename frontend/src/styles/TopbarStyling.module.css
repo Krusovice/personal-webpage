@@ -39,10 +39,21 @@
   color: var(--link-hover);
 }
 
-.logo {
+.logoContainer {
   height: 80px;
+  margin-left: 20px;
 }
 
-.logo:hover {
-  height: 300px;
+.logo {
+  height: 80px;
+  transition: transform 1s ease;
+  transform-origin: center center;
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.logoContainer:hover .logo {
+  transform: scale(40) rotate(0deg) translateY(32px) translateX(28px);
+
 }
