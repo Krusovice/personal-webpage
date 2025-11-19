@@ -8,6 +8,7 @@ pub struct LiteratureItem {
     pub title: String,
     pub author: String,
     pub keywords: String,
+    pub content: String,
     pub timestamp_upload: Option<DateTime<Utc>>,
     pub timestamp_modified: Option<DateTime<Utc>>,
     pub views: i64,

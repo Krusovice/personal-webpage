@@ -49,6 +49,7 @@ async fn main() -> Result<()> {
         .route("/api/auth/logout",   post(logout))
         .route("/api/auth/me",       get(user_information))
         .route("/api/search_literature_items", post(get_literature_items))
+        .route("/api/literature/:id/file", get(view_literature))
         .with_state(state)
         .layer(cors);
 

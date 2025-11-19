@@ -18,7 +18,11 @@ export function LiteratureResults({ items }: Props) {
             <td>{title}</td>
             <td>{author}</td>
             <td>{keywords}</td>
-            <td><a href={`/api/literature/${id}/file`}>Download</a></td>
+            <td><a
+              href={`/api/literature/${id}/file`}
+              target="_blank"
+              rel="noopener noreferrer" // prevent tabnabbing + hide Referer
+            >Download</a></td>
             <td>{views}</td>
           </tr>
         ))}
