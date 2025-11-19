@@ -9,7 +9,7 @@ export function LiteratureResults({ items }: Props) {
     <table>
       <thead>
         <tr>
-          <th>Title</th><th>Author</th><th>Keywords</th><th>Views</th>
+          <th>Title</th><th>Author</th><th>Keywords</th><th>Download</th><th>Views</th>
         </tr>
       </thead>
       <tbody>
@@ -18,6 +18,7 @@ export function LiteratureResults({ items }: Props) {
             <td>{title}</td>
             <td>{author}</td>
             <td>{keywords}</td>
+            <td><a href={`/api/literature/${id}/file`}>Download</a></td>
             <td>{views}</td>
           </tr>
         ))}

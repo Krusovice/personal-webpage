@@ -1,0 +1,19 @@
+After starting using sqlx for managing db migrations,
+a new database can be initialized by
+
+docker compose up -d postgres
+sqlx migrate run 
+
+instead of calling the postgres/init folder.
+
+Example of a new migration work flow:
+
+# 1) Create a migration file
+sqlx migrate add -r add_file_path_to_literature_items
+
+# 2) Edit backend/migrations/2025..._add_file_path_to_literature_items.sql
+#    and write your ALTER TABLE ...
+
+# 3) Run it against your dev DB
+export DATABASE_URL="postgres://dev_user:dev_password@localhost:5432/personal_webpage_dev"
+sqlx migrate run

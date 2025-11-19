@@ -36,6 +36,7 @@
 }
 
 .resultsArea th:nth-child(1), .resultsArea td:nth-child(1) { width: 35%; } /* Title */
-.resultsArea th:nth-child(2), .resultsArea td:nth-child(2) { width: 25%; } /* Author */
-.resultsArea th:nth-child(3), .resultsArea td:nth-child(3) { width: 32%; } /* keywords */
-.resultsArea th:nth-child(4), .resultsArea td:nth-child(4) { width: 8%; } /* views */
+.resultsArea th:nth-child(2), .resultsArea td:nth-child(2) { width: 20%; } /* Author */
+.resultsArea th:nth-child(3), .resultsArea td:nth-child(3) { width: 25%; } /* keywords */
+.resultsArea th:nth-child(4), .resultsArea td:nth-child(4) { width: 12%; } /* download file */
+.resultsArea th:nth-child(5), .resultsArea td:nth-child(6) { width: 8%; } /* views */
