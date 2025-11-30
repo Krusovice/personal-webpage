@@ -12,12 +12,32 @@ use crate::helpers::encryption::{
     get_user_id_from_cookie
 };
 
-use crate::models::users::{
-    RegisterBody,
-    LoginBody,
-    ApiMsg,
-    UserInfo
-};
+use crate::models::users::UserInfo;
+
+#[derive(Deserialize)]
+pub struct RegisterBody {
+    pub email: String,
+    pub username: String,
+    pub password: String,
+    pub first_name: String,
+    pub last_name: String,
+    pub company: Option<String>,
+    pub registration_key: String
+}
+
+#[derive(Deserialize)]
+pub struct LoginBody { 
+    pub email: String, 
+    pub password: String 
+}
+
+#[derive(Serialize)]
+pub struct ApiMsg { 
+    pub message: String 
+}
+
+
+
 
 pub async fn register(
     State(state): State<AppState>,

@@ -9,9 +9,10 @@ use tower_http::cors::{Any, CorsLayer};
 use axum_extra::extract::cookie::{Key};
 
 use backend::handlers::tests::{print_hello, healthz};
-use backend::handlers::literature_app::get_literature_items;
 use backend::states::AppState;
-use backend::handlers::users::{register, login, logout, user_information};
+use backend::handlers::auth::{register, login, logout, user_information};
+use backend::handlers::literature_app::get_literature_items;
+use backend::handlers::literature::view_file::view_literature_file;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -24,15 +25,15 @@ async fn main() -> Result<()> {
     let backend_ip = std::env::var("BACKEND_IP").expect("BACKEND_IP not set");
     let backend_port = std::env::var("BACKEND_PORT").expect("BACKEND_PORT not set");
 
-    // pool ?
+    // Postgres connection pool
     println!("{}", database_url);
     let pool = PgPool::connect(&database_url).await?;
 
-    // Cookie key
+    // User Cookie key 
     let cookie_key = Key::generate();
 
     // Appstate
-    let state = AppState { pool, cookie_key };
+    let state = AppState::new(pool, cookie_key);
 
     // Cors layer
     let cors = CorsLayer::new()
@@ -49,7 +50,7 @@ async fn main() -> Result<()> {
         .route("/api/auth/logout",   post(logout))
         .route("/api/auth/me",       get(user_information))
         .route("/api/search_literature_items", post(get_literature_items))
-        .route("/api/literature/:id/file", get(view_literature))
+        .route("/api/literature/:id/file", get(view_literature_file))
         .with_state(state)
         .layer(cors);
 
