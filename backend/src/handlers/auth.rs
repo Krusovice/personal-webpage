@@ -2,6 +2,8 @@ use axum::{extract::{State}, Json};
 use axum::http::StatusCode;
 use axum_extra::extract::cookie::{SignedCookieJar};
 
+use serde::{Serialize, Deserialize};
+
 use crate::states::AppState;
 
 use crate::helpers::encryption::{
@@ -113,10 +115,10 @@ pub async fn logout(
     (jar, Json(ApiMsg { message: "logged out".into() }))
 }
 
-pub async fn user_information(
-    State(state): State<AppState>,
+pub async fn get_user_information(
+    state: &AppState,
     jar: SignedCookieJar,
-) -> Result<Json<UserInfo>, (StatusCode, String)> {
+) -> Result<UserInfo, (StatusCode, String)> {
     let user_id = get_user_id_from_cookie(jar);
 
     let user = sqlx::query_as!(
@@ -130,5 +132,13 @@ pub async fn user_information(
     .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?
     .ok_or((StatusCode::UNAUTHORIZED, "Not authenticated".into()))?;
 
+    Ok(user)
+}
+
+pub async fn get_user_information_http(
+    State(state): State<AppState>,
+    jar: SignedCookieJar,
+) -> Result<Json<UserInfo>, (StatusCode, String)> {
+    let user = get_user_information(&state, jar).await?;
     Ok(Json(user))
 }

@@ -1,4 +1,4 @@
-use std::path::PathBuf
+use std::path::PathBuf;
 use sqlx::{PgPool};
 use axum_extra::extract::cookie::Key;
 use axum::extract::FromRef;
@@ -18,7 +18,7 @@ impl FromRef<AppState> for Key {
 
 impl AppState {
     pub fn new(pool: PgPool, cookie_key: Key) -> Self {
-        let media_root_env = std::env::var("MEDIA_ROOT").expect("MEDIA_ROOT env not set")
+        let media_root_env = std::env::var("MEDIA_ROOT").expect("MEDIA_ROOT env not set");
             
         Self {
             pool,

@@ -10,7 +10,7 @@ use axum_extra::extract::cookie::{Key};
 
 use backend::handlers::tests::{print_hello, healthz};
 use backend::states::AppState;
-use backend::handlers::auth::{register, login, logout, user_information};
+use backend::handlers::auth::{register, login, logout, get_user_information_http};
 use backend::handlers::literature_app::get_literature_items;
 use backend::handlers::literature::view_file::view_literature_file;
 
@@ -48,7 +48,7 @@ async fn main() -> Result<()> {
         .route("/api/auth/register", post(register))
         .route("/api/auth/login",    post(login))
         .route("/api/auth/logout",   post(logout))
-        .route("/api/auth/me",       get(user_information))
+        .route("/api/auth/me",       get(get_user_information_http))
         .route("/api/search_literature_items", post(get_literature_items))
         .route("/api/literature/:id/file", get(view_literature_file))
         .with_state(state)

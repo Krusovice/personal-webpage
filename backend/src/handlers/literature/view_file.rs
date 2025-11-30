@@ -1,11 +1,16 @@
 use axum::{
     extract::{Path, State},
     http::{header, StatusCode},
-    response::{IntoResponse, Response},
+    response::{Response, IntoResponse},
 };
 use tokio::fs;
 use mime_guess::from_path;
 
+use axum_extra::extract::cookie::SignedCookieJar;
+
+use crate::states::AppState;
+use crate::models::users::UserInfo;
+use crate::handlers::auth::get_user_information;
 
 
 #[derive(sqlx::FromRow)]
@@ -17,10 +22,9 @@ struct LiteratureItemRow {
 
 pub async fn view_literature_file(
     State(state): State<AppState>,
+    jar: SignedCookieJar
     Path(id): Path<i64>,
-    current_user: Option<CurrentUser>, // or Option<CurrentUser> if you want 200 for public
 ) -> Result<Response, (StatusCode, String)> {
-
     // 1) Fetching up item
     let item = sqlx::query_as::<_, LiteratureItemRow>(
         "SELECT id, content, public
@@ -28,17 +32,27 @@ pub async fn view_literature_file(
          WHERE id = $1"
     )
     .bind(id)
-    .fetch_optional(&state.db)
+    .fetch_optional(&state.pool)
     .await
     .map_err(|e| (StatusCode::INTERNAL_SERVER_ERROR, e.to_string()))?
     .ok_or((StatusCode::NOT_FOUND, "Item not found".into()))?;
 
-    // 2) If item is not public, and current user doesnt have suffice authority, return error
-    if item.public == false && current_user.id <= 0 {
+    // 2) Checking if a user is logged in
+    let user_result = get_user_information(&state, jar).await;
+    let user: Option<UserInfo> = match user_result {
+        Ok(u) => Some(u),
+        Err((StatusCode::UNAUTHORIZED, _msg)) => None, // not logged in
+        Err(e) => return Err(e), // other errors (e.g. DB) -> propagate
+    };
+
+    let user_logged_in = user.is_some();
+
+    // 3) Enforce login if item is not public
+    if !item.public && !user_logged_in {
         return Err((StatusCode::UNAUTHORIZED, "Login required".into()));
     }
 
-    // 3) Build file path under media_root
+    // 4) Build file path under media_root
     let file_name = item.content;
     let file_path = state.media_root.join(&file_name);
 
