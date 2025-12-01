@@ -15,19 +15,18 @@ use crate::handlers::auth::get_user_information;
 
 #[derive(sqlx::FromRow)]
 struct LiteratureItemRow {
-    id: i64,
     content: String,
     public: bool,
 }
 
 pub async fn view_literature_file(
     State(state): State<AppState>,
-    jar: SignedCookieJar
+    jar: SignedCookieJar,
     Path(id): Path<i64>,
 ) -> Result<Response, (StatusCode, String)> {
     // 1) Fetching up item
     let item = sqlx::query_as::<_, LiteratureItemRow>(
-        "SELECT id, content, public
+        "SELECT content, public
          FROM literature.items
          WHERE id = $1"
     )
@@ -54,12 +53,16 @@ pub async fn view_literature_file(
 
     // 4) Build file path under media_root
     let file_name = item.content;
-    let file_path = state.media_root.join(&file_name);
+    let file_path = state.literature_media_root.join(&file_name);
+
+    println!("Literature item file_path: {:?}", file_path); // For debugging
 
     let bytes = fs::read(&file_path)
         .await
         .map_err(|_| (StatusCode::NOT_FOUND, "File missing".into()))?;
 
+    // using mime_guess to guess the content_type for the http request,
+    // based on the file extension.
     let mime = from_path(&file_path).first_or_octet_stream();
 
     let mut resp = bytes.into_response();

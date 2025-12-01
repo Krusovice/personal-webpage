@@ -1,5 +1,6 @@
 use anyhow::Result;
 use std::net::SocketAddr;
+use std::path::PathBuf;
 
 use tokio::net::TcpListener;
 use axum::{Router};
@@ -21,6 +22,8 @@ async fn main() -> Result<()> {
     let _ = dotenvy::from_filename("../.env");
 
     let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL not set");
+    let literature_media_root_url = std::env::var("LITERATURE_MEDIA_ROOT").expect("LITERATURE_MEDIA_ROOT not set");
+    let literature_media_root = PathBuf::from(literature_media_root_url);
 
     let backend_ip = std::env::var("BACKEND_IP").expect("BACKEND_IP not set");
     let backend_port = std::env::var("BACKEND_PORT").expect("BACKEND_PORT not set");
@@ -33,7 +36,7 @@ async fn main() -> Result<()> {
     let cookie_key = Key::generate();
 
     // Appstate
-    let state = AppState::new(pool, cookie_key);
+    let state = AppState{ pool, cookie_key, literature_media_root };
 
     // Cors layer
     let cors = CorsLayer::new()
@@ -50,7 +53,7 @@ async fn main() -> Result<()> {
         .route("/api/auth/logout",   post(logout))
         .route("/api/auth/me",       get(get_user_information_http))
         .route("/api/search_literature_items", post(get_literature_items))
-        .route("/api/literature/:id/file", get(view_literature_file))
+        .route("/api/literature/{id}/file", get(view_literature_file))
         .with_state(state)
         .layer(cors);
 

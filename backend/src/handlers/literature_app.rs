@@ -33,7 +33,7 @@ pub async fn get_literature_items(
 
     let items = sqlx::query_as::<_, LiteratureItem>(
         r#"
-        SELECT id, title, author, keywords, timestamp_upload, timestamp_modified, views, public
+        SELECT id, title, author, keywords, timestamp_upload, timestamp_modified, views, public, content
         FROM literature.items
         WHERE (title ILIKE $1 OR author ILIKE $1 OR keywords ILIKE $1)
           AND ($2::bool OR public = TRUE)
