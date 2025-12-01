@@ -76,10 +76,10 @@ pub async fn view_literature_file(
     );
 
     // 5) Tracking
-    let _ = sqlx::query!(
-        "UPDATE literature.items SET views = views + 1 WHERE id = $1",
-        item.id
+    let _ = sqlx::query(
+        "UPDATE literature.items SET views = views + 1 WHERE id = $1"
     )
+    .bind(item.id)
     .execute(&state.pool)
     .await;
 
