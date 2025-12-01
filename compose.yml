@@ -38,7 +38,9 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       RUST_LOG: "info"
       REGISTRATION_KEY: ${REGISTRATION_KEY}
-      LITERATURE_MEDIA_ROOT: ${LITERATURE_MEDIA_ROOT}
+      LITERATURE_MEDIA_ROOT: "/media_literature"
+    volumes:
+      - ${LITERATURE_MEDIA_ROOT}:/media_literature
     ports:
       - "5000:5000"
     depends_on:
