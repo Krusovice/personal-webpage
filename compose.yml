@@ -38,9 +38,9 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       RUST_LOG: "info"
       REGISTRATION_KEY: ${REGISTRATION_KEY}
-      LITERATURE_MEDIA_ROOT: "/media_literature"
+      LITERATURE_MEDIA_ROOT: "/media/literature"
     volumes:
-      - ${LITERATURE_MEDIA_ROOT}:/media_literature # workdir is set to /app
+      - ${LITERATURE_MEDIA_ROOT}:/media # workdir is set to /app
     ports:
       - "5000:5000"
     depends_on:
