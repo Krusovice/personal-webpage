@@ -15,6 +15,7 @@ use crate::handlers::auth::get_user_information;
 
 #[derive(sqlx::FromRow)]
 struct LiteratureItemRow {
+    id: i64,
     content: String,
     public: bool,
 }
@@ -26,7 +27,7 @@ pub async fn view_literature_file(
 ) -> Result<Response, (StatusCode, String)> {
     // 1) Fetching up item
     let item = sqlx::query_as::<_, LiteratureItemRow>(
-        "SELECT content, public
+        "SELECT id, content, public
          FROM literature.items
          WHERE id = $1"
     )
@@ -73,27 +74,14 @@ pub async fn view_literature_file(
             .parse()
             .unwrap(),
     );
+
+    // 5) Tracking
+    let _ = sqlx::query!(
+        "UPDATE literature.items SET views = views + 1 WHERE id = $1",
+        item.id
+    )
+    .execute(&state.pool)
+    .await;
+
     Ok(resp)
-
-
-    /* NOT IMPLEMENTING THIS PART RIGHT AWAY
-    // 4) Track view (ignore errors if you want it non-fatal)
-    if item.requires_login {
-        let _ = sqlx::query!(
-            "INSERT INTO literature_item_views (literature_item_id, user_id)
-             VALUES ($1, $2)",
-            item.id,
-            current_user.id
-        )
-        .execute(&state.db)
-        .await;
-
-        let _ = sqlx::query!(
-            "UPDATE literature_items SET views = views + 1 WHERE id = $1",
-            item.id
-        )
-        .execute(&state.db)
-        .await;
-    }
-    */
 }
