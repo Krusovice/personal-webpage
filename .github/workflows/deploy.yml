@@ -14,9 +14,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build & launch stack
+        env:
+          ENV_FILE: /home/jmk/secrets-and-database/webpage.env.prod
         run: |
-          docker compose --env-file .env.prod down --remove-orphans || true
-          docker compose --env-file .env.prod up -d --build --wait
+          docker compose --env-file "$ENV_FILE" down --remove-orphans || true
+          docker compose --env-file "$ENV_FILE" up -d --build --wait
+
 
       - name: Show status
         run: |
