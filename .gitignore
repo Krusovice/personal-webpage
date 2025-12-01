@@ -8,8 +8,12 @@ airflow/logs/
 # Django
 django/staticfiles/
 
-# Rust
+# Backend
 backend/target/
+#cookies created by backend
+cookies.txt
+cookies.txt,
 
 # secrets
 .env.prod
+
