@@ -24,6 +24,7 @@ async fn main() -> Result<()> {
     let database_url = std::env::var("DATABASE_URL").expect("DATABASE_URL not set");
     let literature_media_root_url = std::env::var("LITERATURE_MEDIA_ROOT").expect("LITERATURE_MEDIA_ROOT not set");
     let literature_media_root = PathBuf::from(literature_media_root_url);
+    println!("literature_media_root_url: {:?}", literature_media_root_url); // For debugging
 
     let backend_ip = std::env::var("BACKEND_IP").expect("BACKEND_IP not set");
     let backend_port = std::env::var("BACKEND_PORT").expect("BACKEND_PORT not set");
