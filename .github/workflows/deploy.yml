@@ -15,7 +15,7 @@ jobs:
 
       - name: Build & launch stack
         env:
-          ENV_FILE: /home/jmk/secrets-and-database/webpage.env.prod
+          ENV_FILE: /home/user/secrets-and-database/.env.prod
         run: |
           docker compose --env-file "$ENV_FILE" down --remove-orphans || true
           docker compose --env-file "$ENV_FILE" up -d --build --wait
