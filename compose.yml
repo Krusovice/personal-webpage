@@ -40,7 +40,7 @@ services:
       REGISTRATION_KEY: ${REGISTRATION_KEY}
       LITERATURE_MEDIA_ROOT: "/media_literature"
     volumes:
-      - ${LITERATURE_MEDIA_ROOT}:/media_literature
+      - ${LITERATURE_MEDIA_ROOT}:/app/media_literature
     ports:
       - "5000:5000"
     depends_on:
