@@ -1,6 +1,6 @@
 // StockChart3D.tsx
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Line, Grid } from "@react-three/drei";
+import { OrbitControls, Line, Text } from "@react-three/drei";
 
 // Simple data type: just a label for the date and a close value
 type SimplePricePoint = {
@@ -18,6 +18,7 @@ const mockData: SimplePricePoint[] = [
 ];
 
 // Functions
+
 // Data array to be plotted
 function buildPointsFromData(data) {
   const points = [];
@@ -33,7 +34,7 @@ function buildPointsFromData(data) {
   return points;
 }
 
-// Center coordinate for orbiting
+// Center coordinate for graph
 function centerOrbit(data) {
   const x = [];
   const z = [];
@@ -54,8 +55,47 @@ function centerOrbit(data) {
   return [xCenter, 0, zCenter];
 }
 
-// X-axis, containing dates
 // Z-axis, containing values
+function zAxis(data, numberOfTicks) {
+  const tickValues = [];
+  const tickValuesObject = [];
+  const z = [];
+
+  data.forEach((point) => {
+    z.push(point.close);
+  });
+
+  const zMin = Math.min(...z);
+  const zMax = Math.max(...z);
+  const zInc = (zMax-zMin)/numberOfTicks;
+
+  // Line
+  const linePoint_0 = [0,0,zMin];
+  const linePoint_1 = [0,0,zMax];
+  const line = <Line points={[linePoint_0,linePoint_1]} dashed={false} />;
+  
+  // Labels
+  for (let i = 0; i < numberOfTicks; i++) {
+    let value = zMin + i*zInc;
+    tickValues.push(value);
+  }
+  tickValues.forEach((value) => {
+    tickValuesObject.push(
+      <Text position={[0,0,value]} fontSize={0.4} rotation={[-Math.PI / 2, 0, 0]}>
+        {value}
+      </Text>
+    );
+  });
+
+  return (
+    line,
+    tickValuesObject
+  )
+
+}
+
+// X-axis, containing dates
+
 
 
 
@@ -77,12 +117,7 @@ export default function StockChart3D() {
         {/* mouse control: rotate, pan, zoom */}
         <OrbitControls target={orbitCoord}/>
 
-        {/* 🔹 Grid on the x-z plane */}
-        <Grid
-          args={[10, 10]}   // [size, divisions]
-          position={orbitCoord}
-          infiniteGrid={false}
-        />
+        {zAxis(mockData, 10)}
 
         {/* our flat 3D line on the x-z plane */}
         <Line
