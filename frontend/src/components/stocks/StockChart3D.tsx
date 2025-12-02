@@ -88,8 +88,8 @@ function zAxis(data, numberOfTicks) {
   });
 
   return (
-    line,
-    tickValuesObject
+    [line,
+    tickValuesObject]
   )
 
 }
