@@ -1,10 +1,11 @@
 
 import styles from "./../styles/Content.module.css"
+import StocksContent from "./../components/stocks/Stocks"
 
 export default function Stockspage() {
   return (
     <div className={ styles.content }>
-      <h1>I'm stocks page</h1>  
+      <StocksContent/>
     </div>
     
   )

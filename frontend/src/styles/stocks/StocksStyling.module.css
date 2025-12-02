@@ -1,0 +1,15 @@
+.stocksArea {
+  display: grid;
+  grid-template-areas:
+    "inputArea"
+    "plotArea";
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 800px;
+
+  color: var(--color-text);
+  background-color: var(--color-sidebar-background);
+  padding: 18px;
+  margin: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+}
