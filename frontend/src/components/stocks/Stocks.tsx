@@ -11,7 +11,7 @@ export default function StocksContent() {
 
   return (
     <div className={styling.stocksArea}>
-      <StockChart3D data={data} />
+      <StockChart3D />
     </div>
   );
 }
