@@ -86,11 +86,16 @@ function zAxis(data, numberOfTicks) {
     let tickValue_loc = zMin_loc + i*zInc_loc;
     let tickValue = zMin + i*zInc;
 
+    let linePoint_0 = [zMin_loc,0,tickValue_loc];
+    let linePoint_1 = [zMax_loc,0,tickValue_loc];
+    tickValuesObject.push(
+      <Line points={[linePoint_0,linePoint_1]} dashed={false} />
+    );
     tickValuesObject.push(
       <Text position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[-Math.PI / 2, 0, 0]}>
         {tickValue}
       </Text>
-    );
+    );   
   };
 
   return [line, ...tickValuesObject];
@@ -127,6 +132,12 @@ function xAxis(data, numberOfTicks) {
     let value = i/numberOfTicks;
     let index = Math.round(value * (x.length - 1));
 
+    let linePoint_0 = [value,0,xMin_loc];
+    let linePoint_1 = [value,0,xMax_loc];
+    tickValuesObject.push(
+      <Line points={[linePoint_0,linePoint_1]} dashed={false} />
+    );
+
     tickValuesObject.push(
       <Text position={[value,0,-0.15]} fontSize={0.05} rotation={[-Math.PI / 2, 0, Math.PI / 4]}>
         {xText[index]}
@@ -154,8 +165,8 @@ export default function StockChart3D() {
         {/* mouse control: rotate, pan, zoom */}
         <OrbitControls target={[0.5,0.5,0.5]}/>
 
+        {xAxis(mockData, 5)}
         {zAxis(mockData, 10)}
-        {xAxis(mockData, 10)}
 
         {/* our flat 3D line on the x-z plane */}
         <Line
