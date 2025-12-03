@@ -72,7 +72,6 @@ function zAxis(data, numberOfTicks) {
   const zInc = (zMax-zMin)/numberOfTicks;
   
   // Normalizing graph loc values, so theyre always between 0 and 1.
-  // For proper text sizing.
   const zMin_loc = 0;
   const zMax_loc = 1;
   const zInc_loc = (zMax_loc-zMin_loc)/numberOfTicks;
@@ -88,7 +87,7 @@ function zAxis(data, numberOfTicks) {
     let tickValue = zMin + i*zInc;
 
     tickValuesObject.push(
-      <Text position={[0,0,tickValue_loc]} fontSize={0.05} rotation={[-Math.PI / 2, 0, 0]}>
+      <Text position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[-Math.PI / 2, 0, 0]}>
         {tickValue}
       </Text>
     );
@@ -97,51 +96,45 @@ function zAxis(data, numberOfTicks) {
   return [line, ...tickValuesObject];
 }
 
+
 // X-axis, containing dates
 function xAxis(data, numberOfTicks) {
-  const tickValues = [];
   const tickValuesObject = [];
   const x = [];
   const xText = [];
 
   data.forEach((point) => {
-    x.push( Date(point.date).getTime() );
+    x.push( new Date(point.date).getTime() );
     xText.push( point.date );
-
-
-
   });
 
+  const xMin = Math.min(...x);
+  const xMax = Math.max(...x);
+  const xInc = (xMax-xMin)/numberOfTicks;
 
-
-  const zMin = Math.min(...z);
-  const zMax = Math.max(...z);
-  const zInc = (zMax-zMin)/numberOfTicks;
+  // Normalizing graph loc values, so theyre always between 0 and 1.
+  const xMin_loc = 0;
+  const xMax_loc = 1;
+  const xInc_loc = (xMax_loc-xMin_loc)/numberOfTicks;
 
   // Line
-  const linePoint_0 = [0,0,zMin];
-  const linePoint_1 = [0,0,zMax];
+  const linePoint_0 = [xMin_loc,0,0];
+  const linePoint_1 = [xMax_loc,0,0];
   const line = <Line points={[linePoint_0,linePoint_1]} dashed={false} />;
-  
+
   // Labels
   for (let i = 0; i < numberOfTicks; i++) {
-    let value = zMin + i*zInc;
-    tickValues.push(value);
-  }
-  tickValues.forEach((value) => {
+    let value = i/numberOfTicks;
+    let index = Math.round(value * (x.length - 1));
+
     tickValuesObject.push(
-      <Text position={[0,0,value]} fontSize={0.1} rotation={[-Math.PI / 2, 0, 0]}>
-        {value}
+      <Text position={[value,0,-0.15]} fontSize={0.05} rotation={[-Math.PI / 2, 0, Math.PI / 4]}>
+        {xText[index]}
       </Text>
     );
-  });
+  }
 
-  return (
-    [line,
-    tickValuesObject]
-  )
-
-
+  return [line, ...tickValuesObject];
 }
 
 
@@ -151,13 +144,18 @@ export default function StockChart3D() {
   const points = buildPointsFromData(mockData);
 
   return (
-    <div style={{ width: "100%", height: "400px" }}>
-      <Canvas camera={{ position: [0.5,2,0.5], fov: 50 }}>
+    <div style={{ width: "100%", height: "700px" }}>
+      <Canvas camera={{
+        position: [0.5,3,0.5],
+        fov: 30,
+        up: [0, 0, -1]
+      }}>
 
         {/* mouse control: rotate, pan, zoom */}
         <OrbitControls target={[0.5,0.5,0.5]}/>
 
         {zAxis(mockData, 10)}
+        {xAxis(mockData, 10)}
 
         {/* our flat 3D line on the x-z plane */}
         <Line
