@@ -1,7 +1,7 @@
 // StockChart3D.tsx
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
-
+import styling from "./../../styles/stocks/StocksStyling.module.css"
 // Simple data type: just a label for the date and a close value
 type SimplePricePoint = {
   date: string;
@@ -155,7 +155,7 @@ export default function StockChart3D() {
   const points = buildPointsFromData(mockData);
 
   return (
-    <div style={{ width: "100%", height: "700px" }}>
+    <div className={styling.plotArea}>
       <Canvas camera={{
         position: [0.5,-3,0.5],
         fov: 30,

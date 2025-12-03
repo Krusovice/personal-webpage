@@ -1,10 +1,10 @@
 .stocksArea {
   display: grid;
   grid-template-areas:
-    "inputArea"
+    "filtersArea"
     "plotArea";
   grid-template-columns: 1fr;
-  grid-template-rows: 80px 800px;
+  grid-template-rows: 150px 800px;
 
   color: var(--color-text);
   background-color: var(--color-sidebar-background);
@@ -12,4 +12,43 @@
   margin: 30px;
   border: 1px solid var(--color-border);
   border-radius: 20px;
+}
+
+.filtersArea {
+  grid-area: filtersArea;
+  display: grid;
+  grid-template-areas:
+    "searchBar selectedStocks"
+    "dateRange selectedStocks"
+    "fetchButton selectedStocks";
+  grid-template-columns: 300px 300px;
+  grid-template-rows: 40px 40px 40px;
+
+  color: var(--color-text);
+  background-color: var(--color-sidebar-background);
+  margin-bottom: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.plotArea {
+  grid-area: plotArea;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+
+.searchBar {
+  grid-area: searchBar;
+}
+
+.selectedStocks {
+  grid-area: selectedStocks;
+}
+
+.dateRange {
+  grid-area: dateRange;
+}
+
+.fetchButton {
+  grid-area: fetchButton;
 }
