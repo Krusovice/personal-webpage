@@ -92,7 +92,7 @@ function zAxis(data, numberOfTicks) {
       <Line points={[linePoint_0,linePoint_1]} dashed={false} />
     );
     tickValuesObject.push(
-      <Text position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[-Math.PI / 2, 0, 0]}>
+      <Text position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[Math.PI / 2, 0, 0]}>
         {tickValue}
       </Text>
     );   
@@ -139,7 +139,7 @@ function xAxis(data, numberOfTicks) {
     );
 
     tickValuesObject.push(
-      <Text position={[value,0,-0.15]} fontSize={0.05} rotation={[-Math.PI / 2, 0, Math.PI / 4]}>
+      <Text position={[value,0,-0.1]} fontSize={0.05} rotation={[Math.PI / 2, 0, Math.PI / 5]}>
         {xText[index]}
       </Text>
     );
@@ -157,9 +157,9 @@ export default function StockChart3D() {
   return (
     <div style={{ width: "100%", height: "700px" }}>
       <Canvas camera={{
-        position: [0.5,3,0.5],
+        position: [0.5,-3,0.5],
         fov: 30,
-        up: [0, 0, -1]
+        up: [0, 0, 1]
       }}>
 
         {/* mouse control: rotate, pan, zoom */}
