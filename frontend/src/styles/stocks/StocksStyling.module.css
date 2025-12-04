@@ -37,10 +37,6 @@
   border-radius: 6px;
 }
 
-.searchBar {
-  grid-area: searchBar;
-}
-
 .selectedStocks {
   grid-area: selectedStocks;
 }
@@ -51,4 +47,40 @@
 
 .fetchButton {
   grid-area: fetchButton;
+}
+
+.searchBar {
+  grid-area: searchBar;
+}
+
+.searchBarDropdown {
+  position: relative;
+  width: 250px;
+}
+
+.searchBarDropdown input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.searchBarDropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.searchBarDropdownOption {
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.searchBarDropdownOption:hover {
+  background: #eee;
 }

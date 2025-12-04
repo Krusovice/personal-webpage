@@ -16,7 +16,6 @@ export default function StockFilters () {
   return(
     <div className={styling.filtersArea}>
 
-        <div className={styling.searchBar}>
           <StockSearch
             options={STOCK_OPTIONS}         // list of possible stocks
             query={stockQuery}              // current value
@@ -26,7 +25,7 @@ export default function StockFilters () {
               setStockQuery(val);          // optional, already set in onClick
             }}
           />
-        </div>
+        
 
         <div className={styling.selectedStocks}>
           selectedStocks

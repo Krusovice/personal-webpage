@@ -33,48 +33,41 @@ export default function StockSearch({
   }, []);
 
   return(
-    <div ref={wrapperRef} style={{ position: "relative", width: "250px" }}>
-      <input
-        type="text"
-        value={query}
-        placeholder="Type in a Stock"
-        onFocus={() => setOpen(true)}
-        onChange={(e) => {
-          onChange(e.target.value);
-          setOpen(true);
-        }}
-        style={{ width: "100%", boxSizing: "border-box", padding: "8px" }}
-      />
+    <div className={styling.searchBar}>
 
-      {open && filtered.length > 0 && (
-        <div
-          style={{
-            position: "absolute",
-            top: "100%",
-            left: 0,
-            right: 0,
-            background: "white",
-            border: "1px solid #ccc",
-            maxHeight: "150px",
-            overflowY: "auto",
-            zIndex: 10,
+      <div ref={wrapperRef} className = { styling.searchBarDropdown } >
+
+        <input
+          type="text"
+          value={query}
+          placeholder="Type in a Stock"
+          onFocus={() => setOpen(true)}
+          onChange={(e) => {
+            onChange(e.target.value);
+            setOpen(true);
           }}
-        >
-          {filtered.map((opt) => (
-            <div
-              key={opt}
-              style={{ padding: "6px 8px", cursor: "pointer" }}
-              onClick={() => {
-                onChange(opt);
-                onSelect?.(opt);
-                setOpen(false);
-              }}
-            >
-              {opt}
-            </div>
-          ))}
-        </div>
-      )}
+        />
+
+        {open && filtered.length > 0 && (
+          <div className = { styling.searchBarDropdownMenu } >
+            
+            {filtered.map((opt) => (
+              <div
+                key={opt}
+                className={ styling.searchBarDropdownOption }
+                onClick={() => {
+                  onChange(opt);
+                  onSelect?.(opt);
+                  setOpen(false);
+                }}
+              >
+                {opt}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
     </div>
   );
 }
