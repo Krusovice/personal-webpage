@@ -18,10 +18,9 @@
   grid-area: filtersArea;
   display: grid;
   grid-template-areas:
-    "searchBar selectedStocks"
-    "dateRange selectedStocks"
-    "fetchButton selectedStocks";
-  grid-template-columns: 300px 300px;
+    "searchBar searchBar searchBar selectedStocks"
+    "lastMonth lastYear currentYear selectedStocks";
+  grid-template-columns: 100px 100px 100px 300px;
   grid-template-rows: 40px 40px 40px;
 
   color: var(--color-text);
@@ -41,12 +40,16 @@
   grid-area: selectedStocks;
 }
 
-.dateRange {
-  grid-area: dateRange;
+.lastMonth {
+  grid-area: lastMonth;
 }
 
-.fetchButton {
-  grid-area: fetchButton;
+.lastYear {
+  grid-area: lastYear;
+}
+
+.currentYear {
+  grid-area: currentYear;
 }
 
 .searchBar {
