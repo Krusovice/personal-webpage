@@ -10,7 +10,7 @@ export default function SelectedStocks({tickerList, onSelect}: StocksSelectedPro
   function tickerListContainer(ticker: string) {
     return (
       <div 
-        onClick={() => {onSelect.(ticker);}}
+        onClick={() => {onSelect(ticker);}}
         key={ticker}
         className={styling.stocksSelectedItemContainer}>
         {ticker}
