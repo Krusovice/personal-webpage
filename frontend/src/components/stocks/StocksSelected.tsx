@@ -1,4 +1,3 @@
-import useState from "react"
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 
 type StocksSelectedProps = {
@@ -8,10 +7,10 @@ type StocksSelectedProps = {
 
 export default function SelectedStocks({tickerList, onSelect}: StocksSelectedProps) {
   
-  function tickerListContainer(ticker) {
+  function tickerListContainer(ticker: string) {
     return (
       <div 
-        onClick={() => {onSelect?.(ticker);}}
+        onClick={() => {onSelect.(ticker);}}
         key={ticker}
         className={styling.stocksSelectedItemContainer}>
         {ticker}
@@ -29,8 +28,4 @@ export default function SelectedStocks({tickerList, onSelect}: StocksSelectedPro
       )}
     </div>
   )
-
-  // A box with a list of selected stocks
-  // The StockSearch component can add stocks to the list
-  // A click on a component on the list will remove the stock from the list
 }
