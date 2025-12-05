@@ -18,8 +18,8 @@
   grid-area: filtersArea;
   display: grid;
   grid-template-areas:
-    "searchBar searchBar searchBar selectedStocks"
-    "lastMonth lastYear currentYear selectedStocks";
+    "searchBar searchBar searchBar stocksSelected"
+    "lastMonth lastYear currentYear stocksSelected";
   grid-template-columns: 100px 100px 100px 300px;
   grid-template-rows: 40px 40px 40px;
 
@@ -36,9 +36,24 @@
   border-radius: 6px;
 }
 
-.selectedStocks {
-  grid-area: selectedStocks;
+.stocksSelected {
+  grid-area: stocksSelected;
+  height: 100%;
+  border-radius: 6px;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  background-color: grey;
 }
+
+.stocksSelectedItemContainer {
+  padding: 2px;
+  width: 60px;
+}
+
+.stocksSelectedItemContainer:hover {
+  background-color: red;
+}
+
 
 .lastMonth {
   grid-area: lastMonth;

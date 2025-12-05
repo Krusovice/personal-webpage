@@ -3,7 +3,7 @@ import styling from "./../../styles/stocks/StocksStyling.module.css";
 
 type StockSearchProps = {
   options: string[];
-  onSelect: (ticker: string) => void;
+  onClick: (ticker: string) => void;
 };
 
 export default function StockSearch({ options, onSelect }: StockSearchProps) {

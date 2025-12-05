@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 import StockChart3D from "./StockChart3D"
-import StockFilters from "./StockFilters"
+import StockFetch from "./StockFetch"
 
 export default function StocksContent() {
 
@@ -12,7 +12,7 @@ export default function StocksContent() {
 
   return (
     <div className={styling.stocksArea}>
-      <StockFilters />  
+      <StockFetch />  
       <StockChart3D/>
     </div>
   );

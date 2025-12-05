@@ -1,10 +1,11 @@
 import styling from "./../../styles/stocks/StocksStyling.module.css";
 import StockSearch from "./StockSearch";
+import StocksSelected from "./StocksSelected"
 import { useState } from "react";
 
 const STOCK_OPTIONS = ["AAPL", "MSFT", "GOOG", "AMZN", "TSLA"];
 
-export default function StockFilters () {
+export default function StockFetch () {
   const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
 
   function addTicker(ticker: string) {
@@ -62,33 +63,34 @@ export default function StockFilters () {
   return(
     <div className={styling.filtersArea}>
 
-          <StockSearch
-            options={STOCK_OPTIONS}         // list of possible stocks
-            onSelect={addTicker}
-          />
+      <StockSearch
+        options={STOCK_OPTIONS}
+        onSelect={addTicker}
+      />
         
+      <StocksSelected
+        tickerList={selectedTickers}
+        onSelect={removeTicker}
+      /> 
 
-        <div className={styling.selectedStocks}>
-          selectedStocks
-        </div>
 
-        <div className={styling.lastMonth}>
-          <button type="button" onClick={() => fetchStocks("7days")}>
-            Last month
-          </button>
-        </div>
+      <div className={styling.lastMonth}>
+        <button type="button" onClick={() => fetchStocks("7days")}>
+          Last month
+        </button>
+      </div>
 
-        <div className={styling.lastYear}>
-          <button type="button" onClick={() => fetchStocks("30days")}>
-            Last year
-          </button>
-        </div>
+      <div className={styling.lastYear}>
+        <button type="button" onClick={() => fetchStocks("30days")}>
+          Last year
+        </button>
+      </div>
 
-        <div className={styling.currentYear}>
-          <button type="button" onClick={() => fetchStocks("currentYear")}>
-            Current year
-          </button>
-        </div>
+      <div className={styling.currentYear}>
+        <button type="button" onClick={() => fetchStocks("currentYear")}>
+          Current year
+        </button>
+      </div>
 
     </div>
   )
