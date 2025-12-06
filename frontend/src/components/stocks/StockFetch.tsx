@@ -2,11 +2,13 @@ import styling from "./../../styles/stocks/StocksStyling.module.css";
 import StockSearch from "./StockSearch";
 import StocksSelected from "./StocksSelected"
 import { useState } from "react";
+import type { StockData }  from "./types";
 
 const STOCK_OPTIONS = ["AAPL", "MSFT", "GOOG", "AMZN", "TSLA"];
 
 export default function StockFetch () {
   const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
+  const [stockData, setStockData] = useState<Array<StockData>>([]);
 
   function addTicker(ticker: string) {
     setSelectedTickers((prev) =>
@@ -18,7 +20,9 @@ export default function StockFetch () {
     setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
   }
 
-  async function fetchStocks(timeInput: "7days" | "30days" | "currentYear") {
+  async function fetchStocks(
+    timeInput: "7days" | "30days" | "currentYear",
+    ) {
     
     // Calculating the date that should be fetched from
     const now = new Date();
@@ -34,10 +38,9 @@ export default function StockFetch () {
 
     // Formatting for passing to api
     const fromDateStr = fromDate.toISOString().slice(0, 10);
-    console.log(fromDateStr);
 
     const body = {
-      fromDateStr,
+      fromDate: fromDateStr,
       tickers: selectedTickers,
     };
 
@@ -55,9 +58,8 @@ export default function StockFetch () {
       return;
     }
 
-    const data = await resp.json();
-    console.log("Received:", data);
-    // setState with the result here...
+    const data = (await resp.json()) as Array<StockData>; // <-- typed parse
+    setStockData(data);
   }
 
   return(
