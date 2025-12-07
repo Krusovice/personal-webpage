@@ -1,11 +1,10 @@
 use serde::{Deserialize, Serialize};
-use sqlx::types::chrono::{DateTime, Utc};
+use chrono::NaiveDate;
 
-
-#[derive(Serialize, Deserialize, sqlx::FromRow)]
+#[derive(Serialize, Deserialize, sqlx::FromRow, Debug)]
 pub struct StockData {
-    pub ticker: i64,
+    pub id: i32,
     pub ticker: String,
-    pub date: String,
-    pub closing_price: String,
+    pub date: NaiveDate,
+    pub closing_price: f64,
 }

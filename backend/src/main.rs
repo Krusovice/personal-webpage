@@ -15,6 +15,7 @@ use backend::handlers::auth::{register, login, logout, get_user_information_http
 
 use backend::handlers::literature::view_file::view_literature_file;
 use backend::handlers::literature::view_items::get_literature_items;
+use backend::handlers::stocks::fetch_stocks::get_stock_data;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -55,6 +56,7 @@ async fn main() -> Result<()> {
         .route("/api/auth/me",       get(get_user_information_http))
         .route("/api/search_literature_items", post(get_literature_items))
         .route("/api/literature/{id}/file", get(view_literature_file))
+        .route("/api/stocks/fetch", post(get_stock_data))
         .with_state(state)
         .layer(cors);
 

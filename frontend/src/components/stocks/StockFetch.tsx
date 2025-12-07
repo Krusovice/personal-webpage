@@ -28,10 +28,10 @@ export default function StockFetch () {
     const now = new Date();
     const fromDate = new Date(now);
 
-    if (timeInput === "7days") {
-      fromDate.setDate(fromDate.getDate() - 7);
-    } else if (timeInput === "30days") {
+    if (timeInput === "30days") {
       fromDate.setDate(fromDate.getDate() - 30);
+    } else if (timeInput === "365days") {
+      fromDate.setDate(fromDate.getDate() - 365);
     } else if (timeInput === "currentYear") {
       fromDate.setFullYear(now.getFullYear(), 0, 1);
     }
@@ -44,7 +44,7 @@ export default function StockFetch () {
       tickers: selectedTickers,
     };
 
-    const resp = await fetch("/api/stocks", {
+    const resp = await fetch("/api/stocks/fetch", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,6 +60,8 @@ export default function StockFetch () {
 
     const data = (await resp.json()) as Array<StockData>; // <-- typed parse
     setStockData(data);
+
+    console.log(data);
   }
 
   return(
@@ -77,13 +79,13 @@ export default function StockFetch () {
 
 
       <div className={styling.lastMonth}>
-        <button type="button" onClick={() => fetchStocks("7days")}>
+        <button type="button" onClick={() => fetchStocks("30days")}>
           Last month
         </button>
       </div>
 
       <div className={styling.lastYear}>
-        <button type="button" onClick={() => fetchStocks("30days")}>
+        <button type="button" onClick={() => fetchStocks("365days")}>
           Last year
         </button>
       </div>

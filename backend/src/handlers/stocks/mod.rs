@@ -1,1 +1,1 @@
-pub mod fetchStocks;
+pub mod fetch_stocks;
