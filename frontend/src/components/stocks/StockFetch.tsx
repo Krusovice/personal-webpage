@@ -63,7 +63,6 @@ export default function StockFetch({ stockOptions, onFetchedData }: StockFetchPr
     const data = (await resp.json()) as Array<StockData>; // <-- typed parse
     onFetchedData(data);
 
-    console.log(data); // debugging
   }
 
   return(

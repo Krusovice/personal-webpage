@@ -9,55 +9,58 @@ type StockDataProps = {
 }
 
 // Normalized values to be plotted
-function buildPointsFromData(stockData) {
-  const points = [];
-  const xValues = [];
-  const zValues = [];
+function formatStockData(stockData) {
+  let stockGraphs = [];
+  let formattedStockData = {};
+  
+  stockData.forEach((obj) => {
+    if (!(obj.ticker in formattedStockData)) {
+      formattedStockData[obj.ticker] = {
+        dates: [],
+        values: [],
+      };
+    }
 
-  if (!stockData.length) {
-    return points;
-  }
-
-  // collect raw x (time) and z (close) values
-  stockData.forEach((point) => {
-    xValues.push(new Date(point.date).getTime());
-    zValues.push(point.closing_price);
+    formattedStockData[obj.ticker].dates.push(new Date(obj.date).getTime());
+    formattedStockData[obj.ticker].values.push(obj.closing_price);
   });
 
-  const xMin = Math.min(...xValues);
-  const xMax = Math.max(...xValues);
-  const zMin = Math.min(...zValues);
-  const zMax = Math.max(...zValues);
+  formattedStockData["xMin"] = Math.min(...stockData.map((obj) => new Date(obj.date).getTime()));
+  formattedStockData["xMax"] = Math.max(...stockData.map((obj) => new Date(obj.date).getTime()));
+  formattedStockData["zMin"] = Math.min(...stockData.map((obj) => obj.closing_price));
+  formattedStockData["zMax"] = Math.max(...stockData.map((obj) => obj.closing_price));
+  formattedStockData["xRange"] = formattedStockData.xMax - formattedStockData.xMin || 1;
+  formattedStockData["zRange"] = formattedStockData.zMax - formattedStockData.zMin || 1;
 
-  const xRange = xMax - xMin || 1;
-  const zRange = zMax - zMin || 1;
+return formattedStockData;
+}
 
-  stockData.forEach((point) => {
-    const xValue = new Date(point.date).getTime();
-    const xNorm = (xValue - xMin) / xRange;
-    const y = 0;
-    const zValue = point.closing_price;
-    const zNorm = (zValue - zMin) / zRange;
+function createStockGraphs(formattedStockData) {
+  const stockGraphs = [];
+  const metaKeys = ["xMin", "xMax", "zMin", "zMax", "xRange", "zRange"];
 
-    points.push([xNorm, y, zNorm]);
+  Object.entries(formattedStockData).forEach(([ticker, data]) => {
+    if (metaKeys.includes(ticker)) {
+      return;
+    }
+
+    const { dates, values } = data;
+    const xValues = dates.map((date) => (date - formattedStockData.xMin)/formattedStockData.xRange);
+    const yValues = values.map(() => 0);
+    const zValues = values.map((value) => (value - formattedStockData.zMin)/formattedStockData.zRange);
+    
+    const points = xValues.map((x, i) => [x, yValues[i], zValues[i]]);
+    stockGraphs.push(<Line key={ticker} points={points} dashed={false} />);
   });
 
-  return points;
+  return stockGraphs;
 }
 
 
 // Z-axis, containing values
-function zAxis(data, numberOfTicks) {
+function zAxis(formattedStockData, numberOfTicks) {
   const tickValuesObject = [];
-  const zValues = [];
-
-  data.forEach((point) => {
-    zValues.push(point.close);
-  });
-
-  const zMin = Math.min(...zValues);
-  const zMax = Math.max(...zValues);
-  const zInc = (zMax-zMin)/numberOfTicks;
+  const zInc = formattedStockData.zRange/numberOfTicks;
   
   // Normalizing graph loc values, so theyre always between 0 and 1.
   const zMin_loc = 0;
@@ -67,21 +70,21 @@ function zAxis(data, numberOfTicks) {
   // Line
   const linePoint_0 = [0,0,zMin_loc];
   const linePoint_1 = [0,0,zMax_loc];
-  const line = <Line points={[linePoint_0,linePoint_1]} dashed={false} />;
+  const line = <Line key="zAxis" points={[linePoint_0,linePoint_1]} dashed={false} />;
 
   // Labels
-  for (let i = 0; i < numberOfTicks; i++) {
+  for (let i = 0; i <= numberOfTicks; i++) {
     let tickValue_loc = zMin_loc + i*zInc_loc;
-    let tickValue = zMin + i*zInc;
+    let tickValue = formattedStockData.zMin + i*zInc;
 
     let linePoint_0 = [zMin_loc,0,tickValue_loc];
     let linePoint_1 = [zMax_loc,0,tickValue_loc];
     tickValuesObject.push(
-      <Line points={[linePoint_0,linePoint_1]} dashed={false} />
+      <Line key="zAxis" points={[linePoint_0,linePoint_1]} dashed={false} />
     );
     tickValuesObject.push(
-      <Text position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[Math.PI / 2, 0, 0]}>
-        {tickValue}
+      <Text key="zLabel" position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[Math.PI / 2, 0, 0]}>
+        {Number(tickValue.toFixed(1))}
       </Text>
     );   
   };
@@ -91,19 +94,10 @@ function zAxis(data, numberOfTicks) {
 
 
 // X-axis, containing dates
-function xAxis(data, numberOfTicks) {
+function xAxis(formattedStockData, numberOfTicks) {
   const tickValuesObject = [];
-  const x = [];
-  const xText = [];
 
-  data.forEach((point) => {
-    x.push( new Date(point.date).getTime() );
-    xText.push( point.date );
-  });
-
-  const xMin = Math.min(...x);
-  const xMax = Math.max(...x);
-  const xInc = (xMax-xMin)/numberOfTicks;
+  const xInc = formattedStockData.xRange/numberOfTicks;
 
   // Normalizing graph loc values, so theyre always between 0 and 1.
   const xMin_loc = 0;
@@ -113,22 +107,27 @@ function xAxis(data, numberOfTicks) {
   // Line
   const linePoint_0 = [xMin_loc,0,0];
   const linePoint_1 = [xMax_loc,0,0];
-  const line = <Line points={[linePoint_0,linePoint_1]} dashed={false} />;
+  const line = <Line key="xAxis" points={[linePoint_0,linePoint_1]} dashed={false} />;
 
   // Labels
-  for (let i = 0; i < numberOfTicks; i++) {
+  for (let i = 0; i <= numberOfTicks; i++) {
     let value = i/numberOfTicks;
-    let index = Math.round(value * (x.length - 1));
+
+    let date_item = new Date(formattedStockData.xMin + value*xInc);
+    let year = date_item.getFullYear();
+    let month = String(date_item.getMonth() + 1).padStart(2, "0");
+    let day = String(date_item.getDate()).padStart(2, "0");
+    let formatted_date = `${year}-${month}-${day}`; // "2025-12-08"
 
     let linePoint_0 = [value,0,xMin_loc];
     let linePoint_1 = [value,0,xMax_loc];
     tickValuesObject.push(
-      <Line points={[linePoint_0,linePoint_1]} dashed={false} />
+      <Line key="xAxis" points={[linePoint_0,linePoint_1]} dashed={false} />
     );
 
     tickValuesObject.push(
-      <Text position={[value,0,-0.1]} fontSize={0.05} rotation={[Math.PI / 2, 0, Math.PI / 5]}>
-        {xText[index]}
+      <Text key="xLabel" position={[value,0,-0.1]} fontSize={0.05} rotation={[Math.PI / 2, 0, Math.PI / 5]}>
+        {formatted_date}
       </Text>
     );
   }
@@ -139,29 +138,25 @@ function xAxis(data, numberOfTicks) {
 
 
 export default function StockChart3D({ stockData }: StockDataProps) {
-  // Convert mockData into 3D points for the Line
-  const points = buildPointsFromData(stockData);
+  const formattedStockData = formatStockData(stockData);
 
   return (
     <div className={styling.plotArea}>
-      <Canvas camera={{
-        position: [0.5,-3,0.5],
-        fov: 30,
-        up: [0, 0, 1]
-      }}>
+      <Canvas 
+        camera={{
+          position: [0.5,-3,0.5],
+          fov: 30,
+          up: [0, 0, 1]
+        }}
+      >
 
         <OrbitControls target={[0.5,0.5,0.5]}/>
 
-        {xAxis(stockData, 5)}
-        {zAxis(stockData, 10)}
+        {xAxis(formattedStockData, 5)}
+        {zAxis(formattedStockData, 5)}
+        {createStockGraphs(formattedStockData)}
 
-        { points.length > 0 && (
-          <Line
-            points={points}
-            linewidth={2}
-            dashed={false}
-          />
-        )}
+
       </Canvas>
     </div>
   );
