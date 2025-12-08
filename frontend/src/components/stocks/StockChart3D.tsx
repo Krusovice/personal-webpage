@@ -9,9 +9,10 @@ type StockDataProps = {
 }
 
 // Normalized values to be plotted
-function formatStockData(stockData) {
+function formatStockData(stockData, relativePlot) {
   let stockGraphs = [];
   let formattedStockData = {};
+  let tickerList = [];
   
   stockData.forEach((obj) => {
     if (!(obj.ticker in formattedStockData)) {
@@ -19,16 +20,33 @@ function formatStockData(stockData) {
         dates: [],
         values: [],
       };
+      tickerList.push(obj.ticker);
     }
 
     formattedStockData[obj.ticker].dates.push(new Date(obj.date).getTime());
     formattedStockData[obj.ticker].values.push(obj.closing_price);
   });
 
+  if (relativePlot) {
+    Object.entries(formattedStockData).forEach(([ticker, data]) => {
+      data.values = data.values.map((v) => v / data.values[0]);
+      console.log(data.values);
+    });
+  }
+
   formattedStockData["xMin"] = Math.min(...stockData.map((obj) => new Date(obj.date).getTime()));
   formattedStockData["xMax"] = Math.max(...stockData.map((obj) => new Date(obj.date).getTime()));
-  formattedStockData["zMin"] = Math.min(...stockData.map((obj) => obj.closing_price));
-  formattedStockData["zMax"] = Math.max(...stockData.map((obj) => obj.closing_price));
+  let zValues = [];
+
+  Object.entries(formattedStockData).forEach(([key, data]) => {
+    if (tickerList.includes(key)) {
+      zValues.push(...data.values);
+    }
+  });
+
+  formattedStockData["zMin"] = Math.min(...zValues);
+  formattedStockData["zMax"] = Math.max(...zValues);
+
   formattedStockData["xRange"] = formattedStockData.xMax - formattedStockData.xMin || 1;
   formattedStockData["zRange"] = formattedStockData.zMax - formattedStockData.zMin || 1;
 
@@ -138,7 +156,7 @@ function xAxis(formattedStockData, numberOfTicks) {
 
 
 export default function StockChart3D({ stockData }: StockDataProps) {
-  const formattedStockData = formatStockData(stockData);
+  const formattedStockData = formatStockData(stockData, true);
 
   return (
     <div className={styling.plotArea}>
