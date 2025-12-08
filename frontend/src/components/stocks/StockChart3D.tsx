@@ -2,38 +2,26 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
-// Simple data type: just a label for the date and a close value
-type SimplePricePoint = {
-  date: string;
-  close: number;
-};
+import type { StockData } from "../../types/stocks";
 
-// Mock data
-const mockData: SimplePricePoint[] = [
-  { date: "2025-12-03", close: 100 },
-  { date: "2025-12-04", close: 105 },
-  { date: "2025-12-07", close: 102 },
-  { date: "2025-12-08", close: 110 },
-  { date: "2025-12-12", close: 108 },
-];
-
-// Functions
-// Graph plot values are normalized between 0 and 1.
+type StockDataProps = {
+  stockData: StockData[];
+}
 
 // Normalized values to be plotted
-function buildPointsFromData(data) {
+function buildPointsFromData(stockData) {
   const points = [];
   const xValues = [];
   const zValues = [];
 
-  if (!data.length) {
+  if (!stockData.length) {
     return points;
   }
 
   // collect raw x (time) and z (close) values
-  data.forEach((point) => {
+  stockData.forEach((point) => {
     xValues.push(new Date(point.date).getTime());
-    zValues.push(point.close);
+    zValues.push(point.closing_price);
   });
 
   const xMin = Math.min(...xValues);
@@ -44,11 +32,11 @@ function buildPointsFromData(data) {
   const xRange = xMax - xMin || 1;
   const zRange = zMax - zMin || 1;
 
-  data.forEach((point) => {
+  stockData.forEach((point) => {
     const xValue = new Date(point.date).getTime();
     const xNorm = (xValue - xMin) / xRange;
     const y = 0;
-    const zValue = point.close;
+    const zValue = point.closing_price;
     const zNorm = (zValue - zMin) / zRange;
 
     points.push([xNorm, y, zNorm]);
@@ -150,9 +138,9 @@ function xAxis(data, numberOfTicks) {
 
 
 
-export default function StockChart3D() {
+export default function StockChart3D({ stockData }: StockDataProps) {
   // Convert mockData into 3D points for the Line
-  const points = buildPointsFromData(mockData);
+  const points = buildPointsFromData(stockData);
 
   return (
     <div className={styling.plotArea}>
@@ -162,18 +150,18 @@ export default function StockChart3D() {
         up: [0, 0, 1]
       }}>
 
-        {/* mouse control: rotate, pan, zoom */}
         <OrbitControls target={[0.5,0.5,0.5]}/>
 
-        {xAxis(mockData, 5)}
-        {zAxis(mockData, 10)}
+        {xAxis(stockData, 5)}
+        {zAxis(stockData, 10)}
 
-        {/* our flat 3D line on the x-z plane */}
-        <Line
-          points={points}
-          linewidth={2}  // you can remove this line if it causes issues
-          dashed={false}
-        />
+        { points.length > 0 && (
+          <Line
+            points={points}
+            linewidth={2}
+            dashed={false}
+          />
+        )}
       </Canvas>
     </div>
   );

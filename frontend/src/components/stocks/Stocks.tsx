@@ -2,18 +2,23 @@ import { useEffect, useState } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 import StockChart3D from "./StockChart3D"
 import StockFetch from "./StockFetch"
+import type { StockData }  from "./types";
+
+const STOCK_OPTIONS = ["AAPL", "MSFT", "TSLA"];
 
 export default function StocksContent() {
+  const [stockData, setStockData] = useState<Array<StockData>>([]);
 
-  //useEffect(() => {
-    // fetch from your backend or an API (you’ll likely proxy via your backend anyway)
-    // setData(fetchedSeries);
-  // }, []);
 
   return (
     <div className={styling.stocksArea}>
-      <StockFetch />  
-      <StockChart3D/>
+      <StockFetch 
+        stockOptions={STOCK_OPTIONS}
+        onFetchedData={setStockData}
+      />  
+      <StockChart3D
+        stockData={stockData}
+      />
     </div>
   );
 }

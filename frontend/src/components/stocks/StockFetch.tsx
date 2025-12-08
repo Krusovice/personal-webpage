@@ -4,11 +4,13 @@ import StocksSelected from "./StocksSelected"
 import { useState } from "react";
 import type { StockData }  from "./types";
 
-const STOCK_OPTIONS = ["AAPL", "MSFT", "GOOG", "AMZN", "TSLA"];
+type StockFetchProps = {
+  stockOptions: string[];
+  onFetchedData: (data: StockData[]) => void;
+}
 
-export default function StockFetch () {
+export default function StockFetch({ stockOptions, onFetchedData }: StockFetchProps) {
   const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
-  const [stockData, setStockData] = useState<Array<StockData>>([]);
 
   function addTicker(ticker: string) {
     setSelectedTickers((prev) =>
@@ -59,16 +61,16 @@ export default function StockFetch () {
     }
 
     const data = (await resp.json()) as Array<StockData>; // <-- typed parse
-    setStockData(data);
+    onFetchedData(data);
 
-    console.log(data);
+    console.log(data); // debugging
   }
 
   return(
     <div className={styling.filtersArea}>
 
       <StockSearch
-        options={STOCK_OPTIONS}
+        options={stockOptions}
         onSelect={addTicker}
       />
         
