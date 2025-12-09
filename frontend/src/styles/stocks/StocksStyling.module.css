@@ -19,7 +19,8 @@
   display: grid;
   grid-template-areas:
     "searchBar searchBar searchBar stocksSelected"
-    "lastMonth lastYear currentYear stocksSelected";
+    "lastMonth lastYear currentYear stocksSelected"
+    "plotSettings plotSettings plotSettings stocksSelected";
   grid-template-columns: 100px 100px 100px 300px;
   grid-template-rows: 40px 40px 40px;
 
@@ -101,4 +102,8 @@
 
 .searchBarDropdownOption:hover {
   background: #eee;
+}
+
+.plotSettings {
+  grid-area: plotSettings;
 }

@@ -2,14 +2,15 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
-import type { StockData } from "../../types/stocks";
+import type { StockData, PlotSettings } from "../../types/stocks";
 
 type StockDataProps = {
   stockData: StockData[];
+  plotSettings: PlotSettings; 
 }
 
 // Normalized values to be plotted
-function formatStockData(stockData, relativePlot) {
+function formatStockData(stockData, plotSettings) {
   let stockGraphs = [];
   let formattedStockData = {};
   let tickerList = [];
@@ -27,7 +28,7 @@ function formatStockData(stockData, relativePlot) {
     formattedStockData[obj.ticker].values.push(obj.closing_price);
   });
 
-  if (relativePlot) {
+  if (plotSettings.relativeValues) {
     Object.entries(formattedStockData).forEach(([ticker, data]) => {
       data.values = data.values.map((v) => v / data.values[0]);
       console.log(data.values);
@@ -98,10 +99,10 @@ function zAxis(formattedStockData, numberOfTicks) {
     let linePoint_0 = [zMin_loc,0,tickValue_loc];
     let linePoint_1 = [zMax_loc,0,tickValue_loc];
     tickValuesObject.push(
-      <Line key="zAxis" points={[linePoint_0,linePoint_1]} dashed={false} />
+      <Line key={"zAxis_grid_"+i} points={[linePoint_0,linePoint_1]} dashed={false} />
     );
     tickValuesObject.push(
-      <Text key="zLabel" position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[Math.PI / 2, 0, 0]}>
+      <Text key={"zLabel_"+i} position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[Math.PI / 2, 0, 0]}>
         {Number(tickValue.toFixed(1))}
       </Text>
     );   
@@ -140,11 +141,11 @@ function xAxis(formattedStockData, numberOfTicks) {
     let linePoint_0 = [value,0,xMin_loc];
     let linePoint_1 = [value,0,xMax_loc];
     tickValuesObject.push(
-      <Line key="xAxis" points={[linePoint_0,linePoint_1]} dashed={false} />
+      <Line key={"xAxis_grid_"+i} points={[linePoint_0,linePoint_1]} dashed={false} />
     );
 
     tickValuesObject.push(
-      <Text key="xLabel" position={[value,0,-0.1]} fontSize={0.05} rotation={[Math.PI / 2, 0, Math.PI / 5]}>
+      <Text key={"xLabel_"+i} position={[value,0,-0.1]} fontSize={0.05} rotation={[Math.PI / 2, 0, Math.PI / 5]}>
         {formatted_date}
       </Text>
     );
@@ -155,8 +156,8 @@ function xAxis(formattedStockData, numberOfTicks) {
 
 
 
-export default function StockChart3D({ stockData }: StockDataProps) {
-  const formattedStockData = formatStockData(stockData, true);
+export default function StockChart3D({ stockData, plotSettings }: StockDataProps) {
+  const formattedStockData = formatStockData(stockData, plotSettings);
 
   return (
     <div className={styling.plotArea}>

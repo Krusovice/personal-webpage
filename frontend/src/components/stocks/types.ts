@@ -4,3 +4,7 @@ export type StockData = {
 	date: string,
 	closing_price: number
 }
+
+export type PlotSettings = {
+	relativeValues: boolean
+}
