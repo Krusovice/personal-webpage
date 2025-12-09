@@ -1,9 +1,9 @@
 .stocksArea {
   display: grid;
   grid-template-areas:
-    "filtersArea"
-    "plotArea";
-  grid-template-columns: 1fr;
+    "fetchArea" "plotSettings"
+    "plotArea" "plotArea";
+  grid-template-columns: 300px 1fr;
   grid-template-rows: 150px 800px;
 
   color: var(--color-text);
@@ -14,14 +14,24 @@
   border-radius: 20px;
 }
 
-.filtersArea {
-  grid-area: filtersArea;
+.fetchArea {
+  grid-area: fetchArea;
   display: grid;
   grid-template-areas:
-    "searchBar searchBar searchBar stocksSelected"
-    "lastMonth lastYear currentYear stocksSelected"
-    "plotSettings plotSettings plotSettings stocksSelected";
-  grid-template-columns: 100px 100px 100px 300px;
+    "searchBar"
+    "stocksSelected";
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+}
+
+.plotSettings {
+  grid-area: plotSettings;
+  display: grid;
+  grid-template-areas:
+    "lastMonth lastYear currentYear"
+    "relativeToggle empty empty"
+    "empty empty empty";
+  grid-template-columns: 100px 100px 100px;
   grid-template-rows: 40px 40px 40px;
 
   color: var(--color-text);
@@ -104,6 +114,3 @@
   background: #eee;
 }
 
-.plotSettings {
-  grid-area: plotSettings;
-}

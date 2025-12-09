@@ -66,8 +66,7 @@ export default function StockFetch({ stockOptions, onFetchedData }: StockFetchPr
   }
 
   return(
-    <div className={styling.filtersArea}>
-
+    <div className={styling.fetchArea}>
       <StockSearch
         options={stockOptions}
         onSelect={addTicker}
@@ -77,26 +76,6 @@ export default function StockFetch({ stockOptions, onFetchedData }: StockFetchPr
         tickerList={selectedTickers}
         onSelect={removeTicker}
       /> 
-
-
-      <div className={styling.lastMonth}>
-        <button type="button" onClick={() => fetchStocks("30days")}>
-          Last month
-        </button>
-      </div>
-
-      <div className={styling.lastYear}>
-        <button type="button" onClick={() => fetchStocks("365days")}>
-          Last year
-        </button>
-      </div>
-
-      <div className={styling.currentYear}>
-        <button type="button" onClick={() => fetchStocks("currentYear")}>
-          Current year
-        </button>
-      </div>
-
     </div>
   )
 }

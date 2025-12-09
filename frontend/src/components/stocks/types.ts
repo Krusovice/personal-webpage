@@ -6,5 +6,6 @@ export type StockData = {
 }
 
 export type PlotSettings = {
-	relativeValues: boolean
+	relativeValues: boolean,
+	timespan: string,
 }

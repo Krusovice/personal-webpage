@@ -1,7 +1,7 @@
 // StockChart3D.tsx
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
-import styling from "./../../styles/stocks/StocksStyling.module.css"
+import styling from "./../../styles/stocks/StocksStyling.module.css";
 import type { StockData, PlotSettings } from "../../types/stocks";
 
 type StockDataProps = {
@@ -31,7 +31,6 @@ function formatStockData(stockData, plotSettings) {
   if (plotSettings.relativeValues) {
     Object.entries(formattedStockData).forEach(([ticker, data]) => {
       data.values = data.values.map((v) => v / data.values[0]);
-      console.log(data.values);
     });
   }
 
@@ -103,7 +102,7 @@ function zAxis(formattedStockData, numberOfTicks) {
     );
     tickValuesObject.push(
       <Text key={"zLabel_"+i} position={[-0.06,0,tickValue_loc]} fontSize={0.05} rotation={[Math.PI / 2, 0, 0]}>
-        {Number(tickValue.toFixed(1))}
+        {Number(tickValue.toFixed(2))}
       </Text>
     );   
   };
