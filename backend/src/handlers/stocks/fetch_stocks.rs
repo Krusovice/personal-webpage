@@ -4,7 +4,7 @@ use sqlx;
 use axum::Json;
 use reqwest::StatusCode;
 use serde::Deserialize;
-use chrono::NaiveDate;
+use chrono::{NaiveDate, Utc, Duration};
 
 use crate::models::stocks_app::StockData;
 use crate::states::AppState;
@@ -12,7 +12,6 @@ use crate::states::AppState;
 #[derive(Deserialize)]
 pub struct FetchRequest {
     #[serde(rename = "fromDate")]
-    from_date: String,
     tickers: Vec<String>,
     }
 
@@ -26,8 +25,10 @@ pub async fn get_stock_data(
     Json(request): Json<FetchRequest>)
     -> Result<Json<Vec<StockData>>, (StatusCode, String)> {
 
-    let from_date = NaiveDate::parse_from_str(&request.from_date, "%Y-%m-%d")
-        .map_err(|e| (StatusCode::BAD_REQUEST, format!("Invalid date: {e}")))?;
+    
+
+    let now: NaiveDate = Utc::now().date_naive();
+    let from_date: NaiveDate = now - Duration::days(365);
     
     let items = sqlx::query_as::<_, StockData>(
         r#"

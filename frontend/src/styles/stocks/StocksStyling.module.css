@@ -1,8 +1,8 @@
 .stocksArea {
   display: grid;
   grid-template-areas:
-    "fetchArea" "plotSettings"
-    "plotArea" "plotArea";
+    "fetchArea plotSettings"
+    "plotArea plotArea";
   grid-template-columns: 300px 1fr;
   grid-template-rows: 150px 800px;
 

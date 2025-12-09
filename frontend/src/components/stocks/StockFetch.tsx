@@ -22,27 +22,9 @@ export default function StockFetch({ stockOptions, onFetchedData }: StockFetchPr
     setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
   }
 
-  async function fetchStocks(
-    timeInput: "7days" | "30days" | "currentYear",
-    ) {
-    
-    // Calculating the date that should be fetched from
-    const now = new Date();
-    const fromDate = new Date(now);
-
-    if (timeInput === "30days") {
-      fromDate.setDate(fromDate.getDate() - 30);
-    } else if (timeInput === "365days") {
-      fromDate.setDate(fromDate.getDate() - 365);
-    } else if (timeInput === "currentYear") {
-      fromDate.setFullYear(now.getFullYear(), 0, 1);
-    }
-
-    // Formatting for passing to api
-    const fromDateStr = fromDate.toISOString().slice(0, 10);
+  async function fetchStocks() {
 
     const body = {
-      fromDate: fromDateStr,
       tickers: selectedTickers,
     };
 
