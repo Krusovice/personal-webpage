@@ -17,7 +17,11 @@ export default function StocksContent() {
   });
 
   function addStockData(newStockData: StockData[]) {
-    setStockData((prev) => ({ ...prev, ...newStockData}));
+    setStockData((prev) => [...prev, ...newStockData]);
+  }
+
+  function removeStockData(ticker: string) {
+    setStockData((prev) => prev.filter((item) => item.ticker !== ticker));
   }
 
   return (
@@ -25,6 +29,7 @@ export default function StocksContent() {
       <StockFetch 
         stockOptions={STOCK_OPTIONS}
         onFetchedData={addStockData}
+        onRemovedTicker={removeStockData}
       />
 
       <StockChart3D

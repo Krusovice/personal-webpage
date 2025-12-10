@@ -7,9 +7,10 @@ import type { StockData }  from "./types";
 type StockFetchProps = {
   stockOptions: string[];
   onFetchedData: (data: StockData[]) => void;
+  onRemovedTicker: () => void;
 }
 
-export default function StockFetch({ stockOptions, onFetchedData }: StockFetchProps) {
+export default function StockFetch({ stockOptions, onFetchedData, onRemovedTicker }: StockFetchProps) {
   const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
 
   function addTicker(ticker: string) {
@@ -21,6 +22,7 @@ export default function StockFetch({ stockOptions, onFetchedData }: StockFetchPr
 
   function removeTicker(ticker: string) {
     setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
+    onRemovedTicker(ticker);
   }
 
   async function fetchStocks(selectedTicker: string) {
