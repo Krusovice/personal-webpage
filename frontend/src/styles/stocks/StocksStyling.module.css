@@ -30,7 +30,7 @@
   grid-template-areas:
     "lastMonth lastYear currentYear"
     "prices peRatio ."
-    "relativeToggle . .";
+    "relativeValues . .";
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 40px 40px 40px;
   margin: 3px;
@@ -79,8 +79,8 @@
   grid-area: currentYear;
 }
 
-.relativeToggle {
-  grid-area: relativeToggle;
+.relativeValues {
+  grid-area: relativeValues;
 }
 
 .peRatio {
@@ -129,7 +129,7 @@
   background: #eee;
 }
 
-.timespanOption {
+.plotSettingOption {
   border: solid 3px black;
   margin: 3px;
   padding: 3px;

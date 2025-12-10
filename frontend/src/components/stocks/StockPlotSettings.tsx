@@ -14,12 +14,16 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
     setPlotSettings((prev) => ({ ...prev, timespan: input}));
   }
 
+  function toggle(input: PlotSettings[{input}]) {
+    setPlotSettings((prev) => ({ ...prev, input: !prev[input]}))
+  }
+
   return(
     <div className={styling.plotSettings}>
       <div className={styling.lastMonth}>
         <button
           type="button"
-          className={`${styling.timespanOption} ${plotSettings.timespan === "lastMonth" ? styling.active : ""}`}
+          className={`${styling.plotSettingOption} ${plotSettings.timespan === "lastMonth" ? styling.active : ""}`}
           onClick={() => setTimespan("lastMonth")}
         >
           Last month
@@ -29,7 +33,7 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
       <div className={styling.lastYear}>
         <button
           type="button"
-          className={`${styling.timespanOption} ${plotSettings.timespan === "lastYear" ? styling.active : ""}`}
+          className={`${styling.plotSettingOption} ${plotSettings.timespan === "lastYear" ? styling.active : ""}`}
           onClick={() => setTimespan("lastYear")}
         >
           Last year
@@ -39,10 +43,40 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
       <div className={styling.currentYear}>
         <button
           type="button"
-          className={`${styling.timespanOption} ${plotSettings.timespan === "currentYear" ? styling.active : ""}`}
+          className={`${styling.plotSettingOption} ${plotSettings.timespan === "currentYear" ? styling.active : ""}`}
           onClick={() => setTimespan("currentYear")}
         >
           Current year
+        </button>
+      </div>
+
+      <div className={styling.prices}>
+        <button
+          type="button"
+          className={`${styling.plotSettingOption} ${plotSettings.prices === true ? styling.active : ""}`}
+          onClick={() => toggle("prices")}
+        >
+          Prices
+        </button>
+      </div>
+
+      <div className={styling.peRatio}>
+        <button
+          type="button"
+          className={`${styling.plotSettingOption} ${plotSettings.prices === true ? styling.active : ""}`}
+          onClick={() => toggle("prices")}
+        >
+          P/E
+        </button>
+      </div>
+
+      <div className={styling.relativeValues}>
+        <button
+          type="button"
+          className={`${styling.plotSettingOption} ${plotSettings.prices === true ? styling.active : ""}`}
+          onClick={() => toggle("prices")}
+        >
+          Prices
         </button>
       </div>
 
