@@ -9,12 +9,24 @@ type StockDataProps = {
   plotSettings: PlotSettings; 
 }
 
-// Normalized values to be plotted
+
 function formatStockData(stockData, plotSettings) {
   let stockGraphs = [];
   let formattedStockData = {};
   let tickerList = [];
-  
+
+  // Filtering the dates
+  const today = new Date();
+  let fromDate = new Date(today);
+
+  if (plotSettings.timespan === "currentYear") {
+    fromDate = new Date(today.getFullYear(), 0, 1);
+  } else if (plotSettings.timespan === "lastYear") {
+    fromDate.setDate(fromDate.getDate() - 365);
+  } else if (plotSettings.timespan === "lastMonth") {
+    fromDate.setDate(fromDate.getDate() - 30);
+  } 
+
   stockData.forEach((obj) => {
     if (!(obj.ticker in formattedStockData)) {
       formattedStockData[obj.ticker] = {
@@ -24,10 +36,13 @@ function formatStockData(stockData, plotSettings) {
       tickerList.push(obj.ticker);
     }
 
-    formattedStockData[obj.ticker].dates.push(new Date(obj.date).getTime());
-    formattedStockData[obj.ticker].values.push(obj.closing_price);
+    if (new Date(obj.date).getTime() >= fromDate.getTime()) {
+      formattedStockData[obj.ticker].dates.push(new Date(obj.date).getTime());
+      formattedStockData[obj.ticker].values.push(obj.closing_price);
+    }
   });
 
+  // Toggle Relative values
   if (plotSettings.relativeValues) {
     Object.entries(formattedStockData).forEach(([ticker, data]) => {
       data.values = data.values.map((v) => v / data.values[0]);
