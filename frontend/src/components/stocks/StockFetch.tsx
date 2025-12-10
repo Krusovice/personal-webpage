@@ -53,6 +53,7 @@ export default function StockFetch({ stockOptions, onFetchedData, onRemovedTicke
       <StockSearch
         options={stockOptions}
         onSelect={addTicker}
+        selectedTickers={selectedTickers}
       />
         
       <StocksSelected

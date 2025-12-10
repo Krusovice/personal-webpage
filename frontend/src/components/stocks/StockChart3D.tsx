@@ -146,11 +146,11 @@ function xAxis(formattedStockData, numberOfTicks) {
   for (let i = 0; i <= numberOfTicks; i++) {
     let value = i/numberOfTicks;
 
-    let date_item = new Date(formattedStockData.xMin + value*xInc);
+    let date_item = new Date(formattedStockData.xMin + i*xInc);
     let year = date_item.getFullYear();
     let month = String(date_item.getMonth() + 1).padStart(2, "0");
     let day = String(date_item.getDate()).padStart(2, "0");
-    let formatted_date = `${year}-${month}-${day}`; // "2025-12-08"
+    let formatted_date = `${year}-${month}-${day}`;
 
     let linePoint_0 = [value,0,xMin_loc];
     let linePoint_1 = [value,0,xMax_loc];
@@ -185,7 +185,7 @@ export default function StockChart3D({ stockData, plotSettings }: StockDataProps
 
         <OrbitControls target={[0.5,0.5,0.5]}/>
 
-        {xAxis(formattedStockData, 5)}
+        {xAxis(formattedStockData, 6)}
         {zAxis(formattedStockData, 5)}
         {createStockGraphs(formattedStockData)}
 

@@ -63,7 +63,7 @@
 }
 
 .stocksSelectedItemContainer:hover {
-  background-color: red;
+  background-color: var(--orange-rust);
 }
 
 
@@ -126,7 +126,7 @@
 }
 
 .searchBarDropdownOption:hover {
-  background: #eee;
+  background: var(--orange-rust);
 }
 
 .plotSettingOption {
