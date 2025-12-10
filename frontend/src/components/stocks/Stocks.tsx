@@ -9,9 +9,15 @@ const STOCK_OPTIONS = ["AAPL", "MSFT", "TSLA"];
 
 export default function StocksContent() {
   const [stockData, setStockData] = useState<Array<StockData>>([]);
-  const [plotSettings, setPlotSettings] = useState<StockPlotSettings>({
+  const [plotSettings, setPlotSettings] = useState<PlotSettings>({
+    timespan: "currentYear",
     relativeValues: true,
+    peRatios: false,
+    prices: true,
   });
+
+  // debugging
+  console.log(plotSettings);
 
   return (
     <div className={styling.stocksArea}>
@@ -27,6 +33,7 @@ export default function StocksContent() {
 
       <PlotSettingsArea
         plotSettings={plotSettings}
+        setPlotSettings={setPlotSettings}
       />
     </div>
   );

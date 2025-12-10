@@ -6,6 +6,8 @@ export type StockData = {
 }
 
 export type PlotSettings = {
+	timespan: "lastMonth" | "lastYear" | "currentYear",
 	relativeValues: boolean,
-	timespan: string,
+	peRatios: boolean,
+	prices: boolean,
 }

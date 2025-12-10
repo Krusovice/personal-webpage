@@ -8,7 +8,7 @@
 
   color: var(--color-text);
   background-color: var(--color-sidebar-background);
-  padding: 18px;
+  padding: 15px;
   margin: 30px;
   border: 1px solid var(--color-border);
   border-radius: 20px;
@@ -29,14 +29,14 @@
   display: grid;
   grid-template-areas:
     "lastMonth lastYear currentYear"
-    "relativeToggle empty empty"
-    "empty empty empty";
+    "prices peRatio ."
+    "relativeToggle . .";
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 40px 40px 40px;
+  margin: 3px;
 
   color: var(--color-text);
   background-color: var(--color-sidebar-background);
-  margin-bottom: 18px;
   border: 1px solid var(--color-border);
   border-radius: 6px;
 }
@@ -45,13 +45,14 @@
   grid-area: plotArea;
   border: 1px solid var(--color-border);
   border-radius: 6px;
+  margin: 3px;
 }
 
 .stocksSelected {
   grid-area: stocksSelected;
   border-radius: 6px;
+  margin: 3px;
   padding: 6px;
-  margin-bottom: 6px;
   border: 1px solid var(--color-border);
   background-color: grey;
 }
@@ -78,8 +79,22 @@
   grid-area: currentYear;
 }
 
+.relativeToggle {
+  grid-area: relativeToggle;
+}
+
+.peRatio {
+  grid-area: peRatio;
+}
+
+.prices {
+  grid-area: prices;
+}
+
 .searchBar {
   grid-area: searchBar;
+  margin: 3px;
+  margin-left: 6px;
 }
 
 .searchBarDropdown {
@@ -114,3 +129,12 @@
   background: #eee;
 }
 
+.timespanOption {
+  border: solid 3px black;
+  margin: 3px;
+  padding: 3px;
+}
+
+.active {
+  border-color: var(--orange-rust);
+}
