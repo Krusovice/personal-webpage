@@ -14,8 +14,8 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
     setPlotSettings((prev) => ({ ...prev, timespan: input}));
   }
 
-  function toggle(input: PlotSettings[{input}]) {
-    setPlotSettings((prev) => ({ ...prev, input: !prev[input]}))
+  function toggle(key: keyof PlotSettings) {
+    setPlotSettings((prev) => ({ ...prev, [key]: !prev[key]}));
   }
 
   return(
@@ -63,8 +63,8 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
       <div className={styling.peRatio}>
         <button
           type="button"
-          className={`${styling.plotSettingOption} ${plotSettings.prices === true ? styling.active : ""}`}
-          onClick={() => toggle("prices")}
+          className={`${styling.plotSettingOption} ${plotSettings.peRatio === true ? styling.active : ""}`}
+          onClick={() => toggle("peRatio")}
         >
           P/E
         </button>
@@ -73,10 +73,10 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
       <div className={styling.relativeValues}>
         <button
           type="button"
-          className={`${styling.plotSettingOption} ${plotSettings.prices === true ? styling.active : ""}`}
-          onClick={() => toggle("prices")}
+          className={`${styling.plotSettingOption} ${plotSettings.relativeValues === true ? styling.active : ""}`}
+          onClick={() => toggle("relativeValues")}
         >
-          Prices
+          Relative Value
         </button>
       </div>
 

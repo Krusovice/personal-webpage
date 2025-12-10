@@ -14,7 +14,7 @@ function formatStockData(stockData, plotSettings) {
   let stockGraphs = [];
   let formattedStockData = {};
   let tickerList = [];
-  console.log("stockData type:", Array.isArray(stockData), stockData);
+  
   stockData.forEach((obj) => {
     if (!(obj.ticker in formattedStockData)) {
       formattedStockData[obj.ticker] = {
