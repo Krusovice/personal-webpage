@@ -11,8 +11,7 @@ use crate::states::AppState;
 
 #[derive(Deserialize)]
 pub struct FetchRequest {
-    #[serde(rename = "fromDate")]
-    tickers: Vec<String>,
+    ticker: String,
     }
 
 fn internal<E: std::fmt::Display>(e: E) -> (StatusCode, String) {
@@ -25,8 +24,6 @@ pub async fn get_stock_data(
     Json(request): Json<FetchRequest>)
     -> Result<Json<Vec<StockData>>, (StatusCode, String)> {
 
-    
-
     let now: NaiveDate = Utc::now().date_naive();
     let from_date: NaiveDate = now - Duration::days(365);
     
@@ -34,11 +31,11 @@ pub async fn get_stock_data(
         r#"
         SELECT id, ticker, date, closing_price::float8 AS closing_price
         FROM stockmarket.stock_prices
-        WHERE ticker = ANY($1)
+        WHERE ticker = $1
         AND date >= $2
         "#
     )
-    .bind(&request.tickers)
+    .bind(&request.ticker)
     .bind(&from_date)
     .fetch_all(&state.pool)
     .await

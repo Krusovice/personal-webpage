@@ -16,16 +16,16 @@ export default function StockFetch({ stockOptions, onFetchedData }: StockFetchPr
     setSelectedTickers((prev) =>
       prev.includes(ticker) ? prev : [...prev, ticker]
     );
+    fetchStocks(ticker);
   }
 
   function removeTicker(ticker: string) {
     setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
   }
 
-  async function fetchStocks() {
-
+  async function fetchStocks(selectedTicker: string) {
     const body = {
-      tickers: selectedTickers,
+      ticker: selectedTicker,
     };
 
     const resp = await fetch("/api/stocks/fetch", {
@@ -44,7 +44,6 @@ export default function StockFetch({ stockOptions, onFetchedData }: StockFetchPr
 
     const data = (await resp.json()) as Array<StockData>; // <-- typed parse
     onFetchedData(data);
-
   }
 
   return(

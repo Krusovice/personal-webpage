@@ -16,14 +16,15 @@ export default function StocksContent() {
     prices: true,
   });
 
-  // debugging
-  console.log(plotSettings);
+  function addStockData(newStockData: StockData[]) {
+    setStockData((prev) => ({ ...prev, ...newStockData}));
+  }
 
   return (
     <div className={styling.stocksArea}>
       <StockFetch 
         stockOptions={STOCK_OPTIONS}
-        onFetchedData={setStockData}
+        onFetchedData={addStockData}
       />
 
       <StockChart3D
