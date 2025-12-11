@@ -172,6 +172,14 @@ function xAxis(formattedStockData, numberOfTicks) {
 
 export default function StockChart3D({ stockData, plotSettings }: StockDataProps) {
   const formattedStockData = formatStockData(stockData, plotSettings);
+  
+  const hasValidRange =
+    Number.isFinite(formattedStockData.xMin) &&
+    Number.isFinite(formattedStockData.xMax) &&
+    Number.isFinite(formattedStockData.zMin) &&
+    Number.isFinite(formattedStockData.zMax) &&
+    formattedStockData.xMin < formattedStockData.xMax &&
+    formattedStockData.zMin < formattedStockData.zMax;
 
   return (
     <div className={styling.plotArea}>
@@ -184,10 +192,15 @@ export default function StockChart3D({ stockData, plotSettings }: StockDataProps
       >
 
         <OrbitControls target={[0.5,0.5,0.5]}/>
+        {hasValidRange && (
+          <>
+            {xAxis(formattedStockData, 6)}
+            {zAxis(formattedStockData, 5)}
+            {createStockGraphs(formattedStockData)}
+          </>
+        )}
 
-        {xAxis(formattedStockData, 6)}
-        {zAxis(formattedStockData, 5)}
-        {createStockGraphs(formattedStockData)}
+
 
 
       </Canvas>
