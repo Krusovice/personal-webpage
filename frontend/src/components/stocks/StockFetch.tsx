@@ -7,7 +7,7 @@ import type { StockData }  from "./types";
 type StockFetchProps = {
   stockOptions: string[];
   onFetchedData: (data: StockData[]) => void;
-  onRemovedTicker: () => void;
+  onRemovedTicker: (ticker: string) => void;
 }
 
 export default function StockFetch({ stockOptions, onFetchedData, onRemovedTicker }: StockFetchProps) {

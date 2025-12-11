@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 import StockChart3D from "./StockChart3D"
 import StockFetch from "./StockFetch"

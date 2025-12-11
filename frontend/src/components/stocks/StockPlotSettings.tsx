@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css";
 
 import type PlotSettings from "./types";

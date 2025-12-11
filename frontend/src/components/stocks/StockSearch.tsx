@@ -3,7 +3,7 @@ import styling from "./../../styles/stocks/StocksStyling.module.css";
 
 type StockSearchProps = {
   options: string[];
-  onClick: (ticker: string) => void;
+  onSelect: (ticker: string) => void;
   selectedTickers: string[];
 };
 
@@ -34,7 +34,7 @@ export default function StockSearch({ options, onSelect, selectedTickers }: Stoc
           type="text"
           placeholder="Select stocks"
           onFocus={() => setOpen(true)}
-          onChange={(e) => {
+          onChange={() => {
             setOpen(true);
           }}
         />
