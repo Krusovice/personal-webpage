@@ -9,6 +9,15 @@ type StockDataProps = {
   plotSettings: PlotSettings; 
 }
 
+type FormattedStockData = {
+  xMin: number;
+  xMax: number;
+  zMin: number;
+  zMax: number;
+  xRange: number;
+  zRange: number;
+  [ticker: string]: any;
+};
 
 function formatStockData(stockData, plotSettings) {
   let stockGraphs = [];

@@ -24,6 +24,14 @@ export default function StocksContent() {
     setStockData((prev) => prev.filter((item) => item.ticker !== ticker));
   }
 
+  function setTimespan(input: PlotSettings["timespan"]) {
+    setPlotSettings((prev) => ({ ...prev, timespan: input}));
+  }
+
+  function togglePlotSetting(key: keyof PlotSettings) {
+    setPlotSettings((prev) => ({ ...prev, [key]: !prev[key]}));
+  }
+
   return (
     <div className={styling.stocksArea}>
       <StockFetch 
@@ -39,7 +47,8 @@ export default function StocksContent() {
 
       <PlotSettingsArea
         plotSettings={plotSettings}
-        setPlotSettings={setPlotSettings}
+        onSetTimespan={setTimespan}
+        onTogglePlotSetting={togglePlotSetting}
       />
     </div>
   );

@@ -1,23 +1,13 @@
-import { useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css";
-
-import type PlotSettings from "./types";
+import type  { PlotSettings } from "./types";
 
 type PlotSettingsProps = {
   plotSettings: PlotSettings,
-  setPlotSettings: (value: PlotSettings) => void,
+  onSetTimespan: (input: PlotSettings["timespan"]) => void;
+  onTogglePlotSetting: (key: keyof PlotSettings) => void;
 };
 
-export default function PlotSettingsArea({ plotSettings, setPlotSettings }: PlotSettingsProps ) {
-  
-  function setTimespan(input: PlotSettings["timespan"]) {
-    setPlotSettings((prev) => ({ ...prev, timespan: input}));
-  }
-
-  function toggle(key: keyof PlotSettings) {
-    setPlotSettings((prev) => ({ ...prev, [key]: !prev[key]}));
-  }
+export default function PlotSettingsArea({ plotSettings, onSetTimespan, onTogglePlotSetting }: PlotSettingsProps ) {
 
   return(
     <div className={styling.plotSettings}>
@@ -25,7 +15,7 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
         <button
           type="button"
           className={`${styling.plotSettingOption} ${plotSettings.timespan === "lastMonth" ? styling.active : ""}`}
-          onClick={() => setTimespan("lastMonth")}
+          onClick={() => onSetTimespan("lastMonth")}
         >
           Last month
         </button>
@@ -35,7 +25,7 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
         <button
           type="button"
           className={`${styling.plotSettingOption} ${plotSettings.timespan === "lastYear" ? styling.active : ""}`}
-          onClick={() => setTimespan("lastYear")}
+          onClick={() => onSetTimespan("lastYear")}
         >
           Last year
         </button>
@@ -45,7 +35,7 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
         <button
           type="button"
           className={`${styling.plotSettingOption} ${plotSettings.timespan === "currentYear" ? styling.active : ""}`}
-          onClick={() => setTimespan("currentYear")}
+          onClick={() => onSetTimespan("currentYear")}
         >
           Current year
         </button>
@@ -55,17 +45,17 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
         <button
           type="button"
           className={`${styling.plotSettingOption} ${plotSettings.prices === true ? styling.active : ""}`}
-          onClick={() => toggle("prices")}
+          onClick={() => onTogglePlotSetting("prices")}
         >
           Prices
         </button>
       </div>
 
-      <div className={styling.peRatio}>
+      <div className={styling.peRatios}>
         <button
           type="button"
-          className={`${styling.plotSettingOption} ${plotSettings.peRatio === true ? styling.active : ""}`}
-          onClick={() => toggle("peRatio")}
+          className={`${styling.plotSettingOption} ${plotSettings.peRatios === true ? styling.active : ""}`}
+          onClick={() => onTogglePlotSetting("peRatios")}
         >
           P/E
         </button>
@@ -75,7 +65,7 @@ export default function PlotSettingsArea({ plotSettings, setPlotSettings }: Plot
         <button
           type="button"
           className={`${styling.plotSettingOption} ${plotSettings.relativeValues === true ? styling.active : ""}`}
-          onClick={() => toggle("relativeValues")}
+          onClick={() => onTogglePlotSetting("relativeValues")}
         >
           Relative Value
         </button>
