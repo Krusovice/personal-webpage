@@ -41,7 +41,7 @@ export default function StocksContent() {
       />
 
       <StockChart3D
-        stockData={stockData}
+        stockDataList={stockData}
         plotSettings={plotSettings}
       />
 

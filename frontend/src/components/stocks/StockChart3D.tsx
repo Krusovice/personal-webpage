@@ -2,15 +2,15 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
 import styling from "./../../styles/stocks/StocksStyling.module.css";
-import type { StockData, PlotSettings } from "../../types/stocks";
+import type { StockData, PlotSettings } from "./types";
 
 type StockDataProps = {
-  stockData: StockData[];
+  stockDataList: StockData[];
   plotSettings: PlotSettings; 
 }
 
 type TickerSeries = {
-  dates: Date[];
+  dates: number[];
   values: number[];
 };
 
@@ -21,12 +21,16 @@ type FormattedStockData = {
   zMax: number;
   xRange: number;
   zRange: number;
-  tickerList: string[];
   tickerData: Record<string, TickerSeries>;
   fromDate: Date;
 };
 
-function formatStockData(stockData, plotSettings): FormattedStockData {
+type Point3 = [number, number, number];
+
+function formatStockData(
+  stockDataList: StockData[],
+  plotSettings: PlotSettings
+  ): FormattedStockData {
   const formattedStockData: FormattedStockData = {
     xMin: 0,
     xMax: 0,
@@ -53,7 +57,7 @@ function formatStockData(stockData, plotSettings): FormattedStockData {
   formattedStockData.fromDate = fromDate;
 
   // Formatting stock data
-  stockData.forEach((obj) => {
+  stockDataList.forEach((obj: StockData) => {
     // Checking if stockData key exists, otherwise create it
     if (!formattedStockData.tickerData[obj.ticker]) {
       formattedStockData.tickerData[obj.ticker] = { dates: [], values: [] };
@@ -68,15 +72,15 @@ function formatStockData(stockData, plotSettings): FormattedStockData {
 
   // Toggle Relative values
   if (plotSettings.relativeValues) {
-    Object.entries(formattedStockData.tickerData).forEach(([ticker, data]) => {
+    Object.entries(formattedStockData.tickerData).forEach(([_ticker, data]) => {
       data.values = data.values.map((v) => v / data.values[0]);
     });
   }
 
   // Finding min and max dates and values among all tickerData
-  let xValues = [];
-  let zValues = [];
-  Object.entries(formattedStockData.tickerData).forEach(([key, data]) => {
+  let xValues: number[] = [];
+  let zValues: number[] = [];
+  Object.entries(formattedStockData.tickerData).forEach(([_key, data]) => {
     xValues.push(...data.dates);
     zValues.push(...data.values);
   });
@@ -92,8 +96,10 @@ function formatStockData(stockData, plotSettings): FormattedStockData {
 return formattedStockData;
 }
 
-function createStockGraphs(formattedStockData) {
-  stockGraphs = [];
+function createStockGraphs(
+  formattedStockData: FormattedStockData
+  ) {
+  const stockGraphs: React.ReactElement[] = [];
 
   Object.entries(formattedStockData.tickerData).forEach(([ticker, data]) => {
     const { dates, values } = data;
@@ -101,7 +107,7 @@ function createStockGraphs(formattedStockData) {
     const yValues = values.map(() => 0);
     const zValues = values.map((value) => (value - formattedStockData.zMin)/formattedStockData.zRange);
     
-    const points = xValues.map((x, i) => [x, yValues[i], zValues[i]]);
+    const points: Point3[] = xValues.map((x, i) => [x, yValues[i], zValues[i]]);
     stockGraphs.push(<Line key={ticker} points={points} dashed={false} />);
   });
 
@@ -110,7 +116,10 @@ function createStockGraphs(formattedStockData) {
 
 
 // Z-axis, containing values
-function zAxis(formattedStockData, numberOfTicks) {
+function zAxis(
+  formattedStockData: FormattedStockData,
+  numberOfTicks: number
+  ) {
   const tickValuesObject = [];
   const zInc = formattedStockData.zRange/numberOfTicks;
   
@@ -120,8 +129,8 @@ function zAxis(formattedStockData, numberOfTicks) {
   const zInc_loc = (zMax_loc-zMin_loc)/numberOfTicks;
 
   // Line
-  const linePoint_0 = [0,0,zMin_loc];
-  const linePoint_1 = [0,0,zMax_loc];
+  const linePoint_0: Point3 = [0,0,zMin_loc];
+  const linePoint_1: Point3 = [0,0,zMax_loc];
   const line = <Line key="zAxis" points={[linePoint_0,linePoint_1]} dashed={false} />;
 
   // Labels
@@ -129,8 +138,8 @@ function zAxis(formattedStockData, numberOfTicks) {
     let tickValue_loc = zMin_loc + i*zInc_loc;
     let tickValue = formattedStockData.zMin + i*zInc;
 
-    let linePoint_0 = [zMin_loc,0,tickValue_loc];
-    let linePoint_1 = [zMax_loc,0,tickValue_loc];
+    let linePoint_0: Point3 = [zMin_loc,0,tickValue_loc];
+    let linePoint_1: Point3 = [zMax_loc,0,tickValue_loc];
     tickValuesObject.push(
       <Line key={"zAxis_grid_"+i} points={[linePoint_0,linePoint_1]} dashed={false} />
     );
@@ -146,7 +155,10 @@ function zAxis(formattedStockData, numberOfTicks) {
 
 
 // X-axis, containing dates
-function xAxis(formattedStockData, numberOfTicks) {
+function xAxis(
+  formattedStockData: FormattedStockData,
+  numberOfTicks: number,
+  ) {
   const tickValuesObject = [];
 
   const xInc = formattedStockData.xRange/numberOfTicks;
@@ -154,11 +166,10 @@ function xAxis(formattedStockData, numberOfTicks) {
   // Normalizing graph loc values, so theyre always between 0 and 1.
   const xMin_loc = 0;
   const xMax_loc = 1;
-  const xInc_loc = (xMax_loc-xMin_loc)/numberOfTicks;
 
   // Line
-  const linePoint_0 = [xMin_loc,0,0];
-  const linePoint_1 = [xMax_loc,0,0];
+  const linePoint_0: Point3 = [xMin_loc,0,0];
+  const linePoint_1: Point3 = [xMax_loc,0,0];
   const line = <Line key="xAxis" points={[linePoint_0,linePoint_1]} dashed={false} />;
 
   // Labels
@@ -171,8 +182,8 @@ function xAxis(formattedStockData, numberOfTicks) {
     let day = String(date_item.getDate()).padStart(2, "0");
     let formatted_date = `${year}-${month}-${day}`;
 
-    let linePoint_0 = [value,0,xMin_loc];
-    let linePoint_1 = [value,0,xMax_loc];
+    let linePoint_0: Point3  = [value,0,xMin_loc];
+    let linePoint_1: Point3  = [value,0,xMax_loc];
     tickValuesObject.push(
       <Line key={"xAxis_grid_"+i} points={[linePoint_0,linePoint_1]} dashed={false} />
     );
@@ -189,8 +200,8 @@ function xAxis(formattedStockData, numberOfTicks) {
 
 
 
-export default function StockChart3D({ stockData, plotSettings }: StockDataProps) {
-  const formattedStockData = formatStockData(stockData, plotSettings);
+export default function StockChart3D({ stockDataList, plotSettings }: StockDataProps) {
+  const formattedStockData = formatStockData(stockDataList, plotSettings);
   
   const hasValidRange =
     Number.isFinite(formattedStockData.xMin) &&
