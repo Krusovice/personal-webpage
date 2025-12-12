@@ -114,7 +114,6 @@ function createStockGraphs(
   return stockGraphs;
 }
 
-
 // Z-axis, containing values
 function zAxis(
   formattedStockData: FormattedStockData,
@@ -152,7 +151,6 @@ function zAxis(
 
   return [line, ...tickValuesObject];
 }
-
 
 // X-axis, containing dates
 function xAxis(
@@ -198,8 +196,6 @@ function xAxis(
   return [line, ...tickValuesObject];
 }
 
-
-
 export default function StockChart3D({ stockDataList, plotSettings }: StockDataProps) {
   const formattedStockData = formatStockData(stockDataList, plotSettings);
   
@@ -229,9 +225,6 @@ export default function StockChart3D({ stockDataList, plotSettings }: StockDataP
             {createStockGraphs(formattedStockData)}
           </>
         )}
-
-
-
 
       </Canvas>
     </div>
