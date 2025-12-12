@@ -9,6 +9,11 @@ type StockDataProps = {
   plotSettings: PlotSettings; 
 }
 
+type TickerSeries = {
+  dates: Date[];
+  values: number[];
+};
+
 type FormattedStockData = {
   xMin: number;
   xMax: number;
@@ -16,13 +21,22 @@ type FormattedStockData = {
   zMax: number;
   xRange: number;
   zRange: number;
-  [ticker: string]: any;
+  tickerList: string[];
+  tickerData: Record<string, TickerSeries>;
+  fromDate: Date;
 };
 
-function formatStockData(stockData, plotSettings) {
-  let stockGraphs = [];
-  let formattedStockData = {};
-  let tickerList = [];
+function formatStockData(stockData, plotSettings): FormattedStockData {
+  const formattedStockData: FormattedStockData = {
+    xMin: 0,
+    xMax: 0,
+    zMin: 0,
+    zMax: 0,
+    xRange: 0,
+    zRange: 0,
+    tickerData: {},
+    fromDate: new Date(),
+  };
 
   // Filtering the dates
   const today = new Date();
@@ -36,56 +50,52 @@ function formatStockData(stockData, plotSettings) {
     fromDate.setDate(fromDate.getDate() - 30);
   } 
 
+  formattedStockData.fromDate = fromDate;
+
+  // Formatting stock data
   stockData.forEach((obj) => {
-    if (!(obj.ticker in formattedStockData)) {
-      formattedStockData[obj.ticker] = {
-        dates: [],
-        values: [],
-      };
-      tickerList.push(obj.ticker);
+    // Checking if stockData key exists, otherwise create it
+    if (!formattedStockData.tickerData[obj.ticker]) {
+      formattedStockData.tickerData[obj.ticker] = { dates: [], values: [] };
     }
 
+    // Storing the object date and closing price to the correct ticker key
     if (new Date(obj.date).getTime() >= fromDate.getTime()) {
-      formattedStockData[obj.ticker].dates.push(new Date(obj.date).getTime());
-      formattedStockData[obj.ticker].values.push(obj.closing_price);
+      formattedStockData.tickerData[obj.ticker].dates.push(new Date(obj.date).getTime());
+      formattedStockData.tickerData[obj.ticker].values.push(obj.closing_price);
     }
   });
 
   // Toggle Relative values
   if (plotSettings.relativeValues) {
-    Object.entries(formattedStockData).forEach(([ticker, data]) => {
+    Object.entries(formattedStockData.tickerData).forEach(([ticker, data]) => {
       data.values = data.values.map((v) => v / data.values[0]);
     });
   }
 
-  formattedStockData["xMin"] = Math.min(...stockData.map((obj) => new Date(obj.date).getTime()));
-  formattedStockData["xMax"] = Math.max(...stockData.map((obj) => new Date(obj.date).getTime()));
+  // Finding min and max dates and values among all tickerData
+  let xValues = [];
   let zValues = [];
-
-  Object.entries(formattedStockData).forEach(([key, data]) => {
-    if (tickerList.includes(key)) {
-      zValues.push(...data.values);
-    }
+  Object.entries(formattedStockData.tickerData).forEach(([key, data]) => {
+    xValues.push(...data.dates);
+    zValues.push(...data.values);
   });
 
-  formattedStockData["zMin"] = Math.min(...zValues);
-  formattedStockData["zMax"] = Math.max(...zValues);
+  formattedStockData.xMin = Math.min(...xValues);
+  formattedStockData.xMax = Math.max(...xValues);
+  formattedStockData.zMin = Math.min(...zValues);
+  formattedStockData.zMax = Math.max(...zValues);
 
-  formattedStockData["xRange"] = formattedStockData.xMax - formattedStockData.xMin || 1;
-  formattedStockData["zRange"] = formattedStockData.zMax - formattedStockData.zMin || 1;
+  formattedStockData.xRange = formattedStockData.xMax - formattedStockData.xMin || 1;
+  formattedStockData.zRange = formattedStockData.zMax - formattedStockData.zMin || 1;
 
 return formattedStockData;
 }
 
 function createStockGraphs(formattedStockData) {
-  const stockGraphs = [];
-  const metaKeys = ["xMin", "xMax", "zMin", "zMax", "xRange", "zRange"];
+  stockGraphs = [];
 
-  Object.entries(formattedStockData).forEach(([ticker, data]) => {
-    if (metaKeys.includes(ticker)) {
-      return;
-    }
-
+  Object.entries(formattedStockData.tickerData).forEach(([ticker, data]) => {
     const { dates, values } = data;
     const xValues = dates.map((date) => (date - formattedStockData.xMin)/formattedStockData.xRange);
     const yValues = values.map(() => 0);
