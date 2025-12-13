@@ -43,8 +43,8 @@ services:
       LITERATURE_MEDIA_ROOT: "/media" # hardcoding media location for backend container in production. Literature files content location already contains /literature, so therefore only /media
     volumes:
       - ${LITERATURE_MEDIA_ROOT}:/media/literature # folder literature is mapped to containers /media folder
-    ports:
-      - "5000:5000"
+    expose:
+      - "5000"
     depends_on:
       postgres:
         condition: service_healthy
