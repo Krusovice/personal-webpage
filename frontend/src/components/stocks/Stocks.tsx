@@ -1,13 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 import StockChart3D from "./StockChart3D"
 import StockFetch from "./StockFetch"
 import PlotSettingsArea from "./StockPlotSettings"
 import type { StockData, PlotSettings }  from "./types";
 
-const STOCK_OPTIONS = ["AAPL", "MSFT", "TSLA"];
+type StockOptions = string[];
+
+async function fetch_stock_options(): StockOptions {
+  const resp = await fetch("/api/stocks/fetch_options", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!resp.ok) {
+    throw new Error(`Request failed: ${resp.status}`);
+  }
+
+  return (await resp.json()) as StockOptions;
+}
 
 export default function StocksContent() {
+  const [stockOptions, setStockOptions] = useState<StockOptions>([]);
   const [stockData, setStockData] = useState<Array<StockData>>([]);
   const [plotSettings, setPlotSettings] = useState<PlotSettings>({
     timespan: "currentYear",
@@ -32,10 +48,27 @@ export default function StocksContent() {
     setPlotSettings((prev) => ({ ...prev, [key]: !prev[key]}));
   }
 
+  useEffect(() => {
+    let alive = true;
+
+    (async () => {
+      try {
+        const options = await fetch_stock_options();
+        if (alive) setStockOptions(options);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+
+    return () => {
+      alive = false;
+    };
+  }, []); // run once on mount
+
   return (
     <div className={styling.stocksArea}>
       <StockFetch 
-        stockOptions={STOCK_OPTIONS}
+        stockOptions={stockOptions}
         onFetchedData={addStockData}
         onRemovedTicker={removeStockData}
       />
