@@ -33,7 +33,7 @@ pub async fn get_stock_data(
         FROM stockmarket.stock_prices
         WHERE ticker = $1
         AND date >= $2
-        SORT BY date
+        ORDER BY "date" ASC
         "#
     )
     .bind(&request.ticker)
