@@ -1,12 +1,13 @@
 name: webpage
 
 networks:
-  webpage_network: {}   # user-defined bridge; created automatically
+  webpage_network:
+    name: webpage_network
+    external: true
 
 volumes:
   caddy_data:
   caddy_config:
-  pg_data:
 
 services:
   postgres:
@@ -19,14 +20,15 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - /home/user/secrets-and-database/postgres_data:/var/lib/postgresql/data
-      - ./postgres/init:/docker-entrypoint-initdb.d
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 30s
-    networks: [webpage_network]
+    networks:
+      - webpage_network
 
   backend:
     container_name: backend
@@ -51,7 +53,8 @@ services:
       interval: 10s
       timeout: 3s
       retries: 10
-    networks: [webpage_network]
+    networks:
+      - webpage_network
 
   frontend:
     container_name: frontend
@@ -59,7 +62,8 @@ services:
       context: ./frontend
     expose:
       - "80"
-    networks: [webpage_network]
+    networks:
+      - webpage_network
 
   caddy:
     container_name: caddy
@@ -74,4 +78,5 @@ services:
     depends_on:
       - frontend
       - backend
-    networks: [webpage_network]
+    networks:
+      - webpage_network
