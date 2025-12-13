@@ -7,7 +7,7 @@ import type { StockData, PlotSettings }  from "./types";
 
 type StockOptions = string[];
 
-async function fetch_stock_options(): StockOptions {
+async function fetch_stock_options(): Promise<StockOptions> {
   const resp = await fetch("/api/stocks/fetch_options", {
     method: "GET",
     headers: {
