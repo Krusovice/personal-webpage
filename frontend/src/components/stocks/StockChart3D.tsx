@@ -2,30 +2,12 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
 import styling from "./../../styles/stocks/StocksStyling.module.css";
-import type { StockData, PlotSettings } from "./types";
+import type { StockData, PlotSettings, FormattedStockData, Point3 } from "./types";
 
 type StockDataProps = {
   stockDataList: StockData[];
   plotSettings: PlotSettings; 
 }
-
-type TickerSeries = {
-  dates: number[];
-  values: number[];
-};
-
-type FormattedStockData = {
-  xMin: number;
-  xMax: number;
-  zMin: number;
-  zMax: number;
-  xRange: number;
-  zRange: number;
-  tickerData: Record<string, TickerSeries>;
-  fromDate: Date;
-};
-
-type Point3 = [number, number, number];
 
 function formatStockData(
   stockDataList: StockData[],

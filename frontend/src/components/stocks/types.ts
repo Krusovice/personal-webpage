@@ -11,3 +11,21 @@ export type PlotSettings = {
 	peRatios: boolean,
 	prices: boolean,
 }
+
+export type TickerSeries = {
+  dates: number[];
+  values: number[];
+};
+
+export type FormattedStockData = {
+  xMin: number;
+  xMax: number;
+  zMin: number;
+  zMax: number;
+  xRange: number;
+  zRange: number;
+  tickerData: Record<string, TickerSeries>;
+  fromDate: Date;
+};
+
+export type Point3 = [number, number, number];

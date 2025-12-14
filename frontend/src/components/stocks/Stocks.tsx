@@ -31,6 +31,8 @@ export default function StocksContent() {
     peRatios: false,
     prices: true,
   });
+  
+  const stockColors = ["red", "blue", "green"];
 
   function addStockData(newStockData: StockData[]) {
     setStockData((prev) => [...prev, ...newStockData]);
