@@ -3,6 +3,7 @@ import StockSearch from "./StockSearch";
 import StocksSelected from "./StocksSelected"
 import { useState } from "react";
 import type { StockData }  from "./types";
+import { fetchTickerData } from "./api"
 
 type StockFetchProps = {
   stockOptions: string[];
@@ -13,39 +14,22 @@ type StockFetchProps = {
 export default function StockFetch({ stockOptions, onFetchedData, onRemovedTicker }: StockFetchProps) {
   const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
 
-  function addTicker(ticker: string) {
+  async function addTicker(ticker: string) {
     setSelectedTickers((prev) =>
       prev.includes(ticker) ? prev : [...prev, ticker]
     );
-    fetchStocks(ticker);
+
+    try {
+      const data = await fetchTickerData(ticker);
+      onFetchedData(data);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   function removeTicker(ticker: string) {
     setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
     onRemovedTicker(ticker);
-  }
-
-  async function fetchStocks(selectedTicker: string) {
-    const body = {
-      ticker: selectedTicker,
-    };
-
-    const resp = await fetch("/api/stocks/fetch", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(body),
-    });
-
-    if (!resp.ok) {
-      console.error("Request failed:", resp.status);
-      return;
-    }
-
-    const data = (await resp.json()) as Array<StockData>; // <-- typed parse
-    onFetchedData(data);
   }
 
   return(

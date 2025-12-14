@@ -16,7 +16,6 @@ export default function SelectedStocks({tickerList, onSelect}: StocksSelectedPro
         {ticker}
       </div>
     )
-
   }
 
   return (
