@@ -37,5 +37,5 @@ export type PlotSettings = {
 // Stock graph point
 export type Point3 = [number, number, number];
 
-// Stock options for plot selection
+// Stock options of tickers, for plot selection
 export type StockOptions = string[];

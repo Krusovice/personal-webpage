@@ -1,12 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 
-import type { StockData, PlotSettings, StockOptions }  from "./types";
-import { fetchStockOptions } from "./api"
+import type { StockData, PlotSettings, StockOptions, FormattedStockData }  from "./types";
+import { fetchStockOptions, fetchTickerData } from "./api"
+import { formatStockData } from "./dataFunctions"
 
 import StockChart3D from "./StockChart3D"
-import StockFetch from "./StockFetch"
+import StockSearch from "./StockSearch";
+import StocksSelected from "./StocksSelected"
 import PlotSettingsArea from "./StockPlotSettings"
+
+/* Stocks app 
+
+/// Data structure ///
+StockOptions is created on render through a backend api
+and contains all stock options available in the database.
+
+For each Ticker selected, the data is fetched from API.
+The StockData array then extended with the data,
+and given as an input to the formatStockData function.
+FormattedStockData then contains tickerData <TickerSeries>
+and meta data for plots.
+
+PlotSettings contains inputs for plots.
+
+StockContent owns FormattedStockData and PlotSettings.
+
+
+/// Component structure ///
+StockContent
+  StockSearch
+  StockSelected
+  PlotSettingsArea
+  StockChart
+*/
 
 export default function StocksContent() {
   const [plotSettings, setPlotSettings] = useState<PlotSettings>({
@@ -17,16 +44,13 @@ export default function StocksContent() {
   });
   const [stockOptions, setStockOptions] = useState<StockOptions>([]);
   const [stockData, setStockData] = useState<Array<StockData>>([]);
+  const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
 
+  const formattedStockData = useMemo(
+  () => formatStockData(stockData, plotSettings),
+  [stockData, plotSettings]
+);
   //const stockColors = ["red", "blue", "green"];
-
-  function addStockData(newStockData: StockData[]) {
-    setStockData((prev) => [...prev, ...newStockData]);
-  }
-
-  function removeStockData(ticker: string) {
-    setStockData((prev) => prev.filter((item) => item.ticker !== ticker));
-  }
 
   function setTimespan(input: PlotSettings["timespan"]) {
     setPlotSettings((prev) => ({ ...prev, timespan: input}));
@@ -34,6 +58,26 @@ export default function StocksContent() {
 
   function togglePlotSetting(key: keyof PlotSettings) {
     setPlotSettings((prev) => ({ ...prev, [key]: !prev[key]}));
+  }
+
+  async function addTicker(ticker: string) {
+    setSelectedTickers((prev) =>
+      prev.includes(ticker) ? prev : [...prev, ticker]
+    );
+
+    try {
+      const newStockData = await fetchTickerData(ticker);
+      setStockData((prev) => [...prev, ...newStockData]);
+      
+
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function removeTicker(ticker: string) {
+    setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
+    setStockData((prev) => prev.filter((item) => item.ticker !== ticker));
   }
 
   useEffect(() => {
@@ -54,23 +98,30 @@ export default function StocksContent() {
   }, []);
 
   return (
-    <div className={styling.stocksArea}>
-      <StockFetch 
-        stockOptions={stockOptions}
-        onFetchedData={addStockData}
-        onRemovedTicker={removeStockData}
-      />
+      <div className={styling.stocksArea}>
+        <div className={styling.fetchArea}>
+          <StockSearch
+            options={stockOptions}
+            onSelect={addTicker}
+            selectedTickers={selectedTickers}
+          />
+            
+          <StocksSelected
+            tickerList={selectedTickers}
+            onSelect={removeTicker}
+          /> 
+        </div>
 
-      <StockChart3D
-        stockDataList={stockData}
-        plotSettings={plotSettings}
-      />
+        <StockChart3D
+          formattedStockData={formattedStockData}
+          plotSettings={plotSettings}
+        />
 
-      <PlotSettingsArea
-        plotSettings={plotSettings}
-        onSetTimespan={setTimespan}
-        onTogglePlotSetting={togglePlotSetting}
-      />
-    </div>
+        <PlotSettingsArea
+          plotSettings={plotSettings}
+          onSetTimespan={setTimespan}
+          onTogglePlotSetting={togglePlotSetting}
+        />
+      </div>
   );
 }
