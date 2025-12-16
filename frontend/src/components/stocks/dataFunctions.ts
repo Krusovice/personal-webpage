@@ -1,6 +1,9 @@
+import type { PlotSettings, FormattedStockData, StockData } from "./types";
+
 export function formatStockData(
   stockDataList: StockData[],
-  plotSettings: PlotSettings
+  plotSettings: PlotSettings,
+  TICKER_COLORS: string[],
   ): FormattedStockData {
   const formattedStockData: FormattedStockData = {
     xMin: 0,
@@ -28,10 +31,12 @@ export function formatStockData(
   formattedStockData.fromDate = fromDate;
 
   // Formatting stock data
+  let iColor = 0;
   stockDataList.forEach((obj: StockData) => {
     // Checking if stockData key exists, otherwise create it
     if (!formattedStockData.tickerData[obj.ticker]) {
-      formattedStockData.tickerData[obj.ticker] = { dates: [], values: [] };
+      formattedStockData.tickerData[obj.ticker] = { dates: [], values: [], color: TICKER_COLORS[iColor] };
+      iColor ++;
     }
 
     // Storing the object date and closing price to the correct ticker key

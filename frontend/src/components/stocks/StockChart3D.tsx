@@ -2,11 +2,10 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Line, Text } from "@react-three/drei";
 import styling from "./../../styles/stocks/StocksStyling.module.css";
-import type { StockData, PlotSettings, FormattedStockData, Point3 } from "./types";
+import type { FormattedStockData, Point3 } from "./types";
 
 type StockDataProps = {
   formattedStockData: FormattedStockData;
-  plotSettings: PlotSettings; 
 }
 
 function createStockGraphs(
@@ -109,7 +108,7 @@ function xAxis(
   return [line, ...tickValuesObject];
 }
 
-export default function StockChart3D({ formattedStockData, plotSettings }: StockDataProps) {
+export default function StockChart3D({ formattedStockData }: StockDataProps) {
   
   const hasValidRange =
     Number.isFinite(formattedStockData.xMin) &&

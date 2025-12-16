@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 
-import type { StockData, PlotSettings, StockOptions, FormattedStockData }  from "./types";
+import type { StockData, PlotSettings, StockOptions }  from "./types";
 import { fetchStockOptions, fetchTickerData } from "./api"
 import { formatStockData } from "./dataFunctions"
 
@@ -35,7 +35,7 @@ StockContent
   StockChart
 */
 
-export default function StocksContent() {
+export default function StockContent() {
   const [plotSettings, setPlotSettings] = useState<PlotSettings>({
     timespan: "currentYear",
     relativeValues: true,
@@ -45,12 +45,13 @@ export default function StocksContent() {
   const [stockOptions, setStockOptions] = useState<StockOptions>([]);
   const [stockData, setStockData] = useState<Array<StockData>>([]);
   const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
+  
+  const TICKER_COLORS = ["red", "blue", "green"];
 
   const formattedStockData = useMemo(
-  () => formatStockData(stockData, plotSettings),
-  [stockData, plotSettings]
+  () => formatStockData(stockData, plotSettings, TICKER_COLORS),
+  [stockData, plotSettings, TICKER_COLORS]
 );
-  //const stockColors = ["red", "blue", "green"];
 
   function setTimespan(input: PlotSettings["timespan"]) {
     setPlotSettings((prev) => ({ ...prev, timespan: input}));
@@ -114,7 +115,6 @@ export default function StocksContent() {
 
         <StockChart3D
           formattedStockData={formattedStockData}
-          plotSettings={plotSettings}
         />
 
         <PlotSettingsArea

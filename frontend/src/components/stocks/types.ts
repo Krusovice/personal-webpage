@@ -20,8 +20,7 @@ export type FormattedStockData = {
 
 // Data format for each stock series after formatted stock data
 export type TickerSeries = {
-  ticker: string,
-  color: string,
+  color: string;
   dates: number[];
   values: number[];
 };
