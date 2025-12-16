@@ -54,7 +54,7 @@ export default function StockContent() {
   const [stockData, setStockData] = useState<StockData[]>([]);
   const [selectedTickers, setSelectedTickers] = useState<SelectedTicker[]>([]);
   
-  const TICKER_COLOR_OPTIONS = ["red", "blue", "green"];
+  const TICKER_COLOR_OPTIONS = ["red","blue","green","orange","purple","cyan","magenta","yellow","brown","teal"] as const;
 
   const formattedStockData = useMemo(
   () => formatStockData(stockData, plotSettings, selectedTickers),
