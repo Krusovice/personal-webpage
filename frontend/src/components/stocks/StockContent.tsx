@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 
-import type { StockData, PlotSettings, StockOptions, SelectedTickers }  from "./types";
+import type { StockData, PlotSettings, StockOptions, SelectedTicker }  from "./types";
 import { fetchStockOptions, fetchTickerData } from "./api"
 import { formatStockData } from "./dataFunctions"
 
@@ -21,6 +21,14 @@ The StockData array then extended with the data,
 and given as an input to the formatStockData function.
 FormattedStockData then contains tickerData <TickerSeries>
 and meta data for plots.
+
+When the ticker is selected, selectedTickers is appended
+with the ticker, and the ticker is given a color from 
+TICKER_COLOR_OPTIONS. When plotting, selectedTickers are
+also given as an argument, to provide colors to the plots
+without changing the colors when graphs are removed from
+the plot. selectedTickers are also used to show colors in
+the StockSelected component.
 
 PlotSettings contains inputs for plots.
 
@@ -46,11 +54,11 @@ export default function StockContent() {
   const [stockData, setStockData] = useState<StockData[]>([]);
   const [selectedTickers, setSelectedTickers] = useState<SelectedTicker[]>([]);
   
-  const TICKER_COLORS = ["red", "blue", "green"];
+  const TICKER_COLOR_OPTIONS = ["red", "blue", "green"];
 
   const formattedStockData = useMemo(
-  () => formatStockData(stockData, plotSettings, TICKER_COLORS),
-  [stockData, plotSettings, TICKER_COLORS]
+  () => formatStockData(stockData, plotSettings, selectedTickers),
+  [stockData, plotSettings]
 );
 
   function setTimespan(input: PlotSettings["timespan"]) {
@@ -63,10 +71,12 @@ export default function StockContent() {
 
   async function addTicker(ticker: string) {
     setSelectedTickers((prev) => {
-      if (prev.some((t) => t.ticker === ticker)) return prev;  
+      if (prev.some((t) => t.ticker === ticker)) return prev;
       
-      const color = TICKER_COLORS[0];
-
+      // Finding a color that has not been used
+      const color = TICKER_COLOR_OPTIONS.find((c) => 
+        !selectedTickers.some((t) => t.color === c)) ?? "black";
+      
       return [...prev, { ticker, color }];
     });
     
@@ -74,7 +84,6 @@ export default function StockContent() {
       const newStockData = await fetchTickerData(ticker);
       setStockData((prev) => [...prev, ...newStockData]);
       
-
     } catch (e) {
       console.error(e);
     }

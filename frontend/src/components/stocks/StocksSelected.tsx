@@ -8,13 +8,14 @@ type StocksSelectedProps = {
 
 export default function SelectedStocks({selectedTickers, onSelect}: StocksSelectedProps) {
   
-  function tickerListContainer(ticker: string) {
+  function tickerListContainer(item: SelectedTicker) {
     return (
       <div 
-        onClick={() => {onSelect(ticker);}}
-        key={ticker}
-        className={styling.stocksSelectedItemContainer}>
-        {ticker}
+        onClick={() => {onSelect(item.ticker);}}
+        key={item.ticker}
+        className={styling.stocksSelectedItemContainer}
+        style={{ color: item.color }}>
+        {item.ticker}
       </div>
     )
   }
@@ -24,7 +25,7 @@ export default function SelectedStocks({selectedTickers, onSelect}: StocksSelect
       className={styling.stocksSelected}
     >
       {selectedTickers.map((item) => 
-        tickerListContainer(item.ticker)
+        tickerListContainer(item)
       )}
     </div>
   )
