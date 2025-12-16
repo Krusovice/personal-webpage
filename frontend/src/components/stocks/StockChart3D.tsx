@@ -14,13 +14,13 @@ function createStockGraphs(
   const stockGraphs: React.ReactElement[] = [];
 
   Object.entries(formattedStockData.tickerData).forEach(([ticker, data]) => {
-    const { dates, values } = data;
+    const { dates, values, color } = data;
     const xValues = dates.map((date) => (date - formattedStockData.xMin)/formattedStockData.xRange);
     const yValues = values.map(() => 0);
     const zValues = values.map((value) => (value - formattedStockData.zMin)/formattedStockData.zRange);
     
     const points: Point3[] = xValues.map((x, i) => [x, yValues[i], zValues[i]]);
-    stockGraphs.push(<Line key={ticker} points={points} dashed={false} />);
+    stockGraphs.push(<Line key={ticker} points={points} dashed={false} color={color} />);
   });
 
   return stockGraphs;

@@ -1,11 +1,12 @@
 import styling from "./../../styles/stocks/StocksStyling.module.css"
+import type { SelectedTicker } from "./types"
 
 type StocksSelectedProps = {
-  tickerList: string[];
+  selectedTickers: SelectedTicker[];
   onSelect: (ticker: string) => void;
 };
 
-export default function SelectedStocks({tickerList, onSelect}: StocksSelectedProps) {
+export default function SelectedStocks({selectedTickers, onSelect}: StocksSelectedProps) {
   
   function tickerListContainer(ticker: string) {
     return (
@@ -22,8 +23,8 @@ export default function SelectedStocks({tickerList, onSelect}: StocksSelectedPro
     <div
       className={styling.stocksSelected}
     >
-      {tickerList.map((ticker) => 
-        tickerListContainer(ticker)
+      {selectedTickers.map((item) => 
+        tickerListContainer(item.ticker)
       )}
     </div>
   )

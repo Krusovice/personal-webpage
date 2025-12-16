@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
 
-import type { StockData, PlotSettings, StockOptions }  from "./types";
+import type { StockData, PlotSettings, StockOptions, SelectedTickers }  from "./types";
 import { fetchStockOptions, fetchTickerData } from "./api"
 import { formatStockData } from "./dataFunctions"
 
@@ -43,8 +43,8 @@ export default function StockContent() {
     prices: true,
   });
   const [stockOptions, setStockOptions] = useState<StockOptions>([]);
-  const [stockData, setStockData] = useState<Array<StockData>>([]);
-  const [selectedTickers, setSelectedTickers] = useState<string[]>([]);
+  const [stockData, setStockData] = useState<StockData[]>([]);
+  const [selectedTickers, setSelectedTickers] = useState<SelectedTicker[]>([]);
   
   const TICKER_COLORS = ["red", "blue", "green"];
 
@@ -62,10 +62,14 @@ export default function StockContent() {
   }
 
   async function addTicker(ticker: string) {
-    setSelectedTickers((prev) =>
-      prev.includes(ticker) ? prev : [...prev, ticker]
-    );
+    setSelectedTickers((prev) => {
+      if (prev.some((t) => t.ticker === ticker)) return prev;  
+      
+      const color = TICKER_COLORS[0];
 
+      return [...prev, { ticker, color }];
+    });
+    
     try {
       const newStockData = await fetchTickerData(ticker);
       setStockData((prev) => [...prev, ...newStockData]);
@@ -77,7 +81,7 @@ export default function StockContent() {
   }
 
   function removeTicker(ticker: string) {
-    setSelectedTickers((prev) => prev.filter((t) => t !== ticker));
+    setSelectedTickers((prev) => prev.filter((item) => item.ticker !== ticker));
     setStockData((prev) => prev.filter((item) => item.ticker !== ticker));
   }
 
@@ -108,7 +112,7 @@ export default function StockContent() {
           />
             
           <StocksSelected
-            tickerList={selectedTickers}
+            selectedTickers={selectedTickers}
             onSelect={removeTicker}
           /> 
         </div>

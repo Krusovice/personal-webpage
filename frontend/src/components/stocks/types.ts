@@ -33,6 +33,11 @@ export type PlotSettings = {
 	prices: boolean,
 }
 
+export type SelectedTicker = {
+  ticker: string;
+  color: string;
+}
+
 // Stock graph point
 export type Point3 = [number, number, number];
 

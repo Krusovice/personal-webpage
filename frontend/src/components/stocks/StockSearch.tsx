@@ -1,18 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css";
+import type { SelectedTicker } from "./types"
 
 type StockSearchProps = {
   options: string[];
   onSelect: (ticker: string) => void;
-  selectedTickers: string[];
+  selectedTickers: SelectedTicker[];
 };
 
 export default function StockSearch({ options, onSelect, selectedTickers }: StockSearchProps) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const filtered = options.filter((option) => 
-    !selectedTickers.includes(option)
+  const filtered = options.filter(
+    (option) => !selectedTickers.some((t) => t.ticker === option)
   );
 
   useEffect(() => {
