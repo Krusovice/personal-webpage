@@ -42,7 +42,7 @@ export default function PlotSettingsArea({ plotSettings, onSetTimespan, onToggle
       </div>
 
       <div className={styling.prices}>
-        <button
+        <button disabled
           type="button"
           className={`${styling.plotSettingOption} ${plotSettings.prices === true ? styling.active : ""}`}
           onClick={() => onTogglePlotSetting("prices")}
@@ -52,7 +52,7 @@ export default function PlotSettingsArea({ plotSettings, onSetTimespan, onToggle
       </div>
 
       <div className={styling.peRatios}>
-        <button
+        <button disabled
           type="button"
           className={`${styling.plotSettingOption} ${plotSettings.peRatios === true ? styling.active : ""}`}
           onClick={() => onTogglePlotSetting("peRatios")}
