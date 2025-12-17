@@ -17,7 +17,7 @@
 .fetchArea {
   grid-area: fetchArea;
   display: grid;
-  height: 100%;
+
   grid-template-areas:
     "searchBar"
     "selectedTickers";
@@ -51,10 +51,11 @@
 
 .selectedTickers {
   grid-area: selectedTickers;
+
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
   align-content: flex-start;
+  overflow-y: hidden;
 
   border-radius: 6px;
   margin: 3px;
