@@ -1,10 +1,12 @@
 .FRArea {
+  grid-area: formArea;
   display: grid;
   grid-template-areas:
-    "formArea"
-    "resultsArea";
-  grid-template-columns: 600px;
-  grid-tempalte-rows: 600px 50px;
+    "width load eccentricity"
+    "soilLayers soilLayers soilLayers"
+    "calculate result result";
+  grid-template-columns: 120px 120px 120px;
+  grid-template-rows: 50px 120px 50px;
 
   color: var(--color-text);
   background-color: var(--color-sidebar-background);
@@ -14,11 +16,33 @@
   border-radius: 20px;
 }
 
-.formArea {
-  grid-area: formArea;
-  display: grid;
+.width, .load, .eccentricity, .soilLayers, .calculate, .result {
+  margin: 3px;
 }
 
-.resultArea {
-  grid-area: resultArea;
+.width {
+  grid-area: width;
+}
+
+.load {
+  grid-area: load;
+}
+
+.eccentricity {
+  grid-area: eccentricity;
+}
+
+.soilLayers {
+  grid-area: soilLayers;
+  background-color: grey;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.calculate {
+  grid-area: calculate;
+}
+
+.result {
+  grid-area: result;
 }
