@@ -1,12 +1,10 @@
-import styling from "../../styles/foundationResponse/FRStyling.module.css"
+import styling from "../../styles/foundationResponse/FRStyling.module.css";
+import { useState } from "react";
+import type { SoilLayer } from "./types";
+import SoilLayerTable from "./SoilLayerTable";
 
 export default function FRContent() {
-
-/*
-Fields
-  width, load, eccentricity, 
-  soil layers
-*/
+  const [soilLayers, setSoilLayers] = useState<SoilLayer[]>([]);
 
   return (
     <>
@@ -27,7 +25,7 @@ Fields
         </div>
 
         <div className={styling.soilLayers}>
-          
+          <SoilLayerTable/>
         </div>
 
         <div className={styling.calculate}>
