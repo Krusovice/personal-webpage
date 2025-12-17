@@ -1,0 +1,24 @@
+.FRArea {
+  display: grid;
+  grid-template-areas:
+    "formArea"
+    "resultsArea";
+  grid-template-columns: 600px;
+  grid-tempalte-rows: 600px 50px;
+
+  color: var(--color-text);
+  background-color: var(--color-sidebar-background);
+  padding: 15px;
+  margin: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+}
+
+.formArea {
+  grid-area: formArea;
+  display: grid;
+}
+
+.resultArea {
+  grid-area: resultArea;
+}

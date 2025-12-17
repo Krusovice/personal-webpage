@@ -17,6 +17,7 @@
 .fetchArea {
   grid-area: fetchArea;
   display: grid;
+  height: 100%;
   grid-template-areas:
     "searchBar"
     "selectedTickers";
