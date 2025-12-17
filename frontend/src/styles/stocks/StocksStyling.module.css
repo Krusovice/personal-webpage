@@ -19,7 +19,7 @@
   display: grid;
   grid-template-areas:
     "searchBar"
-    "stocksSelected";
+    "selectedTickers";
   grid-template-columns: 1fr;
   grid-template-rows: 35px 1fr;
 }
@@ -48,8 +48,13 @@
   margin: 3px;
 }
 
-.stocksSelected {
-  grid-area: stocksSelected;
+.selectedTickers {
+  grid-area: selectedTickers;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
   border-radius: 6px;
   margin: 3px;
   padding: 6px;
@@ -57,15 +62,14 @@
   background-color: grey;
 }
 
-.stocksSelectedItemContainer {
+.selectedTickersItemContainer {
+  width: 80px;
   padding: 2px;
-  width: 60px;
 }
 
-.stocksSelectedItemContainer:hover {
+.selectedTickersItemContainer:hover {
   background-color: var(--orange-rust);
 }
-
 
 .lastMonth {
   grid-area: lastMonth;

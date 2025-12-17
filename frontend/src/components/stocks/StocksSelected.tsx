@@ -13,7 +13,7 @@ export default function SelectedStocks({selectedTickers, onSelect}: StocksSelect
       <div 
         onClick={() => {onSelect(item.ticker);}}
         key={item.ticker}
-        className={styling.stocksSelectedItemContainer}
+        className={styling.selectedTickersItemContainer}
         style={{ color: item.color }}>
         {item.ticker}
       </div>
@@ -22,7 +22,7 @@ export default function SelectedStocks({selectedTickers, onSelect}: StocksSelect
 
   return (
     <div
-      className={styling.stocksSelected}
+      className={styling.selectedTickers}
     >
       {selectedTickers.map((item) => 
         tickerListContainer(item)
