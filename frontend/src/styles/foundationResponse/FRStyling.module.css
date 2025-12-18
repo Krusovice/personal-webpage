@@ -2,11 +2,11 @@
   grid-area: formArea;
   display: grid;
   grid-template-areas:
-    "width load eccentricity"
-    "soilLayers soilLayers soilLayers"
-    "calculate result result";
-  grid-template-columns: 120px 120px 120px;
-  grid-template-rows: 50px 120px 50px;
+    "width length soilLayers"
+    "load eccentricity soilLayers"
+    "calculate result soilLayers";
+  grid-template-columns: 120px 120px 500px;
+  grid-template-rows: 50px 50px 50px;
 
   color: var(--color-text);
   background-color: var(--color-sidebar-background);

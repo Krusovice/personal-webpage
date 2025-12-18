@@ -6,6 +6,7 @@ export type FoundationResponseApiInput = {
 }
 
 export type SoilLayer = {
+  layerNumber: number;
   name: string;
   level: number;
   Eoed: number;
