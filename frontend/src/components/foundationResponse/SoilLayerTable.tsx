@@ -43,7 +43,6 @@ export default function SoilLayerTable() {
       const existingRow = newTable[rowNumber] ?? {};
       let value: string | number | undefined;
 
-      console.log(rawValue)
       if (key === "name") {
         if (rawValue === "") {
           value = undefined;
@@ -55,6 +54,27 @@ export default function SoilLayerTable() {
       }
 
       newTable[rowNumber] = { ...existingRow, [key]: value };
+
+      // if the rowNumber is the last row in the table and all keys are filled,
+      // then create a new row.
+      const SOIL_LAYER_KEYS = [
+        "name",
+        "level",
+        "Eoed",
+        "phi",
+        "c",
+        "unitWeight",
+      ] as const;
+
+      if (rowNumber == newTable.length -1) {
+        for (const key of SOIL_LAYER_KEYS) {
+          if (newTable[rowNumber][key] === undefined) {
+            return newTable
+          }
+        }
+        newTable.push({ layerNumber: newTable.length +1});
+      }
+
       return newTable;
     });
   }
