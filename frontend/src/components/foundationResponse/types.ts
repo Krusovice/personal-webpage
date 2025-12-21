@@ -13,7 +13,7 @@ export type FoundationResponseApiInput = {
  * So we convert input strings -> numbers when updating state.
  */
 export type SoilLayer = {
-  layerNumber?: number;
+  layerNumber: number;
   name?: string;
   level?: number;
   Eoed?: number;

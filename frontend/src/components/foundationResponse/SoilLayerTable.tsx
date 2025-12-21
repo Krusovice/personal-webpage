@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { SoilLayer } from "./types"
-
+import TableInput from "./SoilLayerTableInput"
 
 // Parsing function
 function parseMaybeNumber(value: string): number | undefined {
@@ -10,47 +10,40 @@ function parseMaybeNumber(value: string): number | undefined {
   return Number.isFinite(n) ? n : undefined;
 }
 
-// Create a table input
-function createTableInput(type: string, inputKey: keyof SoilLayer, row: SoilLayer, rowIndex: number) {
-  return (
-    <td>
-      <input
-        type={type}
-        value={row[inputKey] ?? ""} // controlled input must always receive a string
-        onChange={(e) => updateRow(rowIndex, inputKey, e.target.value)}
-      />
-    </td>
-    )}
-
-
 export default function SoilLayerTable() {
   const [rows, setRows] = useState<SoilLayer[]>([{ layerNumber: 1 }]);
 
-  function addRow() {
-    setRows((prev) => [...prev, { layerNumber: prev.length + 1 }]);
+  function addRow(newRowLayerNumber: number) {
+    setRows((prev) => {
+      const newRows = prev.map((row) => ({ ...row })); // Cloning existing rows
+
+      // If the newRowLayerNumber is equal to an existing rowLayerNumber,
+      // the existing rowLayerNumber and above is increased.
+      newRows.forEach(row => {
+          if (row.layerNumber >= newRowLayerNumber) {
+            row.layerNumber += 1;
+          }
+        })
+
+      newRows.push({ layerNumber: newRowLayerNumber });
+
+      newRows.sort((a, b) => a.layerNumber - b.layerNumber);
+
+      return newRows;
+    });
   }
 
   function removeRow(index: number) {
     setRows((prev) => prev.filter((_, i) => i !== index));
   }
 
-  /**
-   * Core update function: updates ONE field in ONE row.
-   *
-   * index: which row in rows[] to update
-   * key: which property on SoilLayer to update ("name", "phi", etc.)
-   * rawValue: the string coming from the HTML input
-   *
-   * The <K extends SoilLayerKey> part keeps TypeScript aware that:
-   * - key is a valid SoilLayer key
-   * - value we assign matches the expected type for that key
-   */
   function updateRow(rowNumber: number, key: keyof SoilLayer, rawValue: string) {
     setRows((prev) => {
       const newTable = [...prev];
-      const existingRow = newTable[rowNumber];
+      const existingRow = newTable[rowNumber] ?? {};
+      let value: string | number | undefined;
 
-      // parse all keys but name into numbers
+      console.log(rawValue)
       if (key === "name") {
         if (rawValue === "") {
           value = undefined;
@@ -71,16 +64,17 @@ export default function SoilLayerTable() {
 
     return (
       <tr key={rowIndex}>
-        {createTableInput("text", "name", row, rowIndex)}
-        {createTableInput("number", "level", row, rowIndex)}
-        {createTableInput("number", "Eoed", row, rowIndex)}
-        {createTableInput("number", "phi", row, rowIndex)}
-        {createTableInput("number", "c", row, rowIndex)}
-        {createTableInput("number", "unitWeight", row, rowIndex)}
+        <TableInput type="text" inputKey="name" row={row} rowIndex={rowIndex} updateRow={updateRow} />
+        <TableInput type="number" inputKey="level" row={row} rowIndex={rowIndex} updateRow={updateRow} />
+        <TableInput type="number" inputKey="Eoed" row={row} rowIndex={rowIndex} updateRow={updateRow} />
+        <TableInput type="number" inputKey="phi" row={row} rowIndex={rowIndex} updateRow={updateRow} />
+        <TableInput type="number" inputKey="c" row={row} rowIndex={rowIndex} updateRow={updateRow} />
+        <TableInput type="number" inputKey="unitWeight" row={row} rowIndex={rowIndex} updateRow={updateRow} />
+
 
         {/* Insert button - currently just prints the row to the console */}
         <td>
-          <button type="button" onClick={() => console.log("Insert row:", row)}>
+          <button type="button" onClick={() => addRow(rowIndex)}>
             Insert
           </button>
         </td>
