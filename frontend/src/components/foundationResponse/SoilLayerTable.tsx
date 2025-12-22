@@ -133,9 +133,6 @@ export default function SoilLayerTable() {
         {/* Render one <tr> per row in state */}
         <tbody>{rows.map((_, i) => renderEmptyRow(i))}</tbody>
       </table>
-
-      {/* Debugging: shows current state live as JSON */}
-      <pre>{JSON.stringify(rows, null, 2)}</pre>
     </div>
   );
 }

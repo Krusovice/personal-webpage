@@ -35,3 +35,7 @@ td, th {
   border-radius: 5px;
   box-sizing: border-box;
 }
+
+input:focus {
+  outline: 3px solid var(--orange-dark);
+}

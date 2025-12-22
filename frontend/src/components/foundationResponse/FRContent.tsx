@@ -1,10 +1,16 @@
 import styling from "../../styles/foundationResponse/FRStyling.module.css";
 import { useState } from "react";
-import type { SoilLayer } from "./types";
+import type { SoilLayer, FoundationResponseApiInput } from "./types";
 import SoilLayerTable from "./SoilLayerTable";
+import { foundationResponseApiCall } from "./api";
 
 export default function FRContent() {
   const [soilLayers, setSoilLayers] = useState<SoilLayer[]>([]);
+  const [foundationResponseApiInput, setFoundationResponseApiInput] = useState<FoundationResponseApiInput>();
+
+  function calculateFoundationResponse() {
+    console.log(foundationResponseApiInput)
+  }
 
   return (
     <>
@@ -29,7 +35,7 @@ export default function FRContent() {
         </div>
 
         <div className={styling.calculate}>
-          <button type="submit">Calculate</button>
+          <button type="submit" onClick = { calculateFoundationResponse }>Calculate</button>
         </div>
 
         <div className={styling.result}>Result</div>
