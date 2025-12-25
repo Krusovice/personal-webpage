@@ -15,7 +15,7 @@ type SoilLayerTableProps = {
   onRowsChange: (updater: (prev: SoilLayer[]) => SoilLayer[]) => void;
 };
 
-export default function SoilLayerTable(rows, onRowsChange): SoilLayerTableProps {
+export default function SoilLayerTable({rows, onRowsChange}: SoilLayerTableProps) {
 
   function addRow(newRowLayerNumber: number) {
     onRowsChange((prev) => {
@@ -38,11 +38,11 @@ export default function SoilLayerTable(rows, onRowsChange): SoilLayerTableProps 
   }
 
   function removeRow(index: number) {
-    setRows((prev) => prev.filter((_, i) => i !== index));
+    onRowsChange((prev) => prev.filter((_, i) => i !== index));
   }
 
   function updateRow(rowNumber: number, key: keyof SoilLayer, rawValue: string) {
-    setRows((prev) => {
+    onRowsChange((prev) => {
       const newTable = [...prev];
       const existingRow = newTable[rowNumber] ?? {};
       let value: string | number | undefined;
