@@ -5,11 +5,11 @@ import SoilLayerTable from "./SoilLayerTable";
 import { foundationResponseApiCall } from "./api";
 
 export default function FRContent() {
-  const [soilLayers, setSoilLayers] = useState<SoilLayer[]>([]);
+  const [soilLayers, setSoilLayers] = useState<SoilLayer[]>([{ layerNumber: 1 }]);
   const [foundationResponseApiInput, setFoundationResponseApiInput] = useState<FoundationResponseApiInput>();
 
   function calculateFoundationResponse() {
-    console.log(foundationResponseApiInput)
+    console.log(soilLayers)
   }
 
   return (
@@ -31,7 +31,9 @@ export default function FRContent() {
         </div>
 
         <div className={styling.soilLayers}>
-          <SoilLayerTable/>
+          <SoilLayerTable
+            rows={soilLayers}
+            onRowsChange={(updater) => setSoilLayers(updater)}/>
         </div>
 
         <div className={styling.calculate}>

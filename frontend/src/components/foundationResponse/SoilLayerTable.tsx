@@ -10,11 +10,15 @@ function parseMaybeNumber(value: string): number | undefined {
   return Number.isFinite(n) ? n : undefined;
 }
 
-export default function SoilLayerTable() {
-  const [rows, setRows] = useState<SoilLayer[]>([{ layerNumber: 1 }]);
+type SoilLayerTableProps = {
+  rows: SoilLayer[];
+  onRowsChange: (updater: (prev: SoilLayer[]) => SoilLayer[]) => void;
+};
+
+export default function SoilLayerTable(rows, onRowsChange): SoilLayerTableProps {
 
   function addRow(newRowLayerNumber: number) {
-    setRows((prev) => {
+    onRowsChange((prev) => {
       const newRows = prev.map((row) => ({ ...row })); // Cloning existing rows
 
       // If the newRowLayerNumber is equal to an existing rowLayerNumber,
