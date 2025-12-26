@@ -47,6 +47,7 @@ export default function FRContent() {
       };
 
       const result = await foundationResponseApiCall(foundationResponseInput);
+      console.log(result)
 
       // Adjust depending on what your API returns:
       // If API returns { settlements: number }:
