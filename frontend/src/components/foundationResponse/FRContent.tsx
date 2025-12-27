@@ -70,6 +70,11 @@ export default function FRContent() {
           <input id="width" name="width" type="text" required/>
         </div>
 
+        <div className={styling.length}>
+          <label htmlFor="length">Length [m]</label>
+          <input id="length" name="length" type="text" disabled placeholder="inf"/>
+        </div>
+
         <div className={styling.load}>
           <label htmlFor="load">Load [kPa]</label>
           <input id="load" name="load" type="text" required/>

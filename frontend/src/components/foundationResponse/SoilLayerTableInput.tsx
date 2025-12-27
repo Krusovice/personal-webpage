@@ -6,6 +6,8 @@ type TableInputProps = {
   row: SoilLayer;
   rowIndex: number;
   updateRow: (index: number, key: keyof SoilLayer, rawValue: string) => void;
+  placeholder?: string;
+  disabled?: boolean;
 };
 
 export default function TableInput({
@@ -14,6 +16,8 @@ export default function TableInput({
   row,
   rowIndex,
   updateRow,
+  placeholder,
+  disabled = false,
 }: TableInputProps) {
   return (
     <td>
@@ -21,6 +25,8 @@ export default function TableInput({
         type={type}
         value={(row[inputKey] ?? "") as string | number}
         onChange={(e) => updateRow(rowIndex, inputKey, e.target.value)}
+        placeholder={placeholder}
+        disabled={disabled}
       />
     </td>
   );

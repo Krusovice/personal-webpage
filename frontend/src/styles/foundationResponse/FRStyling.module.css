@@ -4,9 +4,10 @@
   grid-template-areas:
     "width length soilLayers"
     "load eccentricity soilLayers"
-    "calculate result soilLayers";
-  grid-template-columns: 120px 120px 500px;
-  grid-template-rows: 50px 50px 50px;
+    "calculate empty soilLayers"
+    "result result soilLayers";
+  grid-template-columns: 120px 120px 1fr;
+  grid-template-rows: 70px 70px 40px 40px;
 
   color: var(--color-text);
   background-color: var(--color-sidebar-background);
@@ -16,12 +17,16 @@
   border-radius: 20px;
 }
 
-.width, .load, .eccentricity, .soilLayers, .calculate, .result {
+.width, .length, .load, .eccentricity, .calculate, .result {
   margin: 3px;
 }
 
 .width {
   grid-area: width;
+}
+
+.length {
+  grid-area: length;
 }
 
 .load {
@@ -36,7 +41,8 @@
   grid-area: soilLayers;
   background-color: grey;
   border-radius: 6px;
-  margin-top: 6px;
+  margin: 6px;
+  padding: 3px;
 }
 
 .calculate {

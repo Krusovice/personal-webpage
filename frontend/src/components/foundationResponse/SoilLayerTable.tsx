@@ -88,12 +88,12 @@ export default function SoilLayerTable({rows, onRowsChange}: SoilLayerTableProps
 
     return (
       <tr key={rowIndex}>
-        <TableInput type="text" inputKey="name" row={row} rowIndex={rowIndex} updateRow={updateRow} />
-        <TableInput type="number" inputKey="level" row={row} rowIndex={rowIndex} updateRow={updateRow} />
-        <TableInput type="number" inputKey="Eoed" row={row} rowIndex={rowIndex} updateRow={updateRow} />
-        <TableInput type="number" inputKey="phi" row={row} rowIndex={rowIndex} updateRow={updateRow} />
-        <TableInput type="number" inputKey="c" row={row} rowIndex={rowIndex} updateRow={updateRow} />
-        <TableInput type="number" inputKey="unitWeight" row={row} rowIndex={rowIndex} updateRow={updateRow} />
+        <TableInput type="text" inputKey="name" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="Layer 1 "/>
+        <TableInput type="text" inputKey="level" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="2" />
+        <TableInput type="text" inputKey="Eoed" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="25000" />
+        <TableInput type="text" inputKey="phi" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="40" disabled={true} />
+        <TableInput type="text" inputKey="c" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="100" disabled={true} />
+        <TableInput type="text" inputKey="unitWeight" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="20" disabled={true} />
 
 
         {/* Insert button - currently just prints the row to the console */}
@@ -115,11 +115,6 @@ export default function SoilLayerTable({rows, onRowsChange}: SoilLayerTableProps
 
   return (
     <div>
-      {/* Adds a new empty row */}
-      <button type="button" onClick={addRow}>
-        Add row
-      </button>
-
       <table>
         <thead>
           <tr>
