@@ -92,7 +92,7 @@ export default function SoilLayerTable({rows, onRowsChange}: SoilLayerTableProps
         <TableInput type="text" inputKey="level" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="2" />
         <TableInput type="text" inputKey="Eoed" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="25000" />
         <TableInput type="text" inputKey="phi" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="40" disabled={true} />
-        <TableInput type="text" inputKey="c" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="100" disabled={true} />
+        <TableInput type="text" inputKey="c" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="300" disabled={true} />
         <TableInput type="text" inputKey="unitWeight" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="20" disabled={true} />
 
 
