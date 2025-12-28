@@ -5,6 +5,10 @@ jkirstein.dk, www.jkirstein.dk {
     reverse_proxy backend:5000
   }
 
+  handle_path /foundation-response/* {
+    reverse_proxy foundation-response-api:8100
+  }
+
   handle {
     reverse_proxy frontend:80
   }
