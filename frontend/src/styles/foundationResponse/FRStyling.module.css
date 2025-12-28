@@ -4,10 +4,9 @@
   grid-template-areas:
     "width length soilLayers"
     "load eccentricity soilLayers"
-    "calculate empty soilLayers"
-    "result result soilLayers";
+    "calculate result soilLayers";
   grid-template-columns: 120px 120px 1fr;
-  grid-template-rows: 70px 70px 40px 40px;
+  grid-template-rows: 70px 70px auto;
 
   color: var(--color-text);
   background-color: var(--color-sidebar-background);
@@ -51,4 +50,5 @@
 
 .result {
   grid-area: result;
+  text-align: right;
 }

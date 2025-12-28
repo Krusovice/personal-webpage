@@ -99,7 +99,7 @@ export default function FRContent() {
         </div>
 
         <div className={styling.result}>
-          Result: {settlements === null ? "-" : settlements}
+          {settlements === null ? "-" : settlements.toFixed(2)} mm
         </div>
       </form>      
     </>

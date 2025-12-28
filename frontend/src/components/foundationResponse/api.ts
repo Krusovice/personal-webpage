@@ -1,7 +1,7 @@
 import type { FoundationResponseApiInput } from "./types.ts";
 
 export async function foundationResponseApiCall(input: FoundationResponseApiInput): Promise<number> {
-  const resp = await fetch("http://localhost:8100/predict", {
+  const resp = await fetch("/foundation-response/predict", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

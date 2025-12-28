@@ -10,6 +10,13 @@ export default defineConfig({
         target: 'http://127.0.0.1:5000',
         changeOrigin: true,
       },
+      "/foundation-response": {
+        target: "http://localhost:8100",
+        changeOrigin: true,
+        // Because Caddy uses handle_path in prod (strips prefix),
+        // we mimic that here:
+        rewrite: (path) => path.replace(/^\/foundation-response/, ""),
+      },
     },
   },
 })

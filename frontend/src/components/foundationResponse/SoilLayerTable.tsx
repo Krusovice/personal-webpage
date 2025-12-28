@@ -112,7 +112,11 @@ export default function SoilLayerTable({rows, onRowsChange}: SoilLayerTableProps
 
         {/* Remove button - removes the current row */}
         <td>
-          <button type="button" onClick={() => removeRow(rowIndex)}>
+          <button 
+            type="button" 
+            onClick={() => removeRow(rowIndex)}
+            disabled={rows.length === 1}
+          >
             Remove
           </button>
         </td>
