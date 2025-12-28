@@ -19,11 +19,13 @@ export default function TableInput({
   placeholder,
   disabled = false,
 }: TableInputProps) {
+  const value = (row[inputKey] ?? "");
+
   return (
     <td>
       <input
         type={type}
-        value={(row[inputKey] ?? "") as string | number}
+        value={value}
         onChange={(e) => updateRow(rowIndex, inputKey, e.target.value)}
         placeholder={placeholder}
         disabled={disabled}

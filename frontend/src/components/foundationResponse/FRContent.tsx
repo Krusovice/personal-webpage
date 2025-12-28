@@ -22,6 +22,7 @@ export default function FRContent() {
   const [isLoading, setIsLoading] = useState(false);
 
   async function calculateFoundationResponse(e: React.FormEvent<HTMLFormElement>) {
+    console.log(soilLayers);
     e.preventDefault();
     setIsLoading(true);
 

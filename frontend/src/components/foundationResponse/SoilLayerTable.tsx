@@ -57,7 +57,14 @@ export default function SoilLayerTable({rows, onRowsChange}: SoilLayerTableProps
         value = parseMaybeNumber(rawValue);
       }
 
-      newTable[rowNumber] = { ...existingRow, [key]: value };
+      // Hardcoding in the fixed values, whose inputs are disabled
+      newTable[rowNumber] = {
+        ...existingRow, 
+        [key]: value, 
+        phi: 40, 
+        c: 300, 
+        unitWeight: 20,
+      };
 
       // if the rowNumber is the last row in the table and all keys are filled,
       // then create a new row.
@@ -91,9 +98,9 @@ export default function SoilLayerTable({rows, onRowsChange}: SoilLayerTableProps
         <TableInput type="text" inputKey="name" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="Layer 1 "/>
         <TableInput type="text" inputKey="level" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="2" />
         <TableInput type="text" inputKey="Eoed" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="25000" />
-        <TableInput type="text" inputKey="phi" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="40" disabled={true} />
-        <TableInput type="text" inputKey="c" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="300" disabled={true} />
-        <TableInput type="text" inputKey="unitWeight" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="20" disabled={true} />
+        <TableInput type="text" inputKey="phi" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="40" disabled={true} fixedValue={40} />
+        <TableInput type="text" inputKey="c" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="300" disabled={true} fixedValue={300} />
+        <TableInput type="text" inputKey="unitWeight" row={row} rowIndex={rowIndex} updateRow={updateRow} placeholder="20" disabled={true} fixedValue={20} />
 
 
         {/* Insert button - currently just prints the row to the console */}
