@@ -5,9 +5,10 @@
   --orange-rust: #8A4632;
   --orange-dark: #2e0f00;
   --rust-beige: #F4EDE4;
-  --grey-light: #ccccc4;
-  --grey-dark: #171515;
-  --grey-mid: #2e2c2c;
+
+  --grey: grey;
+  --dark: #171515;
+  --mild-dark: #2e2c2c;
 
   --sublime-tab-inactive-text: #424242;
   --purple: #AE81FF;
@@ -19,9 +20,11 @@
   --color-border: var(--black);
   --dark-purple: #0b0714;
   --dark-purple-elevated: #151027;
-  --color-background: var(--grey-dark);
-  --color-text: var(--grey-light);
-  --color-topbar: var(--rust-orange);
+  
+  --color-text: var(--grey);
+
+  /* TOPBAR */
+  --color-topbar: var(--mild-dark);
   --color-topbar-link: var(--rust-black);
   --color-topbar-link-hover: var(--rust-orange);
 
@@ -29,15 +32,9 @@
 
   --link-hover: var(--orange-rust);
 
-  --color-window: var(--grey-mid);
-  --color-subWindow: var(--grey-light);
 
-  /*
-  Not used colors
-  */
-  
   /* Sidebar */
-  --color-sidebar-background: var(--grey-mid);
+  --color-sidebar-background: var(--mild-dark);
 
 }
 

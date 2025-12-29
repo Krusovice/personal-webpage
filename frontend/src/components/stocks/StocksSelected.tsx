@@ -1,4 +1,5 @@
 import styling from "./../../styles/stocks/StocksStyling.module.css"
+import layoutStyling from "./../../styles/LayoutStyling.module.css"
 import type { SelectedTicker } from "./types"
 
 type StocksSelectedProps = {
@@ -22,7 +23,7 @@ export default function SelectedStocks({selectedTickers, onSelect}: StocksSelect
 
   return (
     <div
-      className={styling.selectedTickers}
+      className={`${styling.selectedTickers} ${layoutStyling.subWindowGrey}`}
     >
       {selectedTickers.map((item) => 
         tickerListContainer(item)

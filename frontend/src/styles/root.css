@@ -12,10 +12,6 @@ body {
   height: 100vh;
 }
 
-td, th {
-  color: var(--color-text);
-}
-
 input,
 button {
   width: 100%;

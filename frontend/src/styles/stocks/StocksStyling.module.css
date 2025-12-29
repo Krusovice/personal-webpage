@@ -17,7 +17,6 @@
 .fetchArea {
   grid-area: fetchArea;
   display: grid;
-
   grid-template-areas:
     "searchBar"
     "selectedTickers";
@@ -34,12 +33,6 @@
     "relativeValues . .";
   grid-template-columns: 100px 100px 100px;
   grid-template-rows: 40px 40px 40px;
-  margin: 3px;
-
-  color: var(--color-text);
-  background-color: var(--color-sidebar-background);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
 }
 
 .plotArea {
@@ -56,12 +49,6 @@
   flex-flow: column wrap;
   align-content: flex-start;
   overflow-y: hidden;
-
-  border-radius: 6px;
-  margin: 3px;
-  padding: 6px;
-  border: 1px solid var(--color-border);
-  background-color: grey;
 }
 
 .selectedTickersItemContainer {

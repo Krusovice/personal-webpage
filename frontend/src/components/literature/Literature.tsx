@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import styling from "./../../styles/LiteratureStyling.module.css";
+import layoutStyling from "./../../styles/LayoutStyling.module.css"
 import type { LiteratureItem, SearchKeywords } from "./types";
 import { LiteratureSearch } from "./LiteratureSearch";
 import { LiteratureResults } from "./LiteratureResults";
@@ -25,14 +26,14 @@ export default function LiteratureContent() {
   }, []);
 
   return (
-    <>
-      <div>
+    <div className={`${styling.literaturePage} ${layoutStyling.window}`}>
+      <div className={styling.searchBar}>
         <LiteratureSearch onSearch={searchLiteratureItems} />
       </div>
 
-      <div className={styling.resultsArea}>
+      <div className={`${styling.resultArea} ${layoutStyling.subWindowDark}`}>
         <LiteratureResults items={results} />
       </div>
-    </>
+    </div>
   );
 }

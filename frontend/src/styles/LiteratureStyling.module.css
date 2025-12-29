@@ -1,42 +1,40 @@
 .literaturePage {
   display: grid;
   grid-template-areas:
-    "searchBar"
-    "resultsArea";
-  grid-template-columns: 1fr;
+    "searchBar empty"
+    "resultArea resultArea";
+  grid-template-columns: 250px 1fr;
   grid-template-rows: 80px 1fr;
-  min-height: 1100vh;
+  min-height: 100vh;
+  width: 860px;
 }
 
 .searchBar {
   grid-area: searchBar;
-  height: 20px;
+  height: 30px;
 }
 
 .searchBar input {
   height: 100%;
 }
 
-.resultsArea {
-  grid-area: resultsArea;
-  width: 100%;
-  height: 100%;
-  background-color: var(--color-page-background);
+.resultArea {
+  grid-area: resultArea;
+  min-width: 0;
 }
 
-.resultsArea table {
+.resultArea table {
   width: 100%;
   table-layout: fixed;
-
 }
 
-.resultsArea th, .resultsArea td {
+.resultArea th, .resultArea td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.resultsArea th:nth-child(1), .resultsArea td:nth-child(1) { width: 35%; } /* Title */
-.resultsArea th:nth-child(2), .resultsArea td:nth-child(2) { width: 20%; } /* Author */
-.resultsArea th:nth-child(3), .resultsArea td:nth-child(3) { width: 25%; } /* keywords */
-.resultsArea th:nth-child(4), .resultsArea td:nth-child(4) { width: 12%; } /* download file */
-.resultsArea th:nth-child(5), .resultsArea td:nth-child(6) { width: 8%; } /* views */
+.resultArea th:nth-child(1), .resultArea td:nth-child(1) { width: 35%; } /* Title */
+.resultArea th:nth-child(2), .resultArea td:nth-child(2) { width: 20%; } /* Author */
+.resultArea th:nth-child(3), .resultArea td:nth-child(3) { width: 25%; } /* keywords */
+.resultArea th:nth-child(4), .resultArea td:nth-child(4) { width: 12%; } /* download file */
+.resultArea th:nth-child(5), .resultArea td:nth-child(5) { width: 8%; } /* views */

@@ -1,4 +1,5 @@
 import styling from "./../../styles/stocks/StocksStyling.module.css";
+import layoutStyling from "./../../styles/LayoutStyling.module.css"
 import type  { PlotSettings } from "./types";
 
 type PlotSettingsProps = {
@@ -10,7 +11,7 @@ type PlotSettingsProps = {
 export default function PlotSettingsArea({ plotSettings, onSetTimespan, onTogglePlotSetting }: PlotSettingsProps ) {
 
   return(
-    <div className={styling.plotSettings}>
+    <div className={`${styling.plotSettings} ${layoutStyling.subWindowDark}`}>
       <div className={styling.lastMonth}>
         <button
           type="button"

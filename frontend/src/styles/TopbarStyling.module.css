@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   color: var(--color-text);
-  background-color: var(--grey-mid);
+  background-color: var(--color-topbar);
   padding: 12px;
   border-radius: 15px;
 }

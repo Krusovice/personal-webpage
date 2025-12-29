@@ -2,11 +2,29 @@
   grid-area: formArea;
   display: grid;
   grid-template-areas:
-    "width length soilLayers"
-    "load eccentricity soilLayers"
-    "calculate result soilLayers";
-  grid-template-columns: 120px 120px 1fr;
-  grid-template-rows: 70px 70px auto;
+    "inputs soilLayers"
+    "outputs soilLayers";
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 140px auto;
+}
+
+.inputs {
+  grid-area: inputs;
+  display: grid;
+  grid-template-areas:
+    "width length"
+    "load eccentricity";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.outputs {
+  grid-area: outputs;
+  display: grid;
+  grid-template-areas:
+    "calculate result";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
 }
 
 .width, .length, .load, .eccentricity, .calculate, .result {

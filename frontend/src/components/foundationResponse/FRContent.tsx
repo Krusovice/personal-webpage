@@ -68,41 +68,48 @@ export default function FRContent() {
   return (
     <>
       <form className={`${styling.FRArea} ${layoutStyling.window}`} onSubmit={calculateFoundationResponse}>
-        <div className={styling.width}>
-          <label htmlFor="width">Width [m]</label>
-          <input id="width" name="width" type="text" required/>
+
+
+        <div className={`${layoutStyling.subWindowDark} ${styling.inputs}`}>
+          <div className={styling.width}>
+            <label htmlFor="width">Width [m]</label>
+            <input id="width" name="width" type="text" required/>
+          </div>
+
+          <div className={styling.length}>
+            <label htmlFor="length">Length [m]</label>
+            <input id="length" name="length" type="text" disabled placeholder="inf"/>
+          </div>
+
+          <div className={styling.load}>
+            <label htmlFor="load">Load [kPa]</label>
+            <input id="load" name="load" type="text" required/>
+          </div>
+
+          <div className={styling.eccentricity}>
+            <label htmlFor="eccentricity">Eccentricity [m]</label>
+            <input id="eccentricity" name="eccentricity" type="text" required/>
+          </div>
         </div>
 
-        <div className={styling.length}>
-          <label htmlFor="length">Length [m]</label>
-          <input id="length" name="length" type="text" disabled placeholder="inf"/>
-        </div>
-
-        <div className={styling.load}>
-          <label htmlFor="load">Load [kPa]</label>
-          <input id="load" name="load" type="text" required/>
-        </div>
-
-        <div className={styling.eccentricity}>
-          <label htmlFor="eccentricity">Eccentricity [m]</label>
-          <input id="eccentricity" name="eccentricity" type="text" required/>
-        </div>
-
-        <div className={`${styling.soilLayers} ${layoutStyling.subWindow}`}>
+        <div className={`${styling.soilLayers} ${layoutStyling.subWindowGrey}`}>
           <SoilLayerTable
             rows={soilLayers}
             onRowsChange={(updater) => setSoilLayers(updater)}/>
         </div>
 
-        <div className={styling.calculate}>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Calculating..." : "Calculate"}
-          </button>
-        </div>
+        <div className={`${layoutStyling.subWindowDark} ${styling.outputs}`}>
+          <div className={styling.calculate}>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? "Calculating..." : "Calculate"}
+            </button>
+          </div>
 
-        <div className={styling.result}>
-          {settlements === null ? "-" : settlements.toFixed(2)} mm
+          <div className={styling.result}>
+            {settlements === null ? "-" : settlements.toFixed(2)} mm
+          </div>
         </div>
+        
       </form>      
     </>
   )

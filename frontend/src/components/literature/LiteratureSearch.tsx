@@ -10,12 +10,10 @@ export function LiteratureSearch({ onSearch }: Props) {
   };
 
   return (
-    <div>
       <input
         type="text"
         placeholder="Search Literature"
         onChange={handleChange}
       />
-    </div>
   );
 }
