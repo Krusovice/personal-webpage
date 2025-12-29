@@ -1,5 +1,5 @@
 
-import stylesEdges from "./../styles/EdgeStyling.module.css"
+import stylesEdges from "./../styles/LayoutStyling.module.css"
 
 export default function Edges() {
   return (

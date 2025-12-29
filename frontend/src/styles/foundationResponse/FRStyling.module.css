@@ -7,13 +7,6 @@
     "calculate result soilLayers";
   grid-template-columns: 120px 120px 1fr;
   grid-template-rows: 70px 70px auto;
-
-  color: var(--color-text);
-  background-color: var(--color-sidebar-background);
-  padding: 15px;
-  margin: 30px;
-  border: 1px solid var(--color-border);
-  border-radius: 20px;
 }
 
 .width, .length, .load, .eccentricity, .calculate, .result {
@@ -38,10 +31,6 @@
 
 .soilLayers {
   grid-area: soilLayers;
-  background-color: grey;
-  border-radius: 6px;
-  margin: 6px;
-  padding: 3px;
 }
 
 .calculate {

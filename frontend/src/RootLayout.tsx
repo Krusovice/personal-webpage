@@ -1,16 +1,12 @@
-// RootLayout.tsx
 
-
-// Components
 import Edges from "./components/Edges"
 import MainWindow from "./components/MainWindow"
 
-// Styling
-import styles from "./styles/RootWindowStyling.module.css";
+import layoutStyling from "./styles/LayoutStyling.module.css";
 
 export default function RootLayout() {
   return (
-      <div className={ styles.rootWindow } >
+      <div className={ layoutStyling.rootWindow } >
         <MainWindow />
         <Edges />
       </div>

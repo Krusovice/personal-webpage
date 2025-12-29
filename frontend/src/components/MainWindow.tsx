@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Topbar from "./Topbar"
 import Sidebar from "./Sidebar"
 
-import styles from "./../styles/MainWindowStyling.module.css";
+import styles from "./../styles/LayoutStyling.module.css";
 
 export default function RootLayout() {
   return(

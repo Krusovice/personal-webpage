@@ -28,6 +28,10 @@
   --color-edge: var(--dark-purple);
 
   --link-hover: var(--orange-rust);
+
+  --color-window: var(--grey-mid);
+  --color-subWindow: var(--grey-light);
+
   /*
   Not used colors
   */

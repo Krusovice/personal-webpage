@@ -1,0 +1,48 @@
+.rootWindow {
+  display: grid;
+  grid-template-areas:
+    "left_edge mainWindow right_edge"
+    "left_edge footer right_edge";
+  grid-template-columns: 1fr 1340px 1fr;
+  grid-template-rows: 1fr 90px;
+  min-height: 110vh;
+}
+
+.mainWindow {
+  grid-area: mainWindow;
+  display: grid;
+  grid-template-areas:
+    "topbar topbar"
+    "content sidebar";
+  grid-template-columns: 1fr 340px;
+  grid-template-rows: 80px 1fr;
+  padding: 10px;
+  background-color: var(--color-background);
+  border-left: 2px solid var(--color-border);
+  height: 100%;
+}
+
+.window {
+  color: var(--color-text);
+  background-color: var(--color-window);
+  padding: 15px;
+  margin: 30px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+}
+
+.subWindow {
+  background-color: var(--color-subWindow);
+  background-color: grey;
+  border-radius: 6px;
+  margin: 6px;
+  padding: 3px;
+}
+
+.left_edge {
+  grid-area: left_edge;
+}
+
+.right_edge {
+  grid-area: right_edge;
+}

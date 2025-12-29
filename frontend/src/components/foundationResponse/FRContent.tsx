@@ -1,4 +1,6 @@
 import styling from "../../styles/foundationResponse/FRStyling.module.css";
+import layoutStyling from "../../styles/LayoutStyling.module.css";
+
 import { useState } from "react";
 import type { SoilLayer, FoundationResponseApiInput } from "./types";
 import SoilLayerTable from "./SoilLayerTable";
@@ -65,7 +67,7 @@ export default function FRContent() {
 
   return (
     <>
-      <form className={styling.FRArea} onSubmit={calculateFoundationResponse}>
+      <form className={`${styling.FRArea} ${layoutStyling.window}`} onSubmit={calculateFoundationResponse}>
         <div className={styling.width}>
           <label htmlFor="width">Width [m]</label>
           <input id="width" name="width" type="text" required/>
@@ -86,7 +88,7 @@ export default function FRContent() {
           <input id="eccentricity" name="eccentricity" type="text" required/>
         </div>
 
-        <div className={styling.soilLayers}>
+        <div className={`${styling.soilLayers} ${layoutStyling.subWindow}`}>
           <SoilLayerTable
             rows={soilLayers}
             onRowsChange={(updater) => setSoilLayers(updater)}/>
