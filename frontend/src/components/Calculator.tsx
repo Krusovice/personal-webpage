@@ -10,7 +10,7 @@ export default function CalculatorInput() {
     <div className= { calculatorStyling.calculator }>
       <input
         value={value}
-        onChange={e => setValue(e.target.value)}
+        onChange={e => setValue(e.target.value.replace(/,/g, "."))}
         onKeyDown={e => {
           if (e.key === "Enter") {
             try { setValue(String(evaluate(value))); }
