@@ -3,8 +3,9 @@
   display: flex;
   color: var(--color-text);
   background-color: var(--color-sidebar-background);
-  padding: 18px;
-  padding-right: 40px;
-  border: 2px solid var(--color-border);
+  padding: 10px;
+  border: 1px solid var(--color-border);
   border-radius: 20px;
+  margin: 30px;
+  margin-left: 0px;
 }
