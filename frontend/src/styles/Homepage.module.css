@@ -1,0 +1,12 @@
+
+.content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 420ms ease, opacity 420ms ease, transform 420ms ease;
+}
+
+.open {
+  max-height: 200px;
+  opacity: 1;
+}
