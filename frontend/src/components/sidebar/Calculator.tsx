@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { evaluate } from "mathjs";
 
-import calculatorStyling from "./../styles/Calculator.module.css"
+import styling from "./../../styles/sidebar/Calculator.module.css"
 
 export default function CalculatorInput() {
   const [value, setValue] = useState("");
 
   return (
-    <div className= { calculatorStyling.calculator }>
+    <div className= { styling.calculator }>
       <input
         value={value}
         onChange={e => setValue(e.target.value.replace(/,/g, "."))}

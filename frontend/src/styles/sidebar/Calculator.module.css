@@ -1,8 +1,6 @@
 .calculator {
-  display: flex;
   height: 30px;
   padding: 10px;
-  width: 100%;
 }
 
 .calculator input {
