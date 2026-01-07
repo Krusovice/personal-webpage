@@ -10,7 +10,7 @@ export default function ServerMonitor() {
 
   return (
     <div className={`${layoutStyling.subWindowDark} ${styling.monitorGraph}` }>
-      
+      <h5>Live server use monitoring</h5>
       <ServerMonitorGraph/>
 
     </div>
