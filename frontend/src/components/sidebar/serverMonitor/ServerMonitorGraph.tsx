@@ -1,11 +1,44 @@
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Line, Text } from "@react-three/drei";
+import { useLayoutEffect } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { Line } from "@react-three/drei";
 import * as THREE from "three";
 
 export type Point3 = [number, number, number];
 
-export default function ServerMonitorGraph() {
+function FitOrthoToUnitSquare() {
+  const { camera, size } = useThree();
   const center = new THREE.Vector3(0.5, 0, 0.5);
+
+  useLayoutEffect(() => {
+    const cam = camera as THREE.OrthographicCamera;
+
+    // World-space size you want visible:
+    const worldW = 1; // x: 0..1
+    const worldH = 1; // z: 0..1 (mapped to screen vertical via up vector)
+
+    // Padding in pixels
+    const padPx = 10;
+
+    const usableW = Math.max(1, size.width - 2 * padPx);
+    const usableH = Math.max(1, size.height - 2 * padPx);
+
+    // Choose zoom so BOTH dimensions fit (take the limiting one)
+    const zoomX = usableW / worldW;
+    const zoomY = usableH / worldH;
+    cam.zoom = Math.min(zoomX, zoomY);
+
+    // Ensure a stable "2D" orientation looking down onto XZ
+    cam.position.set(0.5, -5, 0.5);
+    cam.up.set(0, 0, 1);        // makes +Z go "up" on screen (flip sign if you prefer)
+    cam.lookAt(center);
+
+    cam.updateProjectionMatrix();
+  }, [camera, size.width, size.height]);
+
+  return null;
+}
+
+export default function ServerMonitorGraph() {
 
   function xAxis() {
     const linePoint_0: Point3 = [0,0,0];
@@ -24,22 +57,35 @@ export default function ServerMonitorGraph() {
 
 
   return(
-    <Canvas 
-      orthographic
-      camera={{
-        position: [0.5,-5,0.5],
-        zoom: 200,
-        near: 0.1,
-        far: 1000,
-        up: [0, 0, -1],
-      }}
-      onCreated={({ camera }) => {
-        camera.lookAt(center);
-        camera.updateProjectionMatrix();
-      }}
-    >
+    <div style={{ position: "relative" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: 8,
+          left: "50%",
+          transform: "translateX(-50%)",
+          textAlign: "center",
+          fontSize: 14,
+          fontWeight: 600,
+          zIndex: 10,
+          pointerEvents: "none",
+        }}
+      >
+        Server monitor (CPU / RAM)
+      </div>
+
+      <Canvas 
+        orthographic
+        camera={{
+          near: 0.1, far: 1000
+        }}
+      >
+      <FitOrthoToUnitSquare />
       {xAxis()}
       {zAxis()}
-    </Canvas>
+
+      {/* Title overlay */}
+      </Canvas>
+    </div>
     )
 }
