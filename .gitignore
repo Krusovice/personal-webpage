@@ -2,12 +2,6 @@
 __pycache__/
 node_modules/
 
-# Airflow
-airflow/logs/
-
-# Django
-django/staticfiles/
-
 # Backend
 backend/target/
 #cookies created by backend
