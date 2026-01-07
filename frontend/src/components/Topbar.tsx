@@ -20,7 +20,7 @@ export default function Topbar() {
         </li>
 
         <li>
-          <a className= {stylesTopbar.link} href="/stocks">Selected Stocks</a>
+          <a className= {stylesTopbar.link} href="/stocks">Stock Viewer</a>
         </li>
 
         <li>
