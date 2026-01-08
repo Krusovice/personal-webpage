@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import styling from "./../../styles/LiteratureStyling.module.css";
+import styling from "./../../styles/literature/LiteratureStyling.module.css";
 import layoutStyling from "./../../styles/LayoutStyling.module.css"
 import type { LiteratureItem, SearchKeywords } from "./types";
 import { LiteratureSearch } from "./LiteratureSearch";
 import { LiteratureResults } from "./LiteratureResults";
+import * as Dialog from "@radix-ui/react-dialog";
+import { UploadDialog } from "./UploadDialog";
 
 export default function LiteratureContent() {
   const [results, setResults] = useState<LiteratureItem[]>([]);
+  const [uploadOpen, setUploadOpen] = useState(false);
 
   async function searchLiteratureItems(searchKeywords: SearchKeywords) {
     const resp = await fetch("/api/search_literature_items", {
@@ -29,6 +32,21 @@ export default function LiteratureContent() {
     <div className={`${styling.literaturePage} ${layoutStyling.window}`}>
       <div className={styling.searchBar}>
         <LiteratureSearch onSearch={searchLiteratureItems} />
+      </div>
+
+      <div className={styling.uploadArea}>
+        <Dialog.Root open={uploadOpen} onOpenChange={setUploadOpen}>
+          <Dialog.Trigger asChild>
+            <button type="button">Upload</button>
+          </Dialog.Trigger>
+
+          <UploadDialog
+            onUploaded={() => {
+              setUploadOpen(false);
+              searchLiteratureItems(""); // or keep current filters if you have them
+            }}
+          />
+        </Dialog.Root>
       </div>
 
       <div className={`${styling.resultArea} ${layoutStyling.subWindowDark}`}>

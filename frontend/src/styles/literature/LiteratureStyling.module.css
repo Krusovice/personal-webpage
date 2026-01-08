@@ -1,9 +1,9 @@
 .literaturePage {
   display: grid;
   grid-template-areas:
-    "searchBar empty"
-    "resultArea resultArea";
-  grid-template-columns: 250px 1fr;
+    "searchBar uploadArea empty"
+    "resultArea resultArea resultArea";
+  grid-template-columns: 250px 150px 1fr;
   grid-template-rows: 80px 1fr;
   min-height: 100vh;
 }
@@ -37,3 +37,8 @@
 .resultArea th:nth-child(3), .resultArea td:nth-child(3) { width: 25%; } /* keywords */
 .resultArea th:nth-child(4), .resultArea td:nth-child(4) { width: 12%; } /* download file */
 .resultArea th:nth-child(5), .resultArea td:nth-child(5) { width: 8%; } /* views */
+
+.uploadArea {
+  grid-area: uploadArea;
+  padding-left: 15px;
+}
