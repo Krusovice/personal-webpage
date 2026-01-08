@@ -7,6 +7,7 @@ import { LiteratureResults } from "./LiteratureResults";
 import * as Dialog from "@radix-ui/react-dialog";
 import { UploadDialog } from "./UploadDialog";
 import { useAuth } from "../../auth";
+import AppDescription from "./../AppDescription";
 
 export default function LiteratureContent() {
   const [results, setResults] = useState<LiteratureItem[]>([]);
@@ -32,27 +33,30 @@ export default function LiteratureContent() {
 
   return (
     <div className={`${styling.literaturePage} ${layoutStyling.window}`}>
-      <div className={styling.searchBar}>
+      <AppDescription/>
+
+      <div className={styling.inputArea}>
         <LiteratureSearch onSearch={searchLiteratureItems} />
+      
+
+        <div className={styling.uploadArea}>
+          <Dialog.Root open={uploadOpen} onOpenChange={setUploadOpen}>
+            <Dialog.Trigger asChild>
+              {user ? <button type="button">Upload</button> : <button disabled type="button">Upload</button>}
+              
+            </Dialog.Trigger>
+
+            <UploadDialog
+              onUploaded={() => {
+                setUploadOpen(false);
+                searchLiteratureItems(""); // or keep current filters if you have them
+              }}
+            />
+          </Dialog.Root>
+        </div>
       </div>
 
-      <div className={styling.uploadArea}>
-        <Dialog.Root open={uploadOpen} onOpenChange={setUploadOpen}>
-          <Dialog.Trigger asChild>
-            {user ? <button type="button">Upload</button> : <button disabled type="button">Upload</button>}
-            
-          </Dialog.Trigger>
-
-          <UploadDialog
-            onUploaded={() => {
-              setUploadOpen(false);
-              searchLiteratureItems(""); // or keep current filters if you have them
-            }}
-          />
-        </Dialog.Root>
-      </div>
-
-      <div className={`${styling.resultArea} ${layoutStyling.subWindowDark}`}>
+      <div className={`${styling.resultArea}`}>
         <LiteratureResults items={results} />
       </div>
     </div>

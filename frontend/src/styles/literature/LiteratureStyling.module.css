@@ -1,25 +1,36 @@
 .literaturePage {
   display: grid;
   grid-template-areas:
-    "searchBar uploadArea empty"
-    "resultArea resultArea resultArea";
-  grid-template-columns: 250px 150px 1fr;
-  grid-template-rows: 80px 1fr;
+    "appInfoArea"
+    "inputArea"
+    "resultArea";
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 80px 1fr;
   min-height: 100vh;
 }
 
+.inputArea {
+  grid-area: inputArea;
+  display: grid;
+  grid-template-areas:
+    "searchBar uploadArea";
+  grid-template-columns: 250px 150px;
+  padding: 20px;
+  border-bottom: 2px solid var(--color-border);
+}
 .searchBar {
   grid-area: searchBar;
-  height: 30px;
+  width: 200px;
 }
 
-.searchBar input {
-  height: 100%;
+.uploadArea {
+  grid-area: uploadArea;
 }
 
 .resultArea {
   grid-area: resultArea;
   min-width: 0;
+  padding: 20px;
 }
 
 .resultArea table {
@@ -38,7 +49,18 @@
 .resultArea th:nth-child(4), .resultArea td:nth-child(4) { width: 12%; } /* download file */
 .resultArea th:nth-child(5), .resultArea td:nth-child(5) { width: 8%; } /* views */
 
-.uploadArea {
-  grid-area: uploadArea;
-  padding-left: 15px;
+
+
+.appInfoArea {
+  grid-area: appInfoArea;
+  display: grid;
+  grid-template-areas: 
+    "appDescArea appDocsArea";
+  grid-template-rows: 30px;
+  grid-template-columns: 250px 250px;
+  padding: 20px;
+  padding-top: 8px;
+  border-bottom: 2px solid var(--color-border);
+
 }
+
