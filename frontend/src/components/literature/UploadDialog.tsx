@@ -19,7 +19,7 @@ export function UploadDialog({ onUploaded }: UploadDialogProps) {
         <Dialog.Title className={styles.title}>Upload literature</Dialog.Title>
 
         <Dialog.Description className={styles.description}>
-          Select a file and add metadata for upload.
+          Add metadata and select a file for upload.
         </Dialog.Description>
 
         <form onSubmit={onSubmit} className={styles.form}>

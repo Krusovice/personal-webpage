@@ -6,10 +6,12 @@ import { LiteratureSearch } from "./LiteratureSearch";
 import { LiteratureResults } from "./LiteratureResults";
 import * as Dialog from "@radix-ui/react-dialog";
 import { UploadDialog } from "./UploadDialog";
+import { useAuth } from "../../auth";
 
 export default function LiteratureContent() {
   const [results, setResults] = useState<LiteratureItem[]>([]);
   const [uploadOpen, setUploadOpen] = useState(false);
+  const { user } = useAuth();
 
   async function searchLiteratureItems(searchKeywords: SearchKeywords) {
     const resp = await fetch("/api/search_literature_items", {
@@ -37,7 +39,8 @@ export default function LiteratureContent() {
       <div className={styling.uploadArea}>
         <Dialog.Root open={uploadOpen} onOpenChange={setUploadOpen}>
           <Dialog.Trigger asChild>
-            <button type="button">Upload</button>
+            {user ? <button type="button">Upload</button> : <button disabled type="button">Upload</button>}
+            
           </Dialog.Trigger>
 
           <UploadDialog

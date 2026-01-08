@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .content {
@@ -10,7 +10,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: min(560px, calc(100% - 32px));
-  background: white;
+  background: var(--grey);
   border-radius: 12px;
   padding: 16px;
 }
