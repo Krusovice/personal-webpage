@@ -1,12 +1,10 @@
-
-import styles from "./../styles/Content.module.css"
 import layoutStyles from "./../styles/LayoutStyling.module.css"
 
 import AppSubject from "./../components/homepage/AppSubject"
 
 export default function Homepage() {
   return (
-    <div className={ `${styles.content} ${layoutStyles.window}` }>
+    <div className={ `${layoutStyles.window}` }>
       <h1>I'm Joachim, And this is my personal webpage.</h1>
       <h3>
         I'm a professional structural engineer with

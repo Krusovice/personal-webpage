@@ -3,17 +3,17 @@
   display: flex;
   align-items: center;
   color: var(--color-text);
-  background-color: var(--color-topbar);
-  padding: 12px;
-  border-radius: 15px;
-  border: 1px solid var(--color-border);
+  background-color: var(--color-topbar-background);
+  padding: var(--space-3);
+  border-radius: var(--radius-2);
+  border: var(--border-standard);
 }
 
 .topbar ul {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 40px;
+  gap: var(--space-6);
 }
 
 .right {
@@ -42,7 +42,6 @@
 
 .logoContainer {
   height: 80px;
-  margin-left: 20px;
   align-items: center;
   display: flex;
 }

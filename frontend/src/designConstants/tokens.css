@@ -1,0 +1,37 @@
+:root {
+
+	/* Spaces */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-5: 24px;
+	--space-6: 32px;
+
+	/* Borders */
+	--border-width: 1px;
+	--border-style: solid;
+	--border-standard: var(--border-width) var(--border-style) var(--mild-dark);
+	--border-strong: var(--border-width) var(--border-style) var(--black);
+	--border-focus: var(--border-width) var(--border-style) var(--orange-rust);
+
+	/* Inputs */
+	--outline-width: 1px;
+	--outline-style: solid;
+	--outline-standard: var(--outline-width) var(--outline-style) var(--orange-rust);
+
+	/* Radii */
+	--radius-1: 4px;
+	--radius-2: 8px;
+	--radius-3: 16px;
+
+	/* Colors */
+	--background-page: var(--palette-gray-950);
+	--background-window: var(--palette-gray-900);
+	--background-window-2: var(--palette-gray-800);
+	--background-window-3: var(--palette-gray-700);
+  	--color-topbar-background: var(--palette-gray-800);
+  	--color-sidebar-background: var(--palette-gray-800);
+	--color-text: var(--palette-gray-200);
+	--link-hover: var(--orange-rust);
+}

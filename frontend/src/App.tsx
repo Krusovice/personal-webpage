@@ -10,7 +10,8 @@ import Registerpage from "./pages/Registerpage";
 
 
 // Constants
-import "./constants/colors.css";
+import "./designConstants/theme.css";
+import "./designConstants/tokens.css";
 
 // Other
 import RootLayout from "./RootLayout";
