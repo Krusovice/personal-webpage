@@ -21,12 +21,12 @@ export default function AppSubject(
         onMouseLeave={() => setOpen(false)}
         className={styling.subject}
       >
-        <h3>{title}</h3>
-        <h5>{subtitle}</h5>
+        <h2>{title}</h2>
+        <h4>{subtitle}</h4>
       </div>
       
       <div className={`${styling.content} ${open ? styling.open : ""}`}>
-        <h5>Stack</h5>
+        <h3>Stack</h3>
         {content}
       </div>
     </div>

@@ -6,7 +6,7 @@ import UserArea from "./user/userArea"
 
 export default function Topbar() {
   return (
-    <div className={ stylesTopbar.topbar }>
+    <nav className={ stylesTopbar.topbar }>
 
       <ul className={ stylesTopbar.list }>
         <li className={ stylesTopbar.logoContainer }>
@@ -20,11 +20,11 @@ export default function Topbar() {
         </li>
 
         <li>
-          <a className= {stylesTopbar.link} href="/stocks">Stock Viewer</a>
+          <Link className={stylesTopbar.link} to="/stocks">Stock Viewer</Link>
         </li>
 
         <li>
-          <a className= {stylesTopbar.link} href="/foundation">Foundation Response</a>
+          <Link className={stylesTopbar.link} to="/foundation">Foundations</Link>
         </li>
 
         <li className={stylesTopbar.right}>
@@ -32,6 +32,6 @@ export default function Topbar() {
         </li>
 
       </ul>
-    </div> 
+    </nav> 
   )
 }

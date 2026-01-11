@@ -6,16 +6,14 @@ export default function Homepage() {
   return (
     <div className={ `${layoutStyles.window}` }>
       <h1>I'm Joachim, And this is my personal webpage.</h1>
-      <h3>
+      <h4>
         I'm a professional structural engineer with
         an interest in data and software development.
-      </h3>
-      <h3>
-        My webpage contains a few apps, below the content and stack is listed.
-      </h3>
+        <br/>My webpage contains a few apps, see below.
+      </h4>
       <AppSubject
         title="Personal Webpage"
-        subtitle="My personal webpage is hosted on my Raspberry Pi"
+        subtitle="Personal webpage, hosted on a Raspberry Pi"
         content=
         {
         <ul>
@@ -30,7 +28,7 @@ export default function Homepage() {
 
       <AppSubject
         title="Literature Database"
-        subtitle="An easily accessible searchable database with public literature and personal literature (through user authentication)."
+        subtitle="An easily accessible searchable database with public literature and personal literature (through authentication)."
         content=
         {
         <ul>
@@ -43,7 +41,7 @@ export default function Homepage() {
 
       <AppSubject
         title="Stock Viewer and Analyser"
-        subtitle="An analyser tool that is developed to compare stockprices. Stockvalues are fetched daily. Currently only features a small selection of stocks. Analyze features will be implemented when needed."
+        subtitle="A stock analyser tool that is developed to compare stockprices. Stockvalues are fetched daily. Currently only features a small selection of stocks. Analyze features will be implemented when needed."
         content=
         {
         <ul>

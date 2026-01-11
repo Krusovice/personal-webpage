@@ -1,15 +1,15 @@
 :root {
-  /* Rust palette */
   --palette-gray-950: #000000;
   --palette-gray-900: #171515;
   --palette-gray-800: #2e2c2c;
   --palette-gray-700: #3a3a3a;
+  --palette-gray-400: #7c7c7c;
+  --palette-gray-300: #929292;
+  --palette-gray-250: #afafaf;
   --palette-gray-200: #cccccc;
   --orange-rust: #8A4632;
   --orange-dark: #2e0f00;
 
-  --dark-purple: #0b0714;
-  --dark-purple-elevated: #151027;
 }
 
 

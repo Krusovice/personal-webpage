@@ -29,9 +29,10 @@
 }
 
 .link {
-  font-size: 20px;
+  font-family: var(--topbar-font-family);
+  font-weight: var(--topbar-font-weight);
+  font-size: var(--topbar-font-size);
   color: var(--color-topbar-link);
-  font-weight: bold;
   text-decoration: none;
   transition: color 0.1s ease;
 }

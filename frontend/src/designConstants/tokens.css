@@ -1,4 +1,13 @@
 :root {
+	/* Front sizes */
+	--font-size-base: 16px;
+	--font-size-h1: 48px;
+	--font-size-h2: 36px;
+	--font-size-h3: 28px;
+	--font-size-h4: 24px;
+
+	--font-line-height-base: 1.6rem;
+
 
 	/* Spaces */
 	--space-1: 4px;
@@ -11,8 +20,8 @@
 	/* Borders */
 	--border-width: 1px;
 	--border-style: solid;
-	--border-standard: var(--border-width) var(--border-style) var(--mild-dark);
-	--border-strong: var(--border-width) var(--border-style) var(--black);
+	--border-standard: var(--border-width) var(--border-style) var(--palette-gray-900);
+	--border-strong: var(--border-width) var(--border-style) var(--palette-gray-950);
 	--border-focus: var(--border-width) var(--border-style) var(--orange-rust);
 
 	/* Inputs */
@@ -26,12 +35,18 @@
 	--radius-3: 16px;
 
 	/* Colors */
-	--background-page: var(--palette-gray-950);
+	--background-page-color-1: var(--palette-gray-950);
+	--background-page-color-2: var(--orange-dark);
 	--background-window: var(--palette-gray-900);
 	--background-window-2: var(--palette-gray-800);
 	--background-window-3: var(--palette-gray-700);
   	--color-topbar-background: var(--palette-gray-800);
   	--color-sidebar-background: var(--palette-gray-800);
-	--color-text: var(--palette-gray-200);
+	--color-text: var(--palette-gray-300);
 	--link-hover: var(--orange-rust);
+
+	/* Top bar*/
+	--topbar-font-size: 24px;
+	--topbar-font-weight: 500;
+	--topbar-font-family: 'Montserrat', sans-serif;;
 }
