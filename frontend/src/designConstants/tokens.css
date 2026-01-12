@@ -53,4 +53,7 @@
 	/* Tabs */
 	--tabs-background-color: var(--background-window);
 	--tabs-background-color-active: var(--background-window-2);
+
+	/* Apps */
+	--apps-margin: var(--space-6);
 }

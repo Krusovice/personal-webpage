@@ -1,30 +1,23 @@
 .literaturePage {
+  margin: var(--apps-margin);
   display: grid;
   grid-template-areas:
     "tabsArea"
-    "inputArea"
-    "resultArea";
+    "literatureApp";
   grid-template-columns: 1fr;
-  grid-template-rows: 80px 80px 1fr;
+  grid-template-rows: 80px 1fr;
   min-height: 100vh;
 }
 
-.tabsArea {
-  grid-area: tabsArea;
-  display: flex;
-  align-items: center;
+.literatureApp {
+  grid-area: literatureApp;
+  display: grid;
+  grid-template-areas:
+    "inputArea"
+    "resultArea";
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr;
 }
-
-.tab button {
-  width: 200px;
-  background-color: var(--tabs-background-color);
-}
-
-.tab-active button {
-  background-color: var(--tabs-background-color);
-}
-
-
 
 .inputArea {
   grid-area: inputArea;

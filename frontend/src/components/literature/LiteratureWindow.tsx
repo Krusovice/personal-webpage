@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-import layoutStyling from "./../../styles/LayoutStyling.module.css"
+import layoutStyling from "./../../styles/LayoutStyling.module.css";
 import styling from "./../../styles/literature/LiteratureStyling.module.css";
+import tabStyling from "./../../styles/AppTabsStyling.module.css";
 
 type Tab = "app" | "docs";
 
@@ -10,22 +11,29 @@ export default function LiteratureWindow() {
 
   return(
     <div>
-      <div className={`${styling.literaturePage} ${layoutStyling.window}`}>
-        <div className={styling.tabsArea}>
+      <div className={styling.literaturePage}>
+
+        <div className={tabStyling.tabsArea}>
           <button 
             onClick={() => setTab("app")}
-            className={`${styling.tab} ${tab === "app" ? styling["tab-active"] : ""}`}
+            className={`${tabStyling.tab} ${tab === "app" ? tabStyling["tab-active"] : ""}`}
           >
             App
           </button>
 
           <button 
             onClick={() => setTab("docs")}
-            className={`${styling.tab} ${tab === "docs" ? styling["tab-active"] : ""}`}
+            className={`${tabStyling.tab} ${tab === "docs" ? tabStyling["tab-active"] : ""}`}
           >
             Docs
           </button>
         </div>
+
+
+        <div className={`${layoutStyling.window} ${styling.literatureApp}`}>
+          literatureApp
+        </div>
+
       </div>
     </div>
   )

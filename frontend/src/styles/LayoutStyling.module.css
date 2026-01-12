@@ -28,7 +28,6 @@
   background-color: var(--background-window-2);
   color: var(--color-text);
   padding: var(--space-3);
-  margin: var(--space-6);
   border: var(--border-standard);
   border-radius: var(--radius-3);
 }
