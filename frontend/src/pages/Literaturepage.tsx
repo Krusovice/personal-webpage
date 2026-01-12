@@ -1,10 +1,10 @@
-import LiteratureContent from "./../components/literature/Literature"
+import LiteratureWindow from "./../components/literature/LiteratureWindow"
 
 
 export default function Literaturepage() {
   return (
     <div>
-      <LiteratureContent/>
+      <LiteratureWindow/>
     </div>
     
   )

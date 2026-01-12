@@ -1,13 +1,30 @@
 .literaturePage {
   display: grid;
   grid-template-areas:
-    "appInfoArea"
+    "tabsArea"
     "inputArea"
     "resultArea";
   grid-template-columns: 1fr;
   grid-template-rows: 80px 80px 1fr;
   min-height: 100vh;
 }
+
+.tabsArea {
+  grid-area: tabsArea;
+  display: flex;
+  align-items: center;
+}
+
+.tab button {
+  width: 200px;
+  background-color: var(--tabs-background-color);
+}
+
+.tab-active button {
+  background-color: var(--tabs-background-color);
+}
+
+
 
 .inputArea {
   grid-area: inputArea;

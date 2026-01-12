@@ -48,5 +48,9 @@
 	/* Top bar*/
 	--topbar-font-size: 24px;
 	--topbar-font-weight: 500;
-	--topbar-font-family: 'Montserrat', sans-serif;;
+	--topbar-font-family: 'Montserrat', sans-serif;
+
+	/* Tabs */
+	--tabs-background-color: var(--background-window);
+	--tabs-background-color-active: var(--background-window-2);
 }
