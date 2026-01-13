@@ -32,6 +32,10 @@
   border-radius: var(--radius-3);
 }
 
+.windowLeftTabbed {
+  border-top-left-radius: 0;
+}
+
 .subWindowGrey {
   color: var(--color-text);
   background-color: var(--background-window-3);

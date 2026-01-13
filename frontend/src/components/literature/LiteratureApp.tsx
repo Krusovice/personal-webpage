@@ -9,7 +9,7 @@ import { UploadDialog } from "./UploadDialog";
 import { useAuth } from "../../auth";
 import AppDescription from "./../AppDescription";
 
-export default function LiteratureContent() {
+export default function LiteratureApp() {
   const [results, setResults] = useState<LiteratureItem[]>([]);
   const [uploadOpen, setUploadOpen] = useState(false);
   const { user } = useAuth();
@@ -32,9 +32,7 @@ export default function LiteratureContent() {
   }, []);
 
   return (
-    <div className={`${styling.literaturePage} ${layoutStyling.window}`}>
-      <AppDescription/>
-
+    <div>
       <div className={styling.inputArea}>
         <LiteratureSearch onSearch={searchLiteratureItems} />
       

@@ -5,11 +5,16 @@
 }
 
 .tab {
-  border-radius: var(--radius-3);
-  padding: 0px;
-  width: 200px;
-  height: 100%;
+  width: var(--tabs-width);
+  height: var(--tabs-height);
+  z-index: 10;
   background-color: var(--tabs-background-color);
+  border-top-left-radius: var(--radius-2);
+  border-top-right-radius: var(--radius-2);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+  transform: translateY(var(--border-width));
 }
 
 .tab-active {
