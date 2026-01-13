@@ -1,4 +1,16 @@
-.stocksArea {
+.stocksPage {
+  margin: var(--apps-margin);
+  display: grid;
+  grid-template-areas:
+    "tabsArea"
+    "stocksApp";
+  grid-template-columns: 1fr;
+  grid-template-rows: var(--tabs-height) 1fr;
+  min-height: 100vh;
+}
+
+.stocksApp {
+  grid-area: stocksApp;
   display: grid;
   grid-template-areas:
     "fetchArea plotSettings"

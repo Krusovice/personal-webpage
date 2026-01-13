@@ -44,7 +44,7 @@ StockContent
   StockChart
 */
 
-export default function StockContent() {
+export default function StockApp() {
   const [plotSettings, setPlotSettings] = useState<PlotSettings>({
     timespan: "currentYear",
     relativeValues: true,
@@ -113,7 +113,7 @@ export default function StockContent() {
   }, []);
 
   return (
-      <div className={`${styling.stocksArea} ${layoutStyling.window}`}>
+      <>
         <div className={styling.fetchArea}>
           <StockSearch
             options={stockOptions}
@@ -136,6 +136,6 @@ export default function StockContent() {
           onSetTimespan={setTimespan}
           onTogglePlotSetting={togglePlotSetting}
         />
-      </div>
+      </>
   );
 }
