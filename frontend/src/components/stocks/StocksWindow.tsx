@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import layoutStyling from "./../../styles/LayoutStyling.module.css";
-import styling from "./../../styles/stocks/StocksStyling.module.css";
 import tabStyling from "./../../styles/AppTabsStyling.module.css";
 
 import StocksApp from "./StocksApp"
@@ -14,7 +13,7 @@ export default function StocksWindow() {
 
   return(
     <div>
-      <div className={styling.stocksPage}>
+      <div className={tabStyling.appWindow}>
 
         <div className={tabStyling.tabsArea}>
           <button 
@@ -33,7 +32,7 @@ export default function StocksWindow() {
         </div>
 
 
-        <div className={`${layoutStyling.window} ${tab === "app" ? layoutStyling.windowLeftTabbed : ""} ${styling.stocksApp}`}>
+        <div className={`${layoutStyling.window} ${tab === "app" ? layoutStyling.windowLeftTabbed : ""} ${tabStyling.appArea}`}>
           {tab === "app" ? <StocksApp/> : <StocksDocs/>}
         </div>
 

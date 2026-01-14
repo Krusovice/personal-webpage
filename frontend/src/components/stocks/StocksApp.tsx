@@ -113,7 +113,7 @@ export default function StockApp() {
   }, []);
 
   return (
-      <>
+      <div className={styling.stocksApp}>
         <div className={styling.fetchArea}>
           <StockSearch
             options={stockOptions}
@@ -136,6 +136,6 @@ export default function StockApp() {
           onSetTimespan={setTimespan}
           onTogglePlotSetting={togglePlotSetting}
         />
-      </>
+      </div>
   );
 }

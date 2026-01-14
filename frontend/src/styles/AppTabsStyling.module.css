@@ -1,7 +1,22 @@
+.appWindow {
+  margin: var(--apps-margin);
+  display: grid;
+  grid-template-areas:
+    "tabsArea"
+    "appArea";
+  grid-template-columns: 1fr;
+  grid-template-rows: var(--tabs-height) 1fr;
+  min-height: 100vh;
+}
+
 .tabsArea {
   grid-area: tabsArea;
   display: flex;
   align-items: center;
+}
+
+.appArea {
+  grid-area: appArea;
 }
 
 .tab {
