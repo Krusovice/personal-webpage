@@ -1,16 +1,4 @@
-.literaturePage {
-  margin: var(--apps-margin);
-  display: grid;
-  grid-template-areas:
-    "tabsArea"
-    "literatureApp";
-  grid-template-columns: 1fr;
-  grid-template-rows: var(--tabs-height) 1fr;
-  min-height: 100vh;
-}
-
 .literatureApp {
-  grid-area: literatureApp;
   display: grid;
   grid-template-areas:
     "inputArea"

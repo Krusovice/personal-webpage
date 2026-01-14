@@ -7,7 +7,7 @@ import { LiteratureResults } from "./LiteratureResults";
 import * as Dialog from "@radix-ui/react-dialog";
 import { UploadDialog } from "./UploadDialog";
 import { useAuth } from "../../auth";
-import AppDescription from "./../AppDescription";
+
 
 export default function LiteratureApp() {
   const [results, setResults] = useState<LiteratureItem[]>([]);
@@ -32,7 +32,7 @@ export default function LiteratureApp() {
   }, []);
 
   return (
-    <div>
+    <div className={styling.literatureApp}>
       <div className={styling.inputArea}>
         <LiteratureSearch onSearch={searchLiteratureItems} />
       

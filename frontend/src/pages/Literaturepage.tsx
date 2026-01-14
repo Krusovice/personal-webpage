@@ -1,10 +1,14 @@
-import LiteratureWindow from "./../components/literature/LiteratureWindow"
-
+import AppWindow from "./../components/AppWindow"
+import LiteratureApp from "./../components/literature/LiteratureApp"
+import LiteratureDocs from "./../components/literature/LiteratureDocs"
 
 export default function Literaturepage() {
   return (
     <div>
-      <LiteratureWindow/>
+      <AppWindow
+        tabs={["App", "Docs"]}
+        components={[LiteratureApp, LiteratureDocs]}
+      />
     </div>
     
   )
