@@ -18,7 +18,7 @@ function isCompleteSoilLayer(row: SoilLayer) {
   );
 }
 
-export default function FRContent() {
+export default function FoundationResponseApp() {
   const [soilLayers, setSoilLayers] = useState<SoilLayer[]>([{ layerNumber: 1 }]);
   const [settlements, setSettlements] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -67,8 +67,7 @@ export default function FRContent() {
 
   return (
     <>
-      <form className={`${styling.FRArea} ${layoutStyling.window}`} onSubmit={calculateFoundationResponse}>
-
+      <form className={styling.FRArea} onSubmit={calculateFoundationResponse}>
 
         <div className={`${layoutStyling.subWindowDark} ${styling.inputs}`}>
           <div className={styling.width}>
