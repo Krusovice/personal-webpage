@@ -7,7 +7,6 @@
   grid-template-rows: 150px 800px;
 }
 
-
 .fetchArea {
   grid-area: fetchArea;
   display: grid;
