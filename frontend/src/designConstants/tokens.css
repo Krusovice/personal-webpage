@@ -6,6 +6,7 @@
 	--font-size-h3: 28px;
 	--font-size-h4: 24px;
 
+	--font-size-label: 0.875rem;
 	--font-line-height-base: 1.6rem;
 
 
@@ -45,6 +46,7 @@
   	--color-sidebar-background: var(--palette-gray-800);
 	--color-text: var(--palette-gray-300);
 	--link-hover: var(--orange-rust);
+	--color-label: var(--orange-dark);
 
 	/* Top bar*/
 	--topbar-font-size: 24px;
@@ -59,4 +61,8 @@
 
 	/* Apps */
 	--apps-margin: var(--space-6);
+
+	/* Figures */
+	--figure-margin: 1.5rem auto;
+	--figure-text-align: center;
 }

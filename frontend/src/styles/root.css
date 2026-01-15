@@ -42,3 +42,12 @@ nav,
 .label {
   font-weight: 500;
 }
+
+figure {
+  margin: var(--figure-margin);
+  text-align: var(--figure-text-align);
+}
+
+figcaption {
+  font-size: var(--font-size-label);
+  color: var(--color-label);
