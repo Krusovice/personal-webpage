@@ -1,4 +1,6 @@
-import { ComponentType, useState } from "react";
+import type { ComponentType } from "react";
+import { useState } from "react";
+
 
 import layoutStyling from "./../styles/LayoutStyling.module.css";
 import tabStyling from "./../styles/AppTabsStyling.module.css";
