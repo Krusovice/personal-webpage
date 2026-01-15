@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styling from "./../../styles/literature/LiteratureStyling.module.css";
-import layoutStyling from "./../../styles/LayoutStyling.module.css"
 import type { LiteratureItem, SearchKeywords } from "./types";
 import { LiteratureSearch } from "./LiteratureSearch";
 import { LiteratureResults } from "./LiteratureResults";

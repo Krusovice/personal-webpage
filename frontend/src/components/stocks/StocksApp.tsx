@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
 import styling from "./../../styles/stocks/StocksStyling.module.css"
-import layoutStyling from "./../../styles/LayoutStyling.module.css"
 
 import type { StockData, PlotSettings, StockOptions, SelectedTicker }  from "./types";
 import { fetchStockOptions, fetchTickerData } from "./api"
