@@ -7,16 +7,17 @@ html, body {
 h1, h2, h3, h4 {
   font-family: 'Montserrat', sans-serif;
 }
-h1 { font-weight: 700; }
-h2 { font-weight: 600; }
-h3 { font-weight: 500; }
-h4 { font-weight: 500; }
+h1 { font-weight: 700; font-size: var(--font-size-h1); color: var(--color-h1)}
+h2 { font-weight: 600; font-size: var(--font-size-h2); color: var(--color-h2) }
+h3 { font-weight: 500; font-size: var(--font-size-h3); color: var(--color-h3) }
+h4 { font-weight: 500; font-size: var(--font-size-h4); color: var(--color-h4) }
 
 body {
   background-image: radial-gradient(ellipse, var(--background-page-color-2), var(--background-page-color-1));
   height: 100vh;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
+  font-size: var(--font-size-base);
 }
 
 strong {

@@ -1,10 +1,10 @@
 :root {
 	/* Front sizes */
 	--font-size-base: 16px;
-	--font-size-h1: 48px;
-	--font-size-h2: 36px;
-	--font-size-h3: 28px;
-	--font-size-h4: 24px;
+	--font-size-h1: 32px;
+	--font-size-h2: 24px;
+	--font-size-h3: 20px;
+	--font-size-h4: 18px;
 
 	--font-size-label: 0.875rem;
 	--font-line-height-base: 1.6rem;
@@ -22,9 +22,7 @@
 	/* Borders */
 	--border-width: 1px;
 	--border-style: solid;
-	--border-standard: var(--border-width) var(--border-style) var(--palette-gray-900);
-	--border-strong: var(--border-width) var(--border-style) var(--palette-gray-950);
-	--border-focus: var(--border-width) var(--border-style) var(--orange-rust);
+	--border-standard: var(--border-width) var(--border-style) var(--border-standard-color);
 
 	/* Inputs */
 	--outline-width: 1px;
@@ -37,16 +35,6 @@
 	--radius-3: 16px;
 
 	/* Colors */
-	--background-page-color-1: var(--palette-gray-950);
-	--background-page-color-2: var(--orange-dark);
-	--background-window: var(--palette-gray-900);
-	--background-window-2: var(--palette-gray-800);
-	--background-window-3: var(--palette-gray-700);
-  	--color-topbar-background: var(--palette-gray-800);
-  	--color-sidebar-background: var(--palette-gray-800);
-	--color-text: var(--palette-gray-300);
-	--link-hover: var(--orange-rust);
-	--color-label: var(--orange-dark);
 
 	/* Top bar*/
 	--topbar-font-size: 24px;

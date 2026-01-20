@@ -4,7 +4,10 @@ import AppSubject from "./../components/homepage/AppSubject"
 
 export default function Homepage() {
   return (
-    <div className={ `${layoutStyles.window}` }>
+    <div 
+      className={ `${layoutStyles.window}` }
+      style={{ margin: "var(--apps-margin)" }}
+    >
       <h1>I'm Joachim, And this is my personal webpage.</h1>
       <h4>
         I'm a professional structural engineer with
