@@ -25,6 +25,7 @@ export default function Homepage() {
           <li>Database: PostgreSQL</li>
           <li>Deployment: Docker + Github Actions</li>
           <li>Host: Raspberry Pi 5</li>
+          <li>Backup: airflow+rclone</li>
         </ul>
         }
       />
