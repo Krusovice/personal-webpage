@@ -10,7 +10,7 @@
 
   /* Slardar theme colors */
   --theme-light: #8A4632;
-  --theme-dark: #2e0f00;
+  --theme-dark: #200f00;
   --theme-mute: #917e7e;
 
   /* Sven theme colors */
@@ -18,10 +18,6 @@
   /* Background */
   --background-page-color-1: var(--palette-gray-950);
   --background-page-color-2: var(--theme-dark);
-
-
-
-
 
   /* Borders */
   --border-standard-color: var(--palette-gray-900);
@@ -37,14 +33,16 @@
   /* Sidebar */
   --color-sidebar-background: var(--palette-gray-700);
 
-  /* Texts */
+  /* Fonts */
   --color-text: var(--palette-gray-300);
-  --link-hover: var(--theme-light);
-  --color-label: var(--theme-light);
+  --color-link-hover: var(--theme-light);
+  --color-label: var(--palette-gray-250);
   --color-h1: var(--palette-gray-250);
   --color-h2: var(--palette-gray-250);
   --color-h3: var(--palette-gray-250);
   --color-h4: var(--palette-gray-300);
+  --color-th: var(--palette-gray-250);
+  --color-tabs-font: var(--palette-gray-250);
 
 }
 

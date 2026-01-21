@@ -20,6 +20,8 @@
 }
 
 .tab {
+  font-weight: var(--tabs-font-weight);
+  color: var(--color-tabs-font);
   width: var(--tabs-width);
   height: var(--tabs-height);
   z-index: 10;

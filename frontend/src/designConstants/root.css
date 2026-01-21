@@ -20,6 +20,14 @@ body {
   font-size: var(--font-size-base);
 }
 
+a:hover {
+  color: var(--color-link-hover);
+}
+
+a {
+  transition: color 0.1s ease;
+}
+
 strong {
   font-weight: 600;
 }
@@ -52,3 +60,13 @@ figure {
 figcaption {
   font-size: var(--font-size-label);
   color: var(--color-label);
+}
+
+th {
+  color: var(--color-th);
+}
+
+label {
+  font-size: var(--font-size-label);
+  color: var(--color-label);
+}
