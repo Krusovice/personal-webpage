@@ -9,6 +9,9 @@ jkirstein.dk, www.jkirstein.dk {
     reverse_proxy foundation-response-api:8100
   }
 
+  handle /ws/metrics* {
+      reverse_proxy metrics-monitor:8010
+  }
   handle {
     reverse_proxy frontend:80
   }
