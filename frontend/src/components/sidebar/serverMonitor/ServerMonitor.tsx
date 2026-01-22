@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ServerMonitorGraph from "./ServerMonitorGraph.tsx"
 
 import layoutStyling from "./../../../styles/LayoutStyling.module.css"

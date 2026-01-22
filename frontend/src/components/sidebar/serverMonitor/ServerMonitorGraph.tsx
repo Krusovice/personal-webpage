@@ -42,14 +42,15 @@ function FitOrthoToUnitSquare() {
 
 
 export default function ServerMonitorGraph() {
-  const [monitorData, setMonitorData] = useState(null);
+  const [monitorData, setMonitorData] = useState([]);
 
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:8010/ws/metrics");
 
     ws.onopen = () => console.log("WebSocket connected");
     ws.onmessage = (e) => {
-      setMonitorData(e.data);
+      const parsed = JSON.parse(e.data);
+      setMonitorData(parsed);
       console.log("Message received:", e.data);
     };
     ws.onerror = (err) => console.error("WebSocket error:", err);
@@ -58,6 +59,10 @@ export default function ServerMonitorGraph() {
     return () => ws.close();
   }, []);
 
+  function graph() {
+    console.log(monitorData);
+    return 0
+  }
 
   function xAxis() {
     const linePoint_0: Point3 = [0,0,0];
@@ -110,6 +115,7 @@ export default function ServerMonitorGraph() {
       <FitOrthoToUnitSquare />
       {xAxis()}
       {zAxis()}
+      {graph()}
 
       {/* Title overlay */}
       </Canvas>
