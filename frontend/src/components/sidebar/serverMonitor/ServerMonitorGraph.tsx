@@ -2,9 +2,11 @@ import { useLayoutEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import * as THREE from "three";
+import  { useState, useEffect } from "react";
 
 export type Point3 = [number, number, number];
 
+// Function to make sure that the graph fits its container
 function FitOrthoToUnitSquare() {
   const { camera, size } = useThree();
   const center = new THREE.Vector3(0.5, 0, 0.5);
@@ -38,7 +40,27 @@ function FitOrthoToUnitSquare() {
   return null;
 }
 
+// Websocket connection, to update graph points
+const ws = new WebSocket("ws://localhost:8010/ws/metrics");
+
 export default function ServerMonitorGraph() {
+  const [monitorData, setMonitorData] = useState(null);
+
+  useEffect(() => {
+    const ws = new WebSocket("ws://localhost:8010/ws/metrics");
+
+    ws.onmessage = (e) => {
+      setMonitorData(e.data);
+    };
+
+    ws.onerror = (err) => {
+      console.error("WebSocket error", err);
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, []);
 
   function xAxis() {
     const linePoint_0: Point3 = [0,0,0];
@@ -55,7 +77,15 @@ export default function ServerMonitorGraph() {
   }
 
 
-
+/*
+  function monitorData(monitorData, cpuData, ramData) {
+    cpuData.push(monitorData.cpu);
+    cpuData = cpuData.slice(0,3600);
+    ramData.push(monitorData.ram);
+    ramData = ramData.slice(0,3600);
+    return();
+  }
+*/
   return(
     <div style={{ position: "relative" }}>
       <div
