@@ -40,8 +40,6 @@ function FitOrthoToUnitSquare() {
   return null;
 }
 
-// Websocket connection, to update graph points
-const ws = new WebSocket("ws://localhost:8010/ws/metrics");
 
 export default function ServerMonitorGraph() {
   const [monitorData, setMonitorData] = useState(null);
@@ -49,18 +47,17 @@ export default function ServerMonitorGraph() {
   useEffect(() => {
     const ws = new WebSocket("ws://localhost:8010/ws/metrics");
 
+    ws.onopen = () => console.log("WebSocket connected");
     ws.onmessage = (e) => {
       setMonitorData(e.data);
+      console.log("Message received:", e.data);
     };
+    ws.onerror = (err) => console.error("WebSocket error:", err);
+    ws.onclose = (e) => console.log("WebSocket closed:", e.code, e.reason);
 
-    ws.onerror = (err) => {
-      console.error("WebSocket error", err);
-    };
-
-    return () => {
-      ws.close();
-    };
+    return () => ws.close();
   }, []);
+
 
   function xAxis() {
     const linePoint_0: Point3 = [0,0,0];
