@@ -45,7 +45,8 @@ export default function ServerMonitorGraph() {
   const [monitorData, setMonitorData] = useState([]);
 
   useEffect(() => {
-    const ws = new WebSocket(import.meta.env.VITE_WS_URL);
+    const protocol = location.protocol === "https:" ? "wss" : "ws";
+    const ws = new WebSocket(`${protocol}://${location.host}/ws/metrics`);
 
     ws.onopen = () => console.log("WebSocket connected");
     ws.onmessage = (e) => {

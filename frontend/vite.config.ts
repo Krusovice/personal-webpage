@@ -17,6 +17,10 @@ export default defineConfig({
         // we mimic that here:
         rewrite: (path) => path.replace(/^\/foundation-response/, ""),
       },
+      '/ws/metrics': {
+        target: 'http://localhost:8010',
+        ws: true,
+      },
     },
   },
   resolve: {
