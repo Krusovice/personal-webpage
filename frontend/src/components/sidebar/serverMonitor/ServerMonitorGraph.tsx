@@ -6,6 +6,11 @@ import  { useState, useEffect } from "react";
 
 export type Point3 = [number, number, number];
 
+type Metric = {
+  cpu: number;
+  ram: number;
+};
+
 // Function to make sure that the graph fits its container
 function FitOrthoToUnitSquare() {
   const { camera, size } = useThree();
@@ -42,7 +47,7 @@ function FitOrthoToUnitSquare() {
 
 
 export default function ServerMonitorGraph() {
-  const [monitorData, setMonitorData] = useState([]);
+  const [monitorData, setMonitorData] = useState<Metric[]>([]);
 
   useEffect(() => {
     const protocol = location.protocol === "https:" ? "wss" : "ws";
