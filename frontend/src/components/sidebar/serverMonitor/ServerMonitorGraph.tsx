@@ -52,7 +52,7 @@ export default function ServerMonitorGraph() {
     ws.onmessage = (e) => {
       const parsed = JSON.parse(e.data);
       setMonitorData(parsed);
-      console.log("Message received:", e.data);
+      //console.log("Message received:", e.data);
     };
     ws.onerror = (err) => console.error("WebSocket error:", err);
     ws.onclose = (e) => console.log("WebSocket closed:", e.code, e.reason);
@@ -61,8 +61,25 @@ export default function ServerMonitorGraph() {
   }, []);
 
   function graph() {
-    console.log(monitorData);
-    return 0
+    //console.log(monitorData.cpu);
+    const cpuData = monitorData.map((i, idx) => ({
+      index: idx,
+      cpu: i.cpu
+    }));
+
+    const points = cpuData.map((value, i) =>
+      new THREE.Vector3(i/3600, 0, value.cpu/100)
+    );
+    console.log(points);
+    if (points.length < 2) return null;
+
+    return (
+      <Line
+        points={points}
+        color="red"
+        lineWidth={2}
+      />
+    );
   }
 
   function xAxis() {
@@ -80,15 +97,6 @@ export default function ServerMonitorGraph() {
   }
 
 
-/*
-  function monitorData(monitorData, cpuData, ramData) {
-    cpuData.push(monitorData.cpu);
-    cpuData = cpuData.slice(0,3600);
-    ramData.push(monitorData.ram);
-    ramData = ramData.slice(0,3600);
-    return();
-  }
-*/
   return(
     <div style={{ position: "relative" }}>
       <div
