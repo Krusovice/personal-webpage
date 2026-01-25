@@ -51,8 +51,11 @@ export default function ServerMonitorGraph() {
     ws.onopen = () => console.log("WebSocket connected");
     ws.onmessage = (e) => {
       const parsed = JSON.parse(e.data);
-      setMonitorData(parsed);
-      //console.log("Message received:", e.data);
+      setMonitorData(prev =>
+        Array.isArray(parsed)
+          ? parsed
+          : [...prev.slice(-3599), parsed]
+      );
     };
     ws.onerror = (err) => console.error("WebSocket error:", err);
     ws.onclose = (e) => console.log("WebSocket closed:", e.code, e.reason);
@@ -61,7 +64,6 @@ export default function ServerMonitorGraph() {
   }, []);
 
   function graph() {
-    //console.log(monitorData.cpu);
     const cpuData = monitorData.map((i, idx) => ({
       index: idx,
       cpu: i.cpu
