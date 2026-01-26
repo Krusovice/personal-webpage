@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
-import { Line } from "@react-three/drei";
+import { Line, Text } from "@react-three/drei";
 import * as THREE from "three";
 import  { useState, useEffect } from "react";
 
@@ -24,7 +24,7 @@ function FitOrthoToUnitSquare() {
     const worldH = 1; // z: 0..1 (mapped to screen vertical via up vector)
 
     // Padding in pixels
-    const padPx = 10;
+    const padPx = 15;
 
     const usableW = Math.max(1, size.width - 2 * padPx);
     const usableH = Math.max(1, size.height - 2 * padPx);
@@ -69,43 +69,122 @@ export default function ServerMonitorGraph() {
   }, []);
 
   function graph() {
-    const cpuData = monitorData.map((i, idx) => ({
+    const data = monitorData.map((i, idx) => ({
       index: idx,
-      cpu: i.cpu
+      cpu: i.cpu,
+      ram: i.ram
     }));
 
-    const points = cpuData.map((value, i) =>
-      new THREE.Vector3(i/3600, 0, value.cpu/100)
+    const pointsCpu = data.map((value, i) =>
+      new THREE.Vector3(i / 3600, 0, value.cpu / 100)
     );
-    console.log(points);
-    if (points.length < 2) return null;
+
+    const pointsRam = data.map((value, i) =>
+      new THREE.Vector3(i / 3600, 0, value.ram / 100)
+    );
+
+    console.log(pointsCpu);
+    if (pointsCpu.length < 2) return null;
 
     return (
-      <Line
-        points={points}
-        color="red"
-        lineWidth={2}
-      />
+      <>
+        <Line
+          points={pointsCpu}
+          color="red"
+          lineWidth={2}
+        />
+        <Line
+          points={pointsRam}
+          color="blue"
+          lineWidth={2}
+          transparent
+          opacity={0.5}
+        />
+      </>
     );
   }
 
   function xAxis() {
     const linePoint_0: Point3 = [0,0,0];
     const linePoint_1: Point3 = [1,0,0];
-    const line = <Line key="xAxis" points={[linePoint_0,linePoint_1]} dashed={false} />;
-    return line
+
+    return(
+      <>
+        <Line
+          key="xAxis"
+          points={[linePoint_0, linePoint_1]}
+          dashed={false}
+        />
+
+        <Text
+          key="xLabel_1h"
+          position={[1, 0, -0.05]}
+          fontSize={0.10}
+          rotation={[Math.PI / 2, 0, Math.PI / 5]}
+        >
+          1h
+        </Text>
+
+        <Text
+          key="xLabel_now"
+          position={[0, 0, -0.05]}
+          fontSize={0.10}
+          rotation={[Math.PI / 2, 0, Math.PI / 5]}
+        >
+          Now
+        </Text>
+
+      </>
+    );
   }
 
   function zAxis() {
     const linePoint_0: Point3 = [0,0,0];
     const linePoint_1: Point3 = [0,0,1];
-    const line = <Line key="zAxis" points={[linePoint_0,linePoint_1]} dashed={false} />;
-    return line
+
+    return (
+      <>
+        <Line 
+          key="zAxis"
+          points={[linePoint_0,linePoint_1]}
+          dashed={false}
+        />
+
+        <Text
+          key="zLabel_100"
+          position={[-0.2, 0, 1]}
+          fontSize={0.10}
+          rotation={[Math.PI / 2, 0, 0]}
+        >
+          100 %
+        </Text>
+
+        <Text
+          key="zLabel_0"
+          position={[-0.2, 0, 0]}
+          fontSize={0.10}
+          rotation={[Math.PI / 2, 0, 0]}
+        >
+          0 %
+        </Text>
+
+        <Text
+          key="zLabel_50"
+          position={[-0.2, 0, .5]}
+          fontSize={0.10}
+          rotation={[Math.PI / 2, 0, 0]}
+        >
+          50 %
+        </Text>
+      </>
+    );
+
+
   }
 
 
   return(
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative", width: "100%", height: "100%"}}>
       <div
         style={{
           position: "absolute",
@@ -123,6 +202,10 @@ export default function ServerMonitorGraph() {
       </div>
 
       <Canvas 
+        style={{
+          height: "100%",
+          width: "100%",
+        }}
         orthographic
         camera={{
           near: 0.1, far: 1000

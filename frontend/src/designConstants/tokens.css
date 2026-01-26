@@ -38,6 +38,10 @@
 	--topbar-font-weight: 500;
 	--topbar-font-family: 'Montserrat', sans-serif;
 
+	/* Side bar*/
+	--sidebar-width: 340px;
+
+
 	/* Tabs */
 	--tabs-background-color: var(--background-window);
 	--tabs-background-color-active: var(--background-window-2);
