@@ -14,7 +14,12 @@ type Metric = {
 // Function to make sure that the graph fits its container
 function FitOrthoToUnitSquare() {
   const { camera, size } = useThree();
-  const center = new THREE.Vector3(0.5, 0, 0.5);
+  const paddingX = size.width/6;
+  const paddingZ = size.height/10;
+  // Shifting the camera position, based on padding, to keep the graph + labels in center
+  const shiftX = paddingX/size.width/1.4
+
+  const center = new THREE.Vector3(0.5-shiftX, 0, 0.5);
 
   useLayoutEffect(() => {
     const cam = camera as THREE.OrthographicCamera;
@@ -24,10 +29,12 @@ function FitOrthoToUnitSquare() {
     const worldH = 1; // z: 0..1 (mapped to screen vertical via up vector)
 
     // Padding in pixels
-    const padPx = 15;
+    
+    
 
-    const usableW = Math.max(1, size.width - 2 * padPx);
-    const usableH = Math.max(1, size.height - 2 * padPx);
+    const usableW = Math.max(1, size.width - 2 * paddingX);
+    const usableH = Math.max(1, size.height - 2 * paddingZ);
+
 
     // Choose zoom so BOTH dimensions fit (take the limiting one)
     const zoomX = usableW / worldW;
@@ -35,7 +42,7 @@ function FitOrthoToUnitSquare() {
     cam.zoom = Math.min(zoomX, zoomY);
 
     // Ensure a stable "2D" orientation looking down onto XZ
-    cam.position.set(0.5, -5, 0.5);
+    cam.position.set(0.5-shiftX, -5, 0.5);
     cam.up.set(0, 0, 1);        // makes +Z go "up" on screen (flip sign if you prefer)
     cam.lookAt(center);
 
@@ -117,21 +124,21 @@ export default function ServerMonitorGraph() {
         />
 
         <Text
-          key="xLabel_1h"
+          key="xLabel_now"
           position={[1, 0, -0.05]}
           fontSize={0.10}
           rotation={[Math.PI / 2, 0, Math.PI / 5]}
         >
-          1h
+          Now
         </Text>
 
         <Text
-          key="xLabel_now"
+          key="xLabel_1h"
           position={[0, 0, -0.05]}
           fontSize={0.10}
           rotation={[Math.PI / 2, 0, Math.PI / 5]}
         >
-          Now
+          1h
         </Text>
 
       </>

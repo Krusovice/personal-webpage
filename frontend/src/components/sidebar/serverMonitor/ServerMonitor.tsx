@@ -12,7 +12,7 @@ export default function ServerMonitor() {
 
   return (
     <div 
-      className={`${layoutStyling.subWindowDark} ${styling.monitorGraph} ${zoomed ? styling.zoomed : ""}`}
+      className={`${layoutStyling.subWindowDark} ${styling.monitorGraph} ${zoomed ? styling.zoomed : styling.unzoomed}`}
       onClick={() => setZoomed(prev => !prev)}
     >
 
