@@ -17,3 +17,11 @@
   width: 230px;
   height: 230px;
 }
+
+.cpu {
+  color: red;
+}
+
+.ram {
+  color: blue;
+}

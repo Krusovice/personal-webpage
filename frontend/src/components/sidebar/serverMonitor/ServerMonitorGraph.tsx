@@ -4,6 +4,8 @@ import { Line, Text } from "@react-three/drei";
 import * as THREE from "three";
 import  { useState, useEffect } from "react";
 
+import styling from "./../../../styles/sidebar/ServerMonitor.module.css"
+
 export type Point3 = [number, number, number];
 
 type Metric = {
@@ -87,10 +89,9 @@ export default function ServerMonitorGraph() {
     );
 
     const pointsRam = data.map((value, i) =>
-      new THREE.Vector3(i / 3600, 0, value.ram / 100)
+      new THREE.Vector3(i / 3600, 0, value.ram) // Ram is already exported as a relative
     );
 
-    console.log(pointsCpu);
     if (pointsCpu.length < 2) return null;
 
     return (
@@ -205,7 +206,9 @@ export default function ServerMonitorGraph() {
           pointerEvents: "none",
         }}
       >
-        Server monitor (CPU / RAM)
+          Server monitor (
+            <span className={styling.cpu}>CPU</span> / <span className={styling.ram}>RAM</span>
+          )
       </div>
 
       <Canvas 
